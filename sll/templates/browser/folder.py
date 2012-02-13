@@ -25,7 +25,7 @@ class View(grok.View):
             'path': {
                 'query': '/'.join(context.getPhysicalPath()),
             },
-            'sort_on': 'modified', 
+            'sort_on': 'modified',
             'sort_order': 'reverse',
             'sort_limit': limit,
         }
@@ -60,13 +60,18 @@ class View(grok.View):
         return desc
 
     def image(self, item):
-        html = item.getObject().restrictedTraverse('cropped-image')('leadImage', 'feed')
+        html = item.getObject().restrictedTraverse('cropped-image')(
+            'leadImage',
+            'feed'
+        )
         if html is None:
             portal_state = getMultiAdapter(
                 (self.context, self.request),
                 name=u'plone_portal_state'
             )
-            image_url = '{0}/++theme++sll.theme/images/feed-fallback.png'.format(portal_state.portal_url())
+            image_url = '{0}/++theme++sll.theme/images/feed-fallback.png'.format(
+                portal_state.portal_url()
+            )
             html = '<div class="crop" style="width:170px;height:150px;">'
             html += '<img src="{0}" alt="{1}" title="{1}" />'.format(
                 image_url,

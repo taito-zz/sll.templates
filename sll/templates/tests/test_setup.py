@@ -12,9 +12,6 @@ class TestCase(IntegrationTestCase):
     def test_is_sll_theme_installed(self):
         self.failUnless(self.installer.isProductInstalled('sll.templates'))
 
-    def test_is_plone_app_theming_installed(self):
-        self.failUnless(self.installer.isProductInstalled('plone.app.theming'))
-
     def test_uninstall(self):
         self.installer.uninstallProducts(['sll.templates'])
         self.failIf(self.installer.isProductInstalled('sll.templates'))
