@@ -1,0 +1,73 @@
+<html
+  i18n:domain="inicie.theme"
+  lang="en"
+  metal:use-macro="context/main_template/macros/master"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  >
+  <body>
+    <metal:main fill-slot="main">
+        <div tal:replace="structure provider:plone.abovecontenttitle" />
+        <h1 class="documentFirstHeading" tal:content="context/title" />
+        <div tal:replace="structure provider:plone.belowcontenttitle" />
+        <table id="folder-feed">
+          <tbody>
+            <tr tal:repeat="item view/items">
+              <td>
+                <div class="crop-frame">
+                  <div tal:replace="structure item/image" />
+                </div>
+              </td>
+              <td>
+                <h1>
+                  <a tal:content="item/title"
+                     tal:attributes="href item/url;
+                                     title item/title" />
+                </h1>
+                <p
+                  class="date"
+                  tal:content="item/date"
+                  />
+                <h2>
+                  <a tal:attributes="href item/parent_url;
+                                     title item/parent;"
+                     tal:content="item/parent" />
+                </h2>
+                <p tal:content="item/description" />
+                <p>
+                  <a tal:attributes="href item/url;"
+                     i18n:translate="">Read more</a>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- <div tal:replace="structure view/image" />
+        <div tal:replace="structure view/text" /> -->
+        <!-- <div tal:replace="structure provider:plone.abovecontentbody" /> -->
+        <!-- <section id="top-view">
+          <article tal:repeat="item view/items"
+                   tal:attributes="style item/style">
+            <div class="project-description" tal:attributes="style item/project-style">
+              <h1>
+                <a tal:content="item/title"
+                   tal:attributes="href item/url;
+                                   title item/title;
+                                   alt item/title" />
+              </h1>
+              <p tal:content="item/description" />
+              <p>
+                <a tal:condition="item/link"
+                   tal:content="item/link"
+                   tal:attributes="href item/link;
+                                   title item/title;
+                                   alt item/title;" />
+              </p>
+            </div>
+          </article>
+        </section> -->
+        <div tal:replace="structure provider:plone.belowcontentbody" />
+    </metal:main>
+  </body>
+</html>

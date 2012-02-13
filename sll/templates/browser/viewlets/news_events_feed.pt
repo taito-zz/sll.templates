@@ -1,0 +1,10 @@
+<div id="news-events-feed">
+  <ul>
+    <li>
+      <div tal:replace="structure provider:sll.news.feed.manager" />
+    </li>
+    <li>
+      <div tal:replace="structure provider:sll.events.feed.manager" />
+    </li>
+  </ul>
+</div>

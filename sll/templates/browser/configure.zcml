@@ -1,0 +1,74 @@
+<configure
+    i18n_domain="sll.templates"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns="http://namespaces.zope.org/zope"
+    >
+
+  <!-- Viewlet manager for top page -->
+  <browser:viewletManager
+    class="plone.app.viewletmanager.manager.OrderedViewletManager"
+    layer=".interfaces.ISllTemplatesLayer"
+    name="sll.top.manager"
+    permission="zope2.View"
+    provides=".interfaces.ITopViewletManager"
+    />
+
+  <!-- News Feed Viewlet Manager -->
+  <browser:viewletManager
+    class="plone.app.viewletmanager.manager.OrderedViewletManager"
+    layer=".interfaces.ISllTemplatesLayer"
+    name="sll.news.feed.manager"
+    permission="zope2.View"
+    provides=".interfaces.INewsFeedViewletManager"
+    />
+
+  <!-- Events Feed Viewlet Manager -->
+  <browser:viewletManager
+    class="plone.app.viewletmanager.manager.OrderedViewletManager"
+    layer=".interfaces.ISllTemplatesLayer"
+    name="sll.events.feed.manager"
+    permission="zope2.View"
+    provides=".interfaces.IEventsFeedViewletManager"
+    />
+
+  <!-- Feed -->
+  <browser:viewlet
+    class=".viewlets.FeedViewlet"
+    for="*"
+    layer=".interfaces.ISllTemplatesLayer"
+    manager=".interfaces.ITopViewletManager"
+    name="sll.feed"
+    permission="zope2.View"
+    />
+
+  <!-- News and Events Viewlets -->
+  <browser:viewlet
+    class=".viewlets.NewsEventsFeedViewlet"
+    for="*"
+    layer=".interfaces.ISllTemplatesLayer"
+    manager=".interfaces.ITopViewletManager"
+    name="sll.news.events"
+    permission="zope2.View"
+    />
+
+  <!-- News Feed Viewlet -->
+  <browser:viewlet
+    class=".viewlets.NewsFeedViewlet"
+    for="*"
+    layer=".interfaces.ISllTemplatesLayer"
+    manager=".interfaces.INewsFeedViewletManager"
+    name="sll.news.feed"
+    permission="zope2.View"
+    />
+
+  <!-- Events Feed Viewlet -->
+  <browser:viewlet
+    class=".viewlets.EventsFeedViewlet"
+    for="*"
+    layer=".interfaces.ISllTemplatesLayer"
+    manager=".interfaces.IEventsFeedViewletManager"
+    name="sll.events.feed"
+    permission="zope2.View"
+    />
+
+</configure>
