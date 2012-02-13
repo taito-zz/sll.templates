@@ -2,9 +2,9 @@
 <object name="Plone Site"
    meta_type="Factory-based Type Information with dynamic views"
    i18n:domain="plone" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="immediate_view">sll-view</property>
+ <!-- <property name="immediate_view">sll-view</property>
  <property name="default_view">sll-view</property>
  <property name="view_methods">
   <element value="sll-view"/>
- </property>
+ </property> -->
 </object>
