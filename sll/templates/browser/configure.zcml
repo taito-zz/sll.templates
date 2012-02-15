@@ -4,6 +4,15 @@
     xmlns="http://namespaces.zope.org/zope"
     >
 
+  <!-- Viewlet manager for feed -->
+  <browser:viewletManager
+    class="plone.app.viewletmanager.manager.OrderedViewletManager"
+    layer=".interfaces.ISllTemplatesLayer"
+    name="sll.feed.manager"
+    permission="zope2.View"
+    provides=".interfaces.IFeedViewletManager"
+    />
+
   <!-- Viewlet manager for top page -->
   <browser:viewletManager
     class="plone.app.viewletmanager.manager.OrderedViewletManager"
@@ -36,7 +45,7 @@
     class=".viewlets.FeedViewlet"
     for="*"
     layer=".interfaces.ISllTemplatesLayer"
-    manager=".interfaces.ITopViewletManager"
+    manager=".interfaces.IFeedViewletManager"
     name="sll.feed"
     permission="zope2.View"
     />

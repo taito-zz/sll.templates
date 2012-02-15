@@ -1,5 +1,6 @@
 from Acquisition import aq_inner
 from Acquisition import aq_parent
+from Products.ATContentTypes.interfaces.document import IATDocument
 from Products.ATContentTypes.interfaces.event import IATEvent
 from Products.ATContentTypes.interfaces.news import IATNewsItem
 from Products.CMFCore.utils import getToolByName
@@ -8,6 +9,7 @@ from plone.app.contentlisting.interfaces import IContentListing
 from plone.app.layout.viewlets.common import ViewletBase
 from sll.policy.browser.interfaces import ITopPageFeed
 from zope.component import getMultiAdapter
+from plone.app.layout.navigation.interfaces import INavigationRoot
 
 
 class FeedViewlet(ViewletBase):
@@ -16,13 +18,26 @@ class FeedViewlet(ViewletBase):
     def items(self):
         context = aq_inner(self.context)
         catalog = getToolByName(context, 'portal_catalog')
-        limit = 3
+        limit = 4
         query = {
-            'object_provides': ITopPageFeed.__identifier__,
+            # 'object_provides': ITopPageFeed.__identifier__,
             'sort_on': 'modified',
             'sort_order': 'reverse',
             'sort_limit': limit,
+            'path': '/'.join(context.getPhysicalPath()),
+            'path': {
+                'query': '/'.join(context.getPhysicalPath()),
+            },
+            'object_provides': [
+                IATDocument.__identifier__,
+                IATEvent.__identifier__,
+                IATNewsItem.__identifier__,
+            ],
         }
+        if INavigationRoot.providedBy(context):
+            limit = 3
+            query['object_provides'] = ITopPageFeed.__identifier__
+            query['sort_limit'] = limit
         res = catalog(query)[:limit]
         ploneview = getMultiAdapter(
             (context, self.request),
@@ -54,7 +69,9 @@ class FeedViewlet(ViewletBase):
         return desc
 
     def image(self, item):
-        html = item.getObject().restrictedTraverse('cropped-image')('leadImage', 'feed')
+        obj = item.getObject()
+        field_name = 'image' if obj.getField('image') else 'leadImage'
+        html = obj.restrictedTraverse('cropped-image')(field_name, 'feed')
         if html is None:
             portal_state = getMultiAdapter(
                 (self.context, self.request),

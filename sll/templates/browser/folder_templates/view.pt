@@ -11,7 +11,8 @@
         <div tal:replace="structure provider:plone.abovecontenttitle" />
         <h1 class="documentFirstHeading" tal:content="context/title" />
         <div tal:replace="structure provider:plone.belowcontenttitle" />
-        <table id="folder-feed">
+        <div tal:replace="structure provider:sll.feed.manager" />
+<!--         <table id="folder-feed">
           <tbody>
             <tr tal:repeat="item view/items">
               <td>
@@ -43,7 +44,7 @@
             </tr>
           </tbody>
         </table>
-        <!-- <div tal:replace="structure view/image" />
+ -->        <!-- <div tal:replace="structure view/image" />
         <div tal:replace="structure view/text" /> -->
         <!-- <div tal:replace="structure provider:plone.abovecontentbody" /> -->
         <!-- <section id="top-view">

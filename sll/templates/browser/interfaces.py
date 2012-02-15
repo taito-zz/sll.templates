@@ -5,8 +5,11 @@ from zope.viewlet.interfaces import IViewletManager
 class ISllTemplatesLayer(Interface):
     """Marker interface for browserlayer."""
 
+class IFeedViewletManager(IViewletManager):
+    """"A viewlet manager for Feed."""
 
-class ITopViewletManager(IViewletManager):
+
+class ITopViewletManager(IFeedViewletManager):
     """A viewlet manager for Portal Top Page."""
 
 
