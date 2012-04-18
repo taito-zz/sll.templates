@@ -2,14 +2,16 @@ from Acquisition import aq_inner
 from Acquisition import aq_parent
 from Products.ATContentTypes.interfaces.document import IATDocument
 from Products.ATContentTypes.interfaces.event import IATEvent
+from Products.ATContentTypes.interfaces.folder import IATFolder
 from Products.ATContentTypes.interfaces.news import IATNewsItem
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.contentlisting.interfaces import IContentListing
+from plone.app.layout.navigation.interfaces import INavigationRoot
+from plone.app.layout.viewlets.common import PathBarViewlet
 from plone.app.layout.viewlets.common import ViewletBase
 from sll.policy.browser.interfaces import ITopPageFeed
 from zope.component import getMultiAdapter
-from plone.app.layout.navigation.interfaces import INavigationRoot
 
 
 class FeedViewlet(ViewletBase):
@@ -130,3 +132,113 @@ class EventsFeedViewlet(SimpleFeedViewlet):
 
     def items(self):
         return self.feeds(IATEvent.__identifier__)
+
+
+class PathBarViewlet(PathBarViewlet):
+    index = ViewPageTemplateFile('viewlets/path_bar.pt')
+
+
+class SiteActionsViewlet(ViewletBase):
+    index = ViewPageTemplateFile('viewlets/site_actions.pt')
+
+    def update(self):
+        self.site_actions = self.items()
+
+    def items(self):
+        context = aq_inner(self.context)
+        portal_state = getMultiAdapter((context, self.request), name="plone_portal_state")
+        catalog = getToolByName(context, 'portal_catalog')
+        query = {
+            'object_provides': IATFolder.__identifier__,
+            'path': {
+                'query': portal_state.navigation_root_path(),
+                'depth': 1,
+            },
+            'sort_on': 'getObjPositionInParent',
+            'Subject': 'actions',
+        }
+        res = catalog(query)
+        return IContentListing(res)
+
+
+class FooterViewlet(ViewletBase):
+    index = ViewPageTemplateFile('viewlets/footer.pt')
+
+
+class FooterInfoViewlet(ViewletBase):
+    index = ViewPageTemplateFile('viewlets/footer_info.pt')
+
+    def items(self):
+        context = aq_inner(self.context)
+        portal_state = getMultiAdapter((context, self.request), name="plone_portal_state")
+        catalog = getToolByName(context, 'portal_catalog')
+        query = {
+            'object_provides': IATDocument.__identifier__,
+            'path': {
+                'query': '{0}/info'.format(portal_state.navigation_root_path()),
+            },
+            'sort_on': 'getObjPositionInParent',
+        }
+        res = catalog(query)
+        if res:
+            width = '{0}'.format(100 / len(res))[:2]
+            self.width = 'width: {0}%'.format(width)
+            items = [
+                {
+                    'title': item.Title(),
+                    'url': item.getURL(),
+                    'description': item.Description(),
+                    'text': item.getObject().CookedBody(),
+                } for item in IContentListing(res)
+            ]
+            return items
+
+
+class FooterSubfoldersViewlet(ViewletBase):
+    index = ViewPageTemplateFile('viewlets/footer_subfolders.pt')
+
+    def items(self):
+        context = aq_inner(self.context)
+        portal_state = getMultiAdapter((context, self.request), name="plone_portal_state")
+        catalog = getToolByName(context, 'portal_catalog')
+        query = {
+            'object_provides': IATFolder.__identifier__,
+            'path': {
+                'query': portal_state.navigation_root_path(),
+                'depth': 1,
+            },
+            'sort_on': 'getObjPositionInParent',
+        }
+        res = [brain for brain in catalog(query) if not brain.exclude_from_nav]
+        ploneview = getMultiAdapter(
+            (context, self.request),
+            name=u'plone'
+        )
+        items = [
+            {
+                'title': item.Title(),
+                'url': item.getURL(),
+                'description': item.Description(),
+                'subfolders': self.subfolders(item, catalog, ploneview),
+            } for item in IContentListing(res)
+        ]
+        return items
+
+    def subfolders(self, item, catalog, ploneview):
+        query = {
+            'object_provides': IATFolder.__identifier__,
+            'path': {
+                'query': item.getPath(),
+                'depth': 1,
+            },
+            'sort_on': 'getObjPositionInParent',
+        }
+        res = catalog(query)
+        items = [
+            {
+                'title': item.Title(),
+                'url': item.getURL(),
+                'description': item.Description(),
+            } for item in IContentListing(res)
+        ]
+        return items

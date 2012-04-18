@@ -5,6 +5,7 @@ from zope.viewlet.interfaces import IViewletManager
 class ISllTemplatesLayer(Interface):
     """Marker interface for browserlayer."""
 
+
 class IFeedViewletManager(IViewletManager):
     """"A viewlet manager for Feed."""
 
@@ -23,3 +24,7 @@ class INewsFeedViewletManager(ISimpleFeedViewletManager):
 
 class IEventsFeedViewletManager(ISimpleFeedViewletManager):
     """Events Feed Viewlet Manager."""
+
+
+class IFooterViewletManager(IViewletManager):
+    """Footer ViewletManager."""

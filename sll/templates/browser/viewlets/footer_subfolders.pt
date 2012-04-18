@@ -1,0 +1,23 @@
+<div id="footer-subfolders">
+  <!-- <ul>
+      <li tal:repeat="item view/items"> -->
+        <article tal:repeat="item view/items">
+          <h1>
+            <a
+              tal:attributes="href item/url"
+              tal:content="item/title" />
+          </h1>
+          <ul>
+            <li tal:repeat="folder item/subfolders">
+              <h2>
+                <a
+                  tal:attributes="href folder/url"
+                  tal:content="folder/title"
+                  />
+              </h2>
+            </li>
+          </ul>
+        </article>
+      <!-- </li>
+  </ul> -->
+</div>

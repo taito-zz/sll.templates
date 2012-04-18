@@ -40,6 +40,33 @@
     provides=".interfaces.IEventsFeedViewletManager"
     />
 
+  <!-- Footer Viewlet Manager -->
+  <browser:viewletManager
+    name="sll.footer.manager"
+    provides=".interfaces.IFooterViewletManager"
+    permission="zope2.View"
+    class="plone.app.viewletmanager.manager.OrderedViewletManager"
+    layer=".interfaces.ISllTemplatesLayer"
+    />
+
+  <!-- The breadcrumbs -->
+  <browser:viewlet
+    name="plone.path_bar"
+    manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+    class=".viewlets.PathBarViewlet"
+    permission="zope2.View"
+    layer=".interfaces.ISllTemplatesLayer"
+    />
+
+  <!-- SiteActions -->
+  <browser:viewlet
+    name="plone.site_actions"
+    manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+    class=".viewlets.SiteActionsViewlet"
+    permission="zope2.View"
+    layer=".interfaces.ISllTemplatesLayer"
+    />
+
   <!-- Feed -->
   <browser:viewlet
     class=".viewlets.FeedViewlet"
@@ -78,6 +105,36 @@
     manager=".interfaces.IEventsFeedViewletManager"
     name="sll.events.feed"
     permission="zope2.View"
+    />
+
+  <!-- Footer -->
+  <browser:viewlet
+    name="plone.footer"
+    for="*"
+    manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
+    class=".viewlets.FooterViewlet"
+    permission="zope.Public"
+    layer=".interfaces.ISllTemplatesLayer"
+    />
+
+  <!-- Footer Info Viewlet -->
+  <browser:viewlet
+    name="sll.footer.info"
+    for="*"
+    manager=".interfaces.IFooterViewletManager"
+    class=".viewlets.FooterInfoViewlet"
+    permission="zope2.View"
+    layer=".interfaces.ISllTemplatesLayer"
+    />
+
+  <!-- Footer Info Viewlet -->
+  <browser:viewlet
+    name="sll.footer.subfolders"
+    for="*"
+    manager=".interfaces.IFooterViewletManager"
+    class=".viewlets.FooterSubfoldersViewlet"
+    permission="zope2.View"
+    layer=".interfaces.ISllTemplatesLayer"
     />
 
 </configure>

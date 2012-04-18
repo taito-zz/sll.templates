@@ -1,0 +1,12 @@
+<ul id="portal-siteactions"
+    tal:condition="view/site_actions">
+    <li tal:repeat="saction view/site_actions"
+        tal:attributes="id string:siteaction-${saction/getId}"><a
+           href=""
+           tal:define="title saction/Title;
+                       id saction/getId;"
+           tal:content="title"
+           tal:attributes="href saction/getURL;
+                           title title;"
+           >Site action</a></li>
+</ul>

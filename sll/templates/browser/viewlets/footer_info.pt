@@ -1,0 +1,13 @@
+<div id="footer-info">
+  <ul>
+    <li
+      tal:repeat="item view/items"
+      tal:attributes="style view/width"
+      >
+      <article>
+        <h1><span tal:content="item/title" /></h1>
+        <div tal:replace="structure item/text" />
+      </article>
+    </li>
+  </ul>
+</div>
