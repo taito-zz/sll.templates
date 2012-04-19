@@ -11,7 +11,7 @@
         <div tal:replace="structure provider:plone.abovecontenttitle" />
         <h1 class="documentFirstHeading" tal:content="context/title" />
         <div tal:replace="structure provider:plone.belowcontenttitle" />
-        <div tal:replace="structure provider:sll.feed.manager" />
+        <!-- <div tal:replace="structure provider:sll.feed.manager" /> -->
         <div tal:replace="structure provider:plone.belowcontentbody" />
     </metal:main>
   </body>

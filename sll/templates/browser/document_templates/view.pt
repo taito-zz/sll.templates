@@ -1,5 +1,5 @@
 <html
-  i18n:domain="inicie.theme"
+  i18n:domain="sll.templates"
   lang="en"
   metal:use-macro="context/main_template/macros/master"
   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
@@ -13,28 +13,6 @@
         <div tal:replace="structure provider:plone.belowcontenttitle" />
         <div tal:replace="structure view/image" />
         <div tal:replace="structure view/text" />
-        <!-- <div tal:replace="structure provider:plone.abovecontentbody" /> -->
-        <!-- <section id="top-view">
-          <article tal:repeat="item view/items"
-                   tal:attributes="style item/style">
-            <div class="project-description" tal:attributes="style item/project-style">
-              <h1>
-                <a tal:content="item/title"
-                   tal:attributes="href item/url;
-                                   title item/title;
-                                   alt item/title" />
-              </h1>
-              <p tal:content="item/description" />
-              <p>
-                <a tal:condition="item/link"
-                   tal:content="item/link"
-                   tal:attributes="href item/link;
-                                   title item/title;
-                                   alt item/title;" />
-              </p>
-            </div>
-          </article>
-        </section> -->
         <div tal:replace="structure provider:plone.belowcontentbody" />
     </metal:main>
   </body>
