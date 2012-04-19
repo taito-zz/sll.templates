@@ -1,10 +1,16 @@
-<div id="news-events-feed">
+<div id="news-events-feed" i18n:domain="plone">
   <ul>
     <li>
-      <div tal:replace="structure provider:sll.news.feed.manager" />
+      <section>
+        <h1 i18n:translate="">News</h1>
+        <div tal:replace="structure provider:sll.news.feed.manager" />
+      </section>
     </li>
     <li>
-      <div tal:replace="structure provider:sll.events.feed.manager" />
+      <section>
+        <h1 i18n:translate="">Events</h1>
+        <div tal:replace="structure provider:sll.events.feed.manager" />
+      </section>
     </li>
   </ul>
 </div>
