@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='sll.templates',
-    version='0.1',
+    version='0.2',
     description="Collection of SLL Templates",
     long_description=open("README.rst").read(),
     # Get more strings from
@@ -24,6 +24,8 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
+        'collective.contentleadimage',
+        'collective.cropimage',
         'five.grok',
         'hexagonit.testing',
         'plone.app.contentlisting',

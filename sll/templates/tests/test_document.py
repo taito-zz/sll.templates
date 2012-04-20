@@ -49,6 +49,17 @@ def setUp(self):
 
     setRoles(portal, TEST_USER_ID, ['Manager'])
 
+    document = portal[
+        portal.invokeFactory(
+            'Document',
+            'document',
+            title='Title of Document',
+            description='Description of Document',
+            text='<p>This is the body text of Document.</p>',
+        )
+    ]
+    document.reindexObject()
+
     transaction.commit()
 
 
@@ -79,6 +90,5 @@ def DocFileSuite(testfile, flags=FLAGS, setUp=setUp, layer=FUNCTIONAL_TESTING):
 
 def test_suite():
     return unittest.TestSuite([
-        # DocFileSuite('functional/doctype.txt'),
-        # DocFileSuite('functional/viewlets.txt'),
+        DocFileSuite('functional/document.txt'),
         ])

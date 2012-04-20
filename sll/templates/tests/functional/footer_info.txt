@@ -1,0 +1,20 @@
+Log in as the portal owner::
+
+    >>> from plone.app.testing import TEST_USER_NAME, TEST_USER_PASSWORD
+    >>> browser.login(TEST_USER_NAME, TEST_USER_PASSWORD)
+
+Go to portal::
+
+    >>> browser.open('/')
+    >>> 'Title of Document01' in browser.contents
+    True
+    >>> 'Description of Document01' in browser.contents
+    False
+    >>> 'This is the body text of Document01.' in browser.contents
+    True
+    >>> 'Title of Document02' in browser.contents
+    True
+    >>> 'Description of Document02' in browser.contents
+    False
+    >>> 'This is the body text of Document02.' in browser.contents
+    True
