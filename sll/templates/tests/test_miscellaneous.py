@@ -7,10 +7,7 @@ from plone.app.testing import TEST_USER_PASSWORD
 from plone.app.testing import setRoles
 from plone.testing import layered
 from sll.templates.tests.base import FUNCTIONAL_TESTING
-from sll.templates.browser.interfaces import ITopPageFeed
 from zope.testing import renormalizing
-from zope.interface import alsoProvides
-
 
 import doctest
 import manuel.codeblock
@@ -52,29 +49,13 @@ def setUp(self):
 
     setRoles(portal, TEST_USER_ID, ['Manager'])
 
-    folder = portal[
+    document = portal[
         portal.invokeFactory(
-            'Folder',
-            'folder',
-            title='Title of Folder',
-            description='Description of Folder.',
+            'Document',
+            'document',
         )
     ]
-    folder.reindexObject()
-
-    ids = ['01', '02']
-    for oid in ids:
-        obj = folder[
-            folder.invokeFactory(
-                'Document',
-                'doc{0}'.format(oid),
-                title='Title of Document{0}'.format(oid),
-                description='Description of Document{0}'.format(oid),
-                text='<p>This is the body text of Document{0}.</p>'.format(oid),
-            )
-        ]
-        alsoProvides(obj, ITopPageFeed)
-        obj.reindexObject()
+    document.reindexObject()
 
     transaction.commit()
 
@@ -106,6 +87,5 @@ def DocFileSuite(testfile, flags=FLAGS, setUp=setUp, layer=FUNCTIONAL_TESTING):
 
 def test_suite():
     return unittest.TestSuite([
-        DocFileSuite('functional/folder.txt'),
-        DocFileSuite('functional/portal.txt'),
+        DocFileSuite('functional/miscellaneous.txt'),
         ])
