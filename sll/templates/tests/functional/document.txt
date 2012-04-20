@@ -1,0 +1,14 @@
+Log in as the portal owner::
+
+    >>> from plone.app.testing import TEST_USER_NAME, TEST_USER_PASSWORD
+    >>> browser.login(TEST_USER_NAME, TEST_USER_PASSWORD)
+
+Go to document sll-view::
+
+    >>> browser.open('/document/@@sll-view')
+    >>> 'Title of Document' in browser.contents
+    True
+    >>> 'Description of Document' in browser.contents
+    True
+    >>> 'This is the body text of Document' in browser.contents
+    True

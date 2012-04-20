@@ -12,6 +12,10 @@ class TestCase(IntegrationTestCase):
         installer = getToolByName(self.portal, 'portal_quickinstaller')
         self.failUnless(installer.isProductInstalled('sll.templates'))
 
+    def test_is_collective_contentleadimage_installed(self):
+        installer = getToolByName(self.portal, 'portal_quickinstaller')
+        self.failUnless(installer.isProductInstalled('collective.contentleadimage'))
+
     def test_browserlayer(self):
         from sll.templates.browser.interfaces import ISllTemplatesLayer
         from plone.browserlayer import utils
@@ -89,9 +93,23 @@ class TestCase(IntegrationTestCase):
         installer.uninstallProducts(['sll.templates'])
         self.failIf(installer.isProductInstalled('sll.templates'))
 
-    def t4est_uninstall__browserlayer(self):
+    def test_uninstall__browserlayer(self):
         installer = getToolByName(self.portal, 'portal_quickinstaller')
         installer.uninstallProducts(['sll.templates'])
         from sll.templates.browser.interfaces import ISllTemplatesLayer
         from plone.browserlayer import utils
         self.failIf(ISllTemplatesLayer in utils.registered_layers())
+
+    def test_uninstall__actions__object_buttons__feed_to_top(self):
+        installer = getToolByName(self.portal, 'portal_quickinstaller')
+        installer.uninstallProducts(['sll.templates'])
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        self.assertFalse(hasattr(object_buttons, 'feed_to_top'))
+
+    def test_uninstall__actions__object_buttons__unfeed_from_top(self):
+        installer = getToolByName(self.portal, 'portal_quickinstaller')
+        installer.uninstallProducts(['sll.templates'])
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        self.assertFalse(hasattr(object_buttons, 'unfeed_from_top'))
