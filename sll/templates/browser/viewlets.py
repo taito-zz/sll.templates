@@ -10,7 +10,7 @@ from plone.app.contentlisting.interfaces import IContentListing
 from plone.app.layout.navigation.interfaces import INavigationRoot
 from plone.app.layout.viewlets.common import PathBarViewlet
 from plone.app.layout.viewlets.common import ViewletBase
-from sll.policy.browser.interfaces import ITopPageFeed
+from sll.templates.browser.interfaces import ITopPageFeed
 from zope.component import getMultiAdapter
 
 

@@ -6,6 +6,10 @@ class ISllTemplatesLayer(Interface):
     """Marker interface for browserlayer."""
 
 
+class ITopPageFeed(Interface):
+    """Marker interface for top page feed."""
+
+
 class IFeedViewletManager(IViewletManager):
     """"A viewlet manager for Feed."""
 
