@@ -25,6 +25,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'collective.contentleadimage',
+        'collective.cropimage',
         'five.grok',
         'hexagonit.testing',
         'plone.app.contentlisting',

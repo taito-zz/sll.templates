@@ -3,5 +3,6 @@
   <version>1</version>
   <dependencies>
     <dependency>profile-collective.contentleadimage:default</dependency>
+    <dependency>profile-collective.cropimage:default</dependency>
   </dependencies>
 </metadata>
