@@ -1,3 +1,4 @@
+from DateTime import DateTime
 from hexagonit.testing.browser import Browser
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
@@ -52,10 +53,25 @@ def setUp(self):
     folder = portal[
         portal.invokeFactory(
             'Folder',
-            'folder'
+            'folder',
+            title='Folder',
         )
     ]
     folder.reindexObject()
+
+    ids = [1, 2]
+    for oid in ids:
+        obj = folder[
+            folder.invokeFactory(
+                'Event',
+                'event0{0}'.format(oid),
+                title='Event0{0}'.format(oid),
+                description='Description of Event0{0}'.format(oid),
+                startDate=DateTime() + oid - 1,
+                endDate=DateTime() + oid,
+            )
+        ]
+        obj.reindexObject()
 
     transaction.commit()
 
