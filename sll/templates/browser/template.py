@@ -42,7 +42,7 @@ class DevelopmentWorkView(grok.View):
                 'date': '{0}-{1}-{2}'.format(item.start.yy(), item.start.mm(), item.start.dd()),
                 'start': '{0}:{1}'.format(item.start.hour(), item.start.minute()),
                 'end': '{0}:{0}'.format(item.end.hour(), item.end.minute()),
-                'duration': timedelta(item.end - item.start).days * 24 * 60,
+                'duration': int(timedelta(item.end - item.start).total_seconds()) / 60,
             } for item in IContentListing(catalog(query))
         ]
 
