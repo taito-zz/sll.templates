@@ -175,7 +175,7 @@ class FooterInfoViewlet(ViewletBase):
         query = {
             'object_provides': IATDocument.__identifier__,
             'path': {
-                'query': '{0}/info'.format(portal_state.navigation_root_path()),
+                'query': '{0}/info'.format('/'.join(portal_state.portal().getPhysicalPath())),
             },
             'sort_on': 'getObjPositionInParent',
         }
@@ -233,7 +233,7 @@ class FooterSubfoldersViewlet(ViewletBase):
             },
             'sort_on': 'getObjPositionInParent',
         }
-        res = catalog(query)
+        res = [brain for brain in catalog(query) if not brain.exclude_from_nav]
         items = [
             {
                 'title': item.Title(),
