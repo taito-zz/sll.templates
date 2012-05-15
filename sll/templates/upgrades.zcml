@@ -1,0 +1,17 @@
+<configure
+  i18n_domain="sll.templates"
+  xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+  xmlns="http://namespaces.zope.org/zope"
+  >
+
+    <genericsetup:upgradeStep
+    description=""
+    destination="2"
+    handler="sll.templates.upgrades.upgrade_1_to_2"
+    profile="sll.templates:default"
+    sortkey="1"
+    source="1"
+    title=""
+    />
+
+</configure>

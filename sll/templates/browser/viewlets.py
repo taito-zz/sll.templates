@@ -117,10 +117,6 @@ class SimpleFeedViewlet(ViewletBase):
             'sort_limit': limit,
         }
         res = catalog(query)[:limit]
-        # ploneview = getMultiAdapter(
-        #     (context, self.request),
-        #     name=u'plone'
-        # )
         items = [
             {
                 'title': item.Title(),

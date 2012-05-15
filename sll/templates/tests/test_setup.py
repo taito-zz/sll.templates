@@ -89,7 +89,19 @@ class TestCase(IntegrationTestCase):
         setup = getToolByName(self.portal, 'portal_setup')
         self.assertEqual(
             setup.getVersionForProfile('profile-sll.templates:default'),
-            u'1'
+            u'2'
+        )
+
+    def test_typeinfo__Document__view_methos(self):
+        types = getToolByName(self.portal, 'portal_types')
+        ctype = types.getTypeInfo('Document')
+        self.assertEqual(
+            ctype.getProperty('view_methods'),
+            (
+                'document_view',
+                'sll-view',
+                'monthly-supporter',
+            )
         )
 
     def test_uninstall__package(self):

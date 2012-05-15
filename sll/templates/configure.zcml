@@ -21,5 +21,6 @@
     />
 
   <include package=".browser" />
+  <include file="upgrades.zcml"/>
 
 </configure>

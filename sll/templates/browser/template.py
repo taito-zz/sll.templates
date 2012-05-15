@@ -1,4 +1,5 @@
 from Acquisition import aq_inner
+from Products.ATContentTypes.interfaces.document import IATDocument
 from Products.ATContentTypes.interfaces.event import IATEvent
 from Products.ATContentTypes.interfaces.folder import IATFolder
 from Products.CMFCore.utils import getToolByName
@@ -76,3 +77,18 @@ class DevelopmentWorkView(grok.View):
         price = Decimal(str(price)).quantize(Decimal('.001'), rounding=ROUND_HALF_UP)
         price = Decimal(price).quantize(Decimal('.01'), rounding=ROUND_HALF_UP)
         return '{0} EUR'.format(price)
+
+
+class MonthlySupporterView(grok.View):
+
+    grok.context(IATDocument)
+    grok.layer(ISllTemplatesLayer)
+    grok.name('monthly-supporter')
+    grok.require('zope2.View')
+    grok.template('monthly-supporter')
+
+    def image(self):
+        return self.context.getField('leadImage').tag(self.context)
+
+    def text(self):
+        return self.context.CookedBody()

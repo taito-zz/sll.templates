@@ -6,5 +6,6 @@
  <property name="view_methods">
   <element value="document_view"/>
   <element value="sll-view"/>
+  <element value="monthly-supporter"/>
  </property>
 </object>
