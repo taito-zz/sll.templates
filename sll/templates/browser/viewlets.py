@@ -22,7 +22,6 @@ class FeedViewlet(ViewletBase):
         catalog = getToolByName(context, 'portal_catalog')
         limit = 4
         query = {
-            # 'object_provides': ITopPageFeed.__identifier__,
             'sort_on': 'modified',
             'sort_order': 'reverse',
             'sort_limit': limit,
@@ -41,10 +40,10 @@ class FeedViewlet(ViewletBase):
             query['object_provides'] = ITopPageFeed.__identifier__
             query['sort_limit'] = limit
         res = catalog(query)[:limit]
-        ploneview = getMultiAdapter(
-            (context, self.request),
-            name=u'plone'
-        )
+        # ploneview = getMultiAdapter(
+        #     (context, self.request),
+        #     name=u'plone'
+        # )
         items = [
             {
                 'title': item.Title(),
@@ -54,10 +53,22 @@ class FeedViewlet(ViewletBase):
                 'description': self.description(item),
                 'object': item.getObject(),
                 'image': self.image(item),
-                'date': ploneview.toLocalizedTime(item.ModificationDate()),
+                'date': self._date(item),
             } for item in IContentListing(res)
         ]
         return items
+
+    def _date(self, item):
+        ploneview = getMultiAdapter(
+            (self.context, self.request),
+            name=u'plone'
+        )
+        if item.start:
+            return '{0} - {1}'.format(
+                ploneview.toLocalizedTime(item.start, long_format=True),
+                ploneview.toLocalizedTime(item.end, long_format=True)
+            )
+        return ploneview.toLocalizedTime(item.ModificationDate())
 
     def description(self, item):
         desc = item.Description()
@@ -106,20 +117,32 @@ class SimpleFeedViewlet(ViewletBase):
             'sort_limit': limit,
         }
         res = catalog(query)[:limit]
-        ploneview = getMultiAdapter(
-            (context, self.request),
-            name=u'plone'
-        )
+        # ploneview = getMultiAdapter(
+        #     (context, self.request),
+        #     name=u'plone'
+        # )
         items = [
             {
                 'title': item.Title(),
                 'url': item.getURL(),
                 'parent': aq_parent(item.getObject()).Title(),
                 'parent_url': aq_parent(item.getObject()).absolute_url(),
-                'date': ploneview.toLocalizedTime(item.ModificationDate()),
+                'date': self._date(item),
             } for item in IContentListing(res)
         ]
         return items
+
+    def _date(self, item):
+        ploneview = getMultiAdapter(
+            (self.context, self.request),
+            name=u'plone'
+        )
+        if item.start:
+            return u'{0} - {1}'.format(
+                ploneview.toLocalizedTime(item.start, long_format=True),
+                ploneview.toLocalizedTime(item.end, long_format=True)
+            )
+        return ploneview.toLocalizedTime(item.ModificationDate())
 
 
 class NewsFeedViewlet(SimpleFeedViewlet):
