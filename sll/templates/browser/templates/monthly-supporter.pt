@@ -15,7 +15,7 @@
         <div tal:replace="structure view/text" />
         <section id="yap-monthly-supporter">
           <iframe
-            src="https://secure.yap.fi/yap.jarjesto.fundraising/?id=sll"
+            src="https://secure.yap.fi/Yap.Jarjesto.FundRaising/home/index/sll"
             frameborder="0"
             height="1100"
             width="700">
