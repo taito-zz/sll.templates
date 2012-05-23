@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-05-02 16:06+0000\n"
+"POT-Creation-Date: 2012-05-23 18:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,51 +14,23 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: sll.templates\n"
 
-#: ./browser/templates/development-work.pt:46
-msgid "ALV"
+#: ./profiles/default/actions.xml
+msgid "Feed to Top"
 msgstr ""
 
-#: ./browser/templates/development-work.pt:45
-msgid "ALV 0%"
+#: ./profiles/default/actions.xml
+msgid "Make feedable to top page."
 msgstr ""
 
-#: ./browser/templates/development-work.pt:47
-msgid "ALV 23%"
-msgstr ""
-
-#: ./browser/templates/development-work.pt:20
-msgid "Date"
-msgstr ""
-
-#: ./browser/templates/development-work.pt:19
-msgid "Description"
-msgstr ""
-
-#: ./browser/templates/development-work.pt:23
-msgid "Duration (min)"
-msgstr ""
-
-#: ./browser/templates/development-work.pt:22
-msgid "End"
+#: ./profiles/default/actions.xml
+msgid "Make unfeedable from top page."
 msgstr ""
 
 #: ./browser/viewlets/feed.pt:30
 msgid "Read more"
 msgstr "Lue lisää"
 
-#: ./browser/templates/development-work.pt:21
-msgid "Start"
-msgstr ""
-
-#: ./browser/templates/development-work.pt:18
-msgid "Title"
-msgstr ""
-
-#: ./browser/templates/development-work.pt:40
-msgid "Total Charge"
-msgstr ""
-
-#: ./browser/templates/development-work.pt:38
-msgid "Total Time"
+#: ./profiles/default/actions.xml
+msgid "Unfeed from Top"
 msgstr ""
 
