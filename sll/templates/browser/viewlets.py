@@ -6,6 +6,7 @@ from Products.ATContentTypes.interfaces.folder import IATFolder
 from Products.ATContentTypes.interfaces.news import IATNewsItem
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.PloneFormGen.interfaces import IPloneFormGenForm
 from plone.app.contentlisting.interfaces import IContentListing
 from plone.app.layout.navigation.interfaces import INavigationRoot
 from plone.app.layout.viewlets.common import PathBarViewlet
@@ -33,6 +34,7 @@ class FeedViewlet(ViewletBase):
                 IATDocument.__identifier__,
                 IATEvent.__identifier__,
                 IATNewsItem.__identifier__,
+                IPloneFormGenForm.__identifier__,
             ],
         }
         if INavigationRoot.providedBy(context):
@@ -40,10 +42,6 @@ class FeedViewlet(ViewletBase):
             query['object_provides'] = ITopPageFeed.__identifier__
             query['sort_limit'] = limit
         res = catalog(query)[:limit]
-        # ploneview = getMultiAdapter(
-        #     (context, self.request),
-        #     name=u'plone'
-        # )
         items = [
             {
                 'title': item.Title(),
