@@ -62,7 +62,7 @@ class FeedViewlet(ViewletBase):
             name=u'plone'
         )
         if item.start:
-            return '{0} - {1}'.format(
+            return u'{0} - {1}'.format(
                 ploneview.toLocalizedTime(item.start, long_format=True),
                 ploneview.toLocalizedTime(item.end, long_format=True)
             )
