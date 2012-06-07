@@ -134,14 +134,14 @@
     />
 
   <!-- Events Feed Viewlet -->
-  <browser:viewlet
+  <!-- <browser:viewlet
     class=".viewlets.EventsFeedViewlet"
     for="*"
     layer=".interfaces.ISllTemplatesLayer"
     manager=".interfaces.IEventsFeedViewletManager"
     name="sll.events.feed"
     permission="zope2.View"
-    />
+    /> -->
 
   <!-- Footer -->
   <browser:viewlet
