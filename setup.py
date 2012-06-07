@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='sll.templates',
-    version='0.6.1',
+    version='0.7',
     description="Collection of SLL Templates",
     long_description=open("README.rst").read(),
     # Get more strings from
@@ -27,6 +27,7 @@ setup(
         'Products.PloneFormGen',
         'collective.contentleadimage',
         'collective.cropimage',
+        'collective.searchevent',
         'five.grok',
         'hexagonit.testing',
         'plone.app.contentlisting',

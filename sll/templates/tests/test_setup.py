@@ -24,6 +24,10 @@ class TestCase(IntegrationTestCase):
         installer = getToolByName(self.portal, 'portal_quickinstaller')
         self.failUnless(installer.isProductInstalled('collective.cropimage'))
 
+    def test_collective_searchevent_installed(self):
+        installer = getToolByName(self.portal, 'portal_quickinstaller')
+        self.failUnless(installer.isProductInstalled('collective.searchevent'))
+
     def test_browserlayer(self):
         from sll.templates.browser.interfaces import ISllTemplatesLayer
         from plone.browserlayer import utils
