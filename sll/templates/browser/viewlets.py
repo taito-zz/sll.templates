@@ -159,6 +159,9 @@ class EventsFeedViewlet(SimpleFeedViewlet):
 class PathBarViewlet(PathBarViewlet):
     index = ViewPageTemplateFile('viewlets/path_bar.pt')
 
+    def available(self):
+        return not IPloneSiteRoot.providedBy(self.context)
+
 
 class SiteActionsViewlet(ViewletBase):
     index = ViewPageTemplateFile('viewlets/site_actions.pt')

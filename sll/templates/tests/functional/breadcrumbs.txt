@@ -1,0 +1,14 @@
+Log in as the portal owner::
+
+    >>> from plone.app.testing import TEST_USER_NAME, TEST_USER_PASSWORD
+    >>> browser.login(TEST_USER_NAME, TEST_USER_PASSWORD)
+
+Go to portal::
+
+    >>> browser.open(portal_url)
+    >>> print browser.bycss('#portal-breadcrumbs')
+
+Go to folder::
+
+    >>> browser.open('/folder')
+    >>> print browser.bycss('#portal-breadcrumbs')
