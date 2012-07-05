@@ -5,6 +5,7 @@ from Products.ATContentTypes.interfaces.event import IATEvent
 from Products.ATContentTypes.interfaces.folder import IATFolder
 from Products.ATContentTypes.interfaces.news import IATNewsItem
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.PloneFormGen.interfaces import IPloneFormGenForm
 from plone.app.contentlisting.interfaces import IContentListing
