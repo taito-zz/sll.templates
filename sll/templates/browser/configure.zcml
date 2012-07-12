@@ -4,11 +4,21 @@
     xmlns="http://namespaces.zope.org/zope"
     >
 
+  <permission
+    id="sll.templates.ManageFeedForTop"
+    title="sll.templates: Manage feed for top"
+    />
+
+  <permission
+    id="sll.templates.ManageFeedForMicroSite"
+    title="sll.templates: Manage feed for micro site"
+    />
+
   <browser:page
     name="feedable-to-top"
     for="*"
     class=".miscellaneous.Miscellaneous"
-    permission="cmf.ManagePortal"
+    permission="sll.templates.ManageFeedForTop"
     attribute="feedable_to_top"
     layer=".interfaces.ISllTemplatesLayer"
     />
@@ -17,7 +27,7 @@
     name="unfeedable-from-top"
     for="*"
     class=".miscellaneous.Miscellaneous"
-    permission="cmf.ManagePortal"
+    permission="sll.templates.ManageFeedForTop"
     attribute="unfeedable_from_top"
     layer=".interfaces.ISllTemplatesLayer"
     />
@@ -26,7 +36,7 @@
     name="feed-to-top"
     for="*"
     class=".miscellaneous.Miscellaneous"
-    permission="cmf.ManagePortal"
+    permission="sll.templates.ManageFeedForTop"
     attribute="feed_to_top"
     layer=".interfaces.ISllTemplatesLayer"
     />
@@ -35,7 +45,7 @@
     name="unfeed-from-top"
     for="*"
     class=".miscellaneous.Miscellaneous"
-    permission="cmf.ManagePortal"
+    permission="sll.templates.ManageFeedForTop"
     attribute="unfeed_from_top"
     layer=".interfaces.ISllTemplatesLayer"
     />
@@ -44,7 +54,7 @@
     name="feedable-to-microsite"
     for="*"
     class=".miscellaneous.Miscellaneous"
-    permission="cmf.ModifyPortalContent"
+    permission="sll.templates.ManageFeedForMicroSite"
     attribute="feedable_to_microsite"
     layer=".interfaces.ISllTemplatesLayer"
     />
@@ -53,7 +63,7 @@
     name="unfeedable-from-microsite"
     for="*"
     class=".miscellaneous.Miscellaneous"
-    permission="cmf.ModifyPortalContent"
+    permission="sll.templates.ManageFeedForMicroSite"
     attribute="unfeedable_from_microsite"
     layer=".interfaces.ISllTemplatesLayer"
     />
@@ -62,7 +72,7 @@
     name="feed-to-microsite"
     for="*"
     class=".miscellaneous.Miscellaneous"
-    permission="cmf.ModifyPortalContent"
+    permission="sll.templates.ManageFeedForMicroSite"
     attribute="feed_to_microsite"
     layer=".interfaces.ISllTemplatesLayer"
     />
@@ -71,7 +81,7 @@
     name="unfeed-from-microsite"
     for="*"
     class=".miscellaneous.Miscellaneous"
-    permission="cmf.ModifyPortalContent"
+    permission="sll.templates.ManageFeedForMicroSite"
     attribute="unfeed_from_microsite"
     layer=".interfaces.ISllTemplatesLayer"
     />

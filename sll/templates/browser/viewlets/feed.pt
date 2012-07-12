@@ -6,12 +6,12 @@
   <table id="folder-feed">
     <tbody>
       <tr tal:repeat="item view/items">
-        <td>
+        <td class="feed-image">
           <div class="crop-frame">
             <div tal:replace="structure item/image" />
           </div>
         </td>
-        <td>
+        <td class="feed-text">
           <h1>
             <a tal:content="item/title"
                tal:attributes="href item/url;

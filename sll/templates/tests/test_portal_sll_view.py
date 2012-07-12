@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
+from Products.CMFCore.utils import getToolByName
 from hexagonit.testing.browser import Browser
 from plone.app.layout.navigation.interfaces import INavigationRoot
-from plone.app.testing import SITE_OWNER_NAME
-from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import TEST_USER_PASSWORD
@@ -38,8 +37,6 @@ def setUp(self):
         'TEST_USER_ID': TEST_USER_ID,
         'TEST_USER_NAME': TEST_USER_NAME,
         'TEST_USER_PASSWORD': TEST_USER_PASSWORD,
-        'SITE_OWNER_NAME': SITE_OWNER_NAME,
-        'SITE_OWNER_PASSWORD': SITE_OWNER_PASSWORD,
     })
 
     portal = self.globs['portal']
@@ -50,17 +47,27 @@ def setUp(self):
     browser.handleErrors = True
     portal.error_log._ignored_exceptions = ()
 
-    setRoles(portal, TEST_USER_ID, ['Manager'])
+    setRoles(portal, TEST_USER_ID, ['Site Administrator'])
+
+    user2 = 'test_user_2_'
+    regtool = getToolByName(portal, 'portal_registration')
+    regtool.addMember(user2, user2)
+    setRoles(portal, user2, ['Contributor'])
+    self.globs['user2'] = user2
 
     folder1 = portal[portal.invokeFactory('Folder', 'folder1', title="Földer1")]
     # INavigationRoot for folder1.
     alsoProvides(folder1, INavigationRoot)
     folder1.reindexObject()
     folder2 = portal[portal.invokeFactory('Folder', 'folder2', title="Földer2")]
+    # INavigationRoot for folder2.
+    alsoProvides(folder1, INavigationRoot)
     folder2.reindexObject()
     doc1 = folder1[folder1.invokeFactory(
         'Document', 'doc1', title="Döcument1", description="Description of Döcument1")]
     doc1.reindexObject()
+
+
 
     transaction.commit()
 

@@ -55,7 +55,7 @@ class TestCase(IntegrationTestCase):
         portal_actions = getToolByName(self.portal, 'portal_actions')
         object_buttons = getattr(portal_actions, 'object_buttons')
         action = getattr(object_buttons, 'feed_to_top')
-        self.assertEqual(action.permissions, ('Manage portal',))
+        self.assertEqual(action.permissions, ('sll.templates: Manage feed for top',))
 
     def test_actions__object_buttons__feed_to_top__visible(self):
         portal_actions = getToolByName(self.portal, 'portal_actions')
@@ -85,12 +85,72 @@ class TestCase(IntegrationTestCase):
         portal_actions = getToolByName(self.portal, 'portal_actions')
         object_buttons = getattr(portal_actions, 'object_buttons')
         action = getattr(object_buttons, 'unfeed_from_top')
-        self.assertEqual(action.permissions, ('Manage portal',))
+        self.assertEqual(action.permissions, ('sll.templates: Manage feed for top',))
 
     def test_actions__object_buttons__unfeed_from_top__visible(self):
         portal_actions = getToolByName(self.portal, 'portal_actions')
         object_buttons = getattr(portal_actions, 'object_buttons')
         action = getattr(object_buttons, 'unfeed_from_top')
+        self.assertTrue(action.visible)
+
+    def test_actions__object_buttons__feed_to_microsite__title(self):
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        action = getattr(object_buttons, 'feed_to_microsite')
+        self.assertEqual(action.title, 'Feed to micro site')
+
+    def test_actions__object_buttons__feed_to_microsite__description(self):
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        action = getattr(object_buttons, 'feed_to_microsite')
+        self.assertEqual(action.description, 'Make feedable to micro site.')
+
+    def test_actions__object_buttons__feed_to_microsite__url_expr(self):
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        action = getattr(object_buttons, 'feed_to_microsite')
+        self.assertEqual(action.url_expr, 'string:${globals_view/getCurrentObjectUrl}/@@feed-to-microsite')
+
+    def test_actions__object_buttons__feed_to_microsite__permissions(self):
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        action = getattr(object_buttons, 'feed_to_microsite')
+        self.assertEqual(action.permissions, ('sll.templates: Manage feed for micro site',))
+
+    def test_actions__object_buttons__feed_to_microsite__visible(self):
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        action = getattr(object_buttons, 'feed_to_microsite')
+        self.assertTrue(action.visible)
+
+    def test_actions__object_buttons__unfeed_from_microsite__title(self):
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        action = getattr(object_buttons, 'unfeed_from_microsite')
+        self.assertEqual(action.title, 'Unfeed from micro site')
+
+    def test_actions__object_buttons__unfeed_from_microsite__description(self):
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        action = getattr(object_buttons, 'unfeed_from_microsite')
+        self.assertEqual(action.description, 'Make unfeedable from micro site.')
+
+    def test_actions__object_buttons__unfeed_from_microsite__url_expr(self):
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        action = getattr(object_buttons, 'unfeed_from_microsite')
+        self.assertEqual(action.url_expr, 'string:${globals_view/getCurrentObjectUrl}/@@unfeed-from-microsite')
+
+    def test_actions__object_buttons__unfeed_from_microsite__permissions(self):
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        action = getattr(object_buttons, 'unfeed_from_microsite')
+        self.assertEqual(action.permissions, ('sll.templates: Manage feed for micro site',))
+
+    def test_actions__object_buttons__unfeed_from_microsite__visible(self):
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        action = getattr(object_buttons, 'unfeed_from_microsite')
         self.assertTrue(action.visible)
 
     def test_metadata__version(self):
@@ -100,7 +160,54 @@ class TestCase(IntegrationTestCase):
             u'2'
         )
 
-    def test_typeinfo__Document__view_methos(self):
+    def test_rolemap__ManageFeedForTop__rolesOfPermission(self):
+        permission = "sll.templates: Manage feed for top"
+        roles = [
+            item['name'] for item in self.portal.rolesOfPermission(
+                permission
+            ) if item['selected'] == 'SELECTED'
+        ]
+        roles.sort()
+        self.assertEqual(
+            roles,
+            [
+                'Manager',
+                'Site Administrator',
+            ]
+        )
+
+    def test_rolemap__ManageFeedForTop__acquiredRolesAreUsedBy(self):
+        permission = "sll.templates: Manage feed for top"
+        self.assertEqual(
+            self.portal.acquiredRolesAreUsedBy(permission),
+            'CHECKED'
+        )
+
+    def test_rolemap__ManageFeedForMicroSite__rolesOfPermission(self):
+        permission = "sll.templates: Manage feed for micro site"
+        roles = [
+            item['name'] for item in self.portal.rolesOfPermission(
+                permission
+            ) if item['selected'] == 'SELECTED'
+        ]
+        roles.sort()
+        self.assertEqual(
+            roles,
+            [
+                'Contributor',
+                'Manager',
+                'Site Administrator',
+            ]
+        )
+
+    def test_rolemap__ManageFeedForMicroSite__acquiredRolesAreUsedBy(self):
+        permission = "sll.templates: Manage feed for micro site"
+        self.assertEqual(
+            self.portal.acquiredRolesAreUsedBy(permission),
+            'CHECKED'
+        )
+
+    def test_typeinfo__Document__view_method(self):
         types = getToolByName(self.portal, 'portal_types')
         ctype = types.getTypeInfo('Document')
         self.assertEqual(
@@ -137,3 +244,17 @@ class TestCase(IntegrationTestCase):
         portal_actions = getToolByName(self.portal, 'portal_actions')
         object_buttons = getattr(portal_actions, 'object_buttons')
         self.assertFalse(hasattr(object_buttons, 'unfeed_from_top'))
+
+    def test_uninstall__actions__object_buttons__feed_to_microsite(self):
+        installer = getToolByName(self.portal, 'portal_quickinstaller')
+        installer.uninstallProducts(['sll.templates'])
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        self.assertFalse(hasattr(object_buttons, 'feed_to_microsite'))
+
+    def test_uninstall__actions__object_buttons__unfeed_from_microsite(self):
+        installer = getToolByName(self.portal, 'portal_quickinstaller')
+        installer.uninstallProducts(['sll.templates'])
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        self.assertFalse(hasattr(object_buttons, 'unfeed_from_microsite'))
