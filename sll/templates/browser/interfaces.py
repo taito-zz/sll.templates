@@ -10,6 +10,10 @@ class ITopPageFeed(Interface):
     """Marker interface for top page feed."""
 
 
+class IMicroSiteFeed(Interface):
+    """Marker interface for micro site feed."""
+
+
 class IFeedViewletManager(IViewletManager):
     """"A viewlet manager for Feed."""
 

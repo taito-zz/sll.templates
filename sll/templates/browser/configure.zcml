@@ -40,6 +40,42 @@
     layer=".interfaces.ISllTemplatesLayer"
     />
 
+  <browser:page
+    name="feedable-to-microsite"
+    for="*"
+    class=".miscellaneous.Miscellaneous"
+    permission="cmf.ModifyPortalContent"
+    attribute="feedable_to_microsite"
+    layer=".interfaces.ISllTemplatesLayer"
+    />
+
+  <browser:page
+    name="unfeedable-from-microsite"
+    for="*"
+    class=".miscellaneous.Miscellaneous"
+    permission="cmf.ModifyPortalContent"
+    attribute="unfeedable_from_microsite"
+    layer=".interfaces.ISllTemplatesLayer"
+    />
+
+  <browser:page
+    name="feed-to-microsite"
+    for="*"
+    class=".miscellaneous.Miscellaneous"
+    permission="cmf.ModifyPortalContent"
+    attribute="feed_to_microsite"
+    layer=".interfaces.ISllTemplatesLayer"
+    />
+
+  <browser:page
+    name="unfeed-from-microsite"
+    for="*"
+    class=".miscellaneous.Miscellaneous"
+    permission="cmf.ModifyPortalContent"
+    attribute="unfeed_from_microsite"
+    layer=".interfaces.ISllTemplatesLayer"
+    />
+
   <!-- Viewlet manager for feed -->
   <browser:viewletManager
     class="plone.app.viewletmanager.manager.OrderedViewletManager"

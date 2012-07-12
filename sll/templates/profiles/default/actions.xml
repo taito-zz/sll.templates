@@ -26,6 +26,30 @@
      </property>
      <property name="visible">True</property>
     </object>
+    <object name="feed_to_microsite" meta_type="CMF Action" i18n:domain="sll.templates">
+     <property name="title" i18n:translate="">Feed to micro site</property>
+     <property name="description" i18n:translate="">Make feedable to micro site.</property>
+     <property
+        name="url_expr">string:${globals_view/getCurrentObjectUrl}/@@feed-to-microsite</property>
+     <property
+        name="available_expr">python: object.restrictedTraverse("feedable-to-microsite")()</property>
+     <property name="permissions">
+      <element value="Modify portal content"/>
+     </property>
+     <property name="visible">True</property>
+    </object>
+    <object name="unfeed_from_microsite" meta_type="CMF Action" i18n:domain="sll.templates">
+     <property name="title" i18n:translate="">Unfeed from micro site</property>
+     <property name="description" i18n:translate="">Make unfeedable from micro site.</property>
+     <property
+        name="url_expr">string:${globals_view/getCurrentObjectUrl}/@@unfeed-from-microsite</property>
+     <property
+        name="available_expr">python: object.restrictedTraverse("unfeedable-from-microsite")()</property>
+     <property name="permissions">
+      <element value="Modify portal content"/>
+     </property>
+     <property name="visible">True</property>
+    </object>
   </object>
 
 </object>

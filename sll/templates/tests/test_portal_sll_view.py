@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 from hexagonit.testing.browser import Browser
+from plone.app.layout.navigation.interfaces import INavigationRoot
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
@@ -7,6 +9,7 @@ from plone.app.testing import TEST_USER_PASSWORD
 from plone.app.testing import setRoles
 from plone.testing import layered
 from sll.templates.tests.base import FUNCTIONAL_TESTING
+from zope.interface import alsoProvides
 from zope.testing import renormalizing
 
 import doctest
@@ -49,13 +52,15 @@ def setUp(self):
 
     setRoles(portal, TEST_USER_ID, ['Manager'])
 
-    document = portal[
-        portal.invokeFactory(
-            'Document',
-            'document',
-        )
-    ]
-    document.reindexObject()
+    folder1 = portal[portal.invokeFactory('Folder', 'folder1', title="Földer1")]
+    # INavigationRoot for folder1.
+    alsoProvides(folder1, INavigationRoot)
+    folder1.reindexObject()
+    folder2 = portal[portal.invokeFactory('Folder', 'folder2', title="Földer2")]
+    folder2.reindexObject()
+    doc1 = folder1[folder1.invokeFactory(
+        'Document', 'doc1', title="Döcument1", description="Description of Döcument1")]
+    doc1.reindexObject()
 
     transaction.commit()
 
@@ -87,5 +92,5 @@ def DocFileSuite(testfile, flags=FLAGS, setUp=setUp, layer=FUNCTIONAL_TESTING):
 
 def test_suite():
     return unittest.TestSuite([
-        DocFileSuite('functional/miscellaneous.txt'),
+        DocFileSuite('functional/portal_sll_view.txt'),
         ])

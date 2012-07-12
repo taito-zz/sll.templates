@@ -12,8 +12,10 @@ from plone.app.contentlisting.interfaces import IContentListing
 from plone.app.layout.navigation.interfaces import INavigationRoot
 from plone.app.layout.viewlets.common import PathBarViewlet
 from plone.app.layout.viewlets.common import ViewletBase
+from sll.templates.browser.interfaces import IMicroSiteFeed
 from sll.templates.browser.interfaces import ITopPageFeed
 from zope.component import getMultiAdapter
+from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 
 
 class FeedViewlet(ViewletBase):
@@ -40,8 +42,11 @@ class FeedViewlet(ViewletBase):
         }
         if INavigationRoot.providedBy(context):
             limit = 3
-            query['object_provides'] = ITopPageFeed.__identifier__
             query['sort_limit'] = limit
+            if IPloneSiteRoot.providedBy(context):
+                query['object_provides'] = ITopPageFeed.__identifier__
+            else:
+                query['object_provides'] = IMicroSiteFeed.__identifier__
         res = catalog(query)[:limit]
         items = [
             {
