@@ -13,19 +13,20 @@
       toLocalizedTime nocall:plone_view/toLocalizedTime;
     "
   >
-    <dl>
-      <tal:results repeat="item batch">
-        <dt>
-          <a 
+    <tal:results repeat="item batch">
+      <article>
+        <h1>
+          <a
             tal:attributes="
               href item/url;
               title item/title
             "
              tal:content="item/title"
              />
-        </dt>
-        <dd class="parent">
+        </h1>
+        <h2>
           <a
+            class="parent"
             tal:attributes="
               alt item/parent_description;
               href item/parent_url;
@@ -33,20 +34,14 @@
             "
             tal:content="item/parent_title"
             />
-        <dd>
-          <span class="dates" tal:condition="python: item['start'] != item['end']">
-            <span tal:replace="python: toLocalizedTime(item['start'], long_format=True)" /> - <span tal:replace="python: toLocalizedTime(item['end'], long_format=True)" />
-          </span>
-          <span class="dates" tal:condition="python: item['start'] == item['end']">
-            <span tal:replace="python: toLocalizedTime(item['start'], long_format=True)" />
-          </span>
-          <p 
-            tal:condition="item/description"
-            tal:content="item/description"
-            />
-        </dd>
-      </tal:results>
-    </dl>
+          <span class="datetime" tal:content="item/datetime">
+        </h2>
+        <p
+          tal:condition="item/description"
+          tal:content="item/description"
+          />
+      </article>
+    </tal:results>
     <div metal:use-macro="context/batch_macros/macros/navigation" />
   </tal:block>
 </tal:block>

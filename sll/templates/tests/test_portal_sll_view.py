@@ -67,8 +67,6 @@ def setUp(self):
         'Document', 'doc1', title="Döcument1", description="Description of Döcument1")]
     doc1.reindexObject()
 
-
-
     transaction.commit()
 
 

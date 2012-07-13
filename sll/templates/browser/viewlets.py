@@ -15,7 +15,6 @@ from plone.app.layout.viewlets.common import ViewletBase
 from sll.templates.browser.interfaces import IMicroSiteFeed
 from sll.templates.browser.interfaces import ITopPageFeed
 from zope.component import getMultiAdapter
-from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 
 
 class FeedViewlet(ViewletBase):

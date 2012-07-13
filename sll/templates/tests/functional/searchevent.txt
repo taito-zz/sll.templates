@@ -49,29 +49,24 @@ Create Event02 FutureYear/05/02-10:00 AM - FutureYear/05/03 10:00 AM under Folde
 Go to event results page::
 
     >>> browser.open('/@@search-results')
+
     >>> print browser.bycss('#search-results')
     --- 1 ---
     <section id="search-results"><h1>Search Results</h1>
-    <dl><dt>
+    <article><h1>
     <a href="http://nohost/plone/folder01/event01" title="Event01">Event01</a>
-    </dt>
-    <dd class="parent">
-    <a alt="Description of Folder01" href="http://nohost/plone/folder01" title="Folder01">Folder01</a>
-    <dd>
-    <span class="dates">
-    ...
-    </span>
+    </h1>
+    <h2>
+    <a class="parent" alt="Description of Folder01" href="http://nohost/plone/folder01" title="Folder01">Folder01</a>
+    <span class="datetime">May 01, ... 10:00 AM - 11:00 AM</span>
+    </h2>
     <p>Description of Event01</p>
-    </dd>
-    </dd><dt>
+    </article><article><h1>
     <a href="http://nohost/plone/folder02/event02" title="Event02">Event02</a>
-    </dt>
-    <dd class="parent">
-    <a alt="Description of Folder02" href="http://nohost/plone/folder02" title="Folder02">Folder02</a>
-    <dd>
-    <span class="dates">
-    ...
-    </span>
+    </h1>
+    <h2>
+    <a class="parent" alt="Description of Folder02" href="http://nohost/plone/folder02" title="Folder02">Folder02</a>
+    <span class="datetime">May 02, ... 10:00 AM - May 03, ... 10:00 AM</span>
+    </h2>
     <p>Description of Event02</p>
-    </dd>
-    </dd></dl></section>
+    </article></section>
