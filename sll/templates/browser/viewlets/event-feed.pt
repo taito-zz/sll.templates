@@ -3,7 +3,7 @@
   tal:define="batch viewlet/batch;">
   <p tal:condition="not: batch"
      i18n:translate="">
-    There are no search results found.
+    There are no upcoming events.
   </p>
   <tal:block tal:condition="batch">
     <tal:results repeat="item batch">
