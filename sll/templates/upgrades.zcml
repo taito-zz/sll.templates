@@ -14,4 +14,14 @@
     title=""
     />
 
+    <genericsetup:upgradeStep
+    description=""
+    destination="3"
+    handler="sll.templates.upgrades.upgrade_2_to_3"
+    profile="sll.templates:default"
+    sortkey="1"
+    source="2"
+    title="Reimport actions.xml and rolemap.xml"
+    />
+
 </configure>

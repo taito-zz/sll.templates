@@ -33,3 +33,92 @@ class TestCase(IntegrationTestCase):
                 'monthly-supporter',
             )
         )
+
+    def test_upgrades_2_to_3(self):
+
+        permission = "sll.templates: Manage feed for top"
+        self.portal.manage_permission(permission, roles=['Manager'])
+        roles = [
+            item['name'] for item in self.portal.rolesOfPermission(
+                permission
+            ) if item['selected'] == 'SELECTED'
+        ]
+        roles.sort()
+        self.assertEqual(
+            roles,
+            [
+                'Manager',
+            ]
+        )
+        self.assertEqual(
+            self.portal.acquiredRolesAreUsedBy(permission),
+            ''
+        )
+
+        permission = "sll.templates: Manage feed for micro site"
+        self.portal.manage_permission(permission, roles=['Manager'])
+        roles = [
+            item['name'] for item in self.portal.rolesOfPermission(
+                permission
+            ) if item['selected'] == 'SELECTED'
+        ]
+        roles.sort()
+        self.assertEqual(
+            roles,
+            [
+                'Manager',
+            ]
+        )
+        self.assertEqual(
+            self.portal.acquiredRolesAreUsedBy(permission),
+            ''
+        )
+
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        object_buttons.manage_delObjects(ids=['feed_to_microsite', 'unfeed_from_microsite'])
+        self.assertFalse(hasattr(object_buttons, 'feed_to_microsite'))
+        self.assertFalse(hasattr(object_buttons, 'unfeed_from_microsite'))
+
+        from sll.templates.upgrades import upgrade_2_to_3
+        upgrade_2_to_3(self.portal)
+
+        permission = "sll.templates: Manage feed for top"
+        roles = [
+            item['name'] for item in self.portal.rolesOfPermission(
+                permission
+            ) if item['selected'] == 'SELECTED'
+        ]
+        roles.sort()
+        self.assertEqual(
+            roles,
+            [
+                'Manager',
+                'Site Administrator',
+            ]
+        )
+        self.assertEqual(
+            self.portal.acquiredRolesAreUsedBy(permission),
+            'CHECKED'
+        )
+
+        permission = "sll.templates: Manage feed for micro site"
+        roles = [
+            item['name'] for item in self.portal.rolesOfPermission(
+                permission
+            ) if item['selected'] == 'SELECTED'
+        ]
+        roles.sort()
+        self.assertEqual(
+            roles,
+            [
+                'Contributor',
+                'Manager',
+                'Site Administrator',
+            ])
+        self.assertEqual(
+            self.portal.acquiredRolesAreUsedBy(permission),
+            'CHECKED')
+
+        self.assertTrue(hasattr(object_buttons, 'feed_to_microsite'))
+        self.assertTrue(hasattr(object_buttons, 'unfeed_from_microsite'))

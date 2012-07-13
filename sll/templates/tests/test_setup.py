@@ -156,9 +156,7 @@ class TestCase(IntegrationTestCase):
     def test_metadata__version(self):
         setup = getToolByName(self.portal, 'portal_setup')
         self.assertEqual(
-            setup.getVersionForProfile('profile-sll.templates:default'),
-            u'2'
-        )
+            setup.getVersionForProfile('profile-sll.templates:default'), u'3')
 
     def test_rolemap__ManageFeedForTop__rolesOfPermission(self):
         permission = "sll.templates: Manage feed for top"
