@@ -1,31 +1,25 @@
 <tal:block
   i18n:domain="collective.searchevent"
-  tal:define="batch viewlet/batch;"
-  >
-  <p tal:condition="not: viewlet/batch"
+  tal:define="batch viewlet/batch;">
+  <p tal:condition="not: batch"
      i18n:translate="">
     There are no search results found.
   </p>
-  <tal:block
-    tal:condition="viewlet/batch"
-    tal:define="
-      plone_view context/@@plone;
-      toLocalizedTime nocall:plone_view/toLocalizedTime;
-    "
-  >
-    <dl>
-      <tal:results repeat="item batch">
-        <dt>
-          <a 
+  <tal:block tal:condition="batch">
+    <tal:results repeat="item batch">
+      <article>
+        <h1>
+          <a
             tal:attributes="
               href item/url;
               title item/title
             "
              tal:content="item/title"
              />
-        </dt>
-        <dd class="parent">
+        </h1>
+        <h2>
           <a
+            class="parent"
             tal:attributes="
               alt item/parent_description;
               href item/parent_url;
@@ -33,19 +27,10 @@
             "
             tal:content="item/parent_title"
             />
-        <dd>
-          <span class="dates" tal:condition="python: item['start'] != item['end']">
-            <span tal:replace="python: toLocalizedTime(item['start'], long_format=True)" /> - <span tal:replace="python: toLocalizedTime(item['end'], long_format=True)" />
-          </span>
-          <span class="dates" tal:condition="python: item['start'] == item['end']">
-            <span tal:replace="python: toLocalizedTime(item['start'], long_format=True)" />
-          </span>
-          <p 
-            tal:condition="item/description"
-            tal:content="item/description"
-            />
-        </dd>
-      </tal:results>
-    </dl>
+          <span class="datetime" tal:content="item/datetime" />
+          <span class="datetime" tal:content="python: viewlet.datetime(item['item'])" />
+        </h2>
+      </article>
+    </tal:results>
   </tal:block>
 </tal:block>

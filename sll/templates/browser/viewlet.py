@@ -49,14 +49,14 @@ class EventsFeedViewlet(SearchEventResultsViewlet):
             parent = aq_parent(aq_inner(item.getObject()))
             items.append(
                 {
+                    'datetime': self.datetime(item),
                     'description': item.Description(),
-                    'end': item.end,
                     'parent_description': parent.Description(),
                     'parent_title': parent.Title(),
                     'parent_url': parent.absolute_url(),
-                    'start': item.start,
                     'title': item.Title(),
                     'url': item.getURL(),
+                    'item': item,
                 }
             )
         return items
