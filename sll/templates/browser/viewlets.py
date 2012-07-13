@@ -12,6 +12,7 @@ from plone.app.contentlisting.interfaces import IContentListing
 from plone.app.layout.navigation.interfaces import INavigationRoot
 from plone.app.layout.viewlets.common import PathBarViewlet
 from plone.app.layout.viewlets.common import ViewletBase
+from plone.memoize.instance import memoize
 from sll.templates.browser.interfaces import IMicroSiteFeed
 from sll.templates.browser.interfaces import ITopPageFeed
 from zope.component import getMultiAdapter
@@ -61,17 +62,23 @@ class FeedViewlet(ViewletBase):
         ]
         return items
 
+    @memoize
+    def _ulocalized_time(self):
+        """Return ulocalized_time method.
+
+        :rtype: method
+        """
+        translation_service = getToolByName(self.context, 'translation_service')
+        return translation_service.ulocalized_time
+
     def _date(self, item):
-        ploneview = getMultiAdapter(
-            (self.context, self.request),
-            name=u'plone'
-        )
+        ulocalized_time = self._ulocalized_time()
         if item.start:
             return u'{0} - {1}'.format(
-                ploneview.toLocalizedTime(item.start, long_format=True),
-                ploneview.toLocalizedTime(item.end, long_format=True)
+                ulocalized_time(item.start, long_format=True, context=self.context),
+                ulocalized_time(item.end, long_format=True, context=self.context)
             )
-        return ploneview.toLocalizedTime(item.ModificationDate())
+        return ulocalized_time(item.ModificationDate(), context=self.context)
 
     def description(self, item):
         desc = item.Description()
@@ -125,16 +132,27 @@ class SimpleFeedViewlet(ViewletBase):
             'sort_limit': limit,
         }
         res = catalog(query)[:limit]
+        ulocalized_time = self._ulocalized_time()
         items = [
             {
                 'title': item.Title(),
                 'url': item.getURL(),
                 'parent': aq_parent(item.getObject()).Title(),
                 'parent_url': aq_parent(item.getObject()).absolute_url(),
-                'date': ploneview.toLocalizedTime(item.ModificationDate()),
+                # 'date': ploneview.toLocalizedTime(item.ModificationDate()),
+                'date': ulocalized_time(item.ModificationDate(), context=context),
             } for item in IContentListing(res)
         ]
         return items
+
+    @memoize
+    def _ulocalized_time(self):
+        """Return ulocalized_time method.
+
+        :rtype: method
+        """
+        translation_service = getToolByName(self.context, 'translation_service')
+        return translation_service.ulocalized_time
 
 
 class NewsFeedViewlet(SimpleFeedViewlet):

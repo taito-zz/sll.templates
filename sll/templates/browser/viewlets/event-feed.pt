@@ -28,7 +28,6 @@
             tal:content="item/parent_title"
             />
           <span class="datetime" tal:content="item/datetime" />
-          <span class="datetime" tal:content="python: viewlet.datetime(item['item'])" />
         </h2>
       </article>
     </tal:results>
