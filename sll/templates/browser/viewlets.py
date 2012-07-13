@@ -143,10 +143,10 @@ class NewsFeedViewlet(SimpleFeedViewlet):
         return self.feeds(IATNewsItem.__identifier__)
 
 
-class EventsFeedViewlet(SimpleFeedViewlet):
+# class EventsFeedViewlet(SimpleFeedViewlet):
 
-    def items(self):
-        return self.feeds(IATEvent.__identifier__)
+#     def items(self):
+#         return self.feeds(IATEvent.__identifier__)
 
 
 class PathBarViewlet(PathBarViewlet):
