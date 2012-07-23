@@ -7,29 +7,31 @@
   </p>
   <tal:block tal:condition="batch">
     <tal:results repeat="item batch">
-      <article>
-        <h1>
-          <a
-            tal:attributes="
-              href item/url;
-              title item/title
-            "
-             tal:content="item/title"
-             />
-        </h1>
-        <h2>
-          <a
-            class="parent"
-            tal:attributes="
-              alt item/parent_description;
-              href item/parent_url;
-              title item/parent_title;
-            "
-            tal:content="item/parent_title"
-            />
-          <span class="datetime" tal:content="item/datetime" />
-        </h2>
-      </article>
+      <div class="simple-feed" repeat="item batch">
+        <article>
+          <h1>
+            <a
+              tal:attributes="
+                href item/url;
+                title item/title
+              "
+               tal:content="item/title"
+               />
+          </h1>
+          <h2>
+            <a
+              class="parent"
+              tal:attributes="
+                alt item/parent_description;
+                href item/parent_url;
+                title item/parent_title;
+              "
+              tal:content="item/parent_title"
+              />
+            <span class="sll-date" tal:content="item/datetime" />
+          </h2>
+        </article>
+      </div>
     </tal:results>
   </tal:block>
 </tal:block>
