@@ -27,7 +27,7 @@
             "
             tal:content="item/parent_title"
             />
-          <span class="datetime" tal:content="item/datetime">
+          <span class="datetime" tal:content="item/datetime" />
         </h2>
         <p
           tal:condition="item/description"
