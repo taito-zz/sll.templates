@@ -139,7 +139,6 @@ class SimpleFeedViewlet(ViewletBase):
                 'url': item.getURL(),
                 'parent': aq_parent(item.getObject()).Title(),
                 'parent_url': aq_parent(item.getObject()).absolute_url(),
-                # 'date': ploneview.toLocalizedTime(item.ModificationDate()),
                 'date': ulocalized_time(item.ModificationDate(), context=context),
             } for item in IContentListing(res)
         ]
@@ -161,17 +160,11 @@ class NewsFeedViewlet(SimpleFeedViewlet):
         return self.feeds(IATNewsItem.__identifier__)
 
 
-# class EventsFeedViewlet(SimpleFeedViewlet):
-
-#     def items(self):
-#         return self.feeds(IATEvent.__identifier__)
-
-
 class PathBarViewlet(PathBarViewlet):
     index = ViewPageTemplateFile('viewlets/path_bar.pt')
 
     def available(self):
-        return not IPloneSiteRoot.providedBy(self.context)
+        return not INavigationRoot.providedBy(self.context)
 
 
 class SiteActionsViewlet(ViewletBase):

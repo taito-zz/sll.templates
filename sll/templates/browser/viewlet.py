@@ -44,8 +44,10 @@ class EventsFeedViewlet(SearchEventResultsViewlet):
 
     def results(self, b_start=0, b_size=10):
         items = []
+        context = aq_inner(self.context)
+        paths = '/'.join(context.getPhysicalPath())
         for item in super(EventsFeedViewlet, self).results(
-            limit=3, b_start=b_start, b_size=b_size):
+            paths=paths, limit=3, b_start=b_start, b_size=b_size):
             parent = aq_parent(aq_inner(item.getObject()))
             items.append(
                 {

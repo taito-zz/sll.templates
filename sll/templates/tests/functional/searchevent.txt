@@ -50,9 +50,9 @@ Go to event results page::
 
     >>> browser.open('/@@search-results')
 
-    >>> print browser.bycss('#search-results')
+    >>> print browser.bycss('#collective-search-event-results')
     --- 1 ---
-    <section id="search-results"><h1>Search Results</h1>
+    <section id="collective-search-event-results"><h1>Search Results</h1>
     <article><h1>
     <a href="http://nohost/plone/folder01/event01" title="Event01">Event01</a>
     </h1>
