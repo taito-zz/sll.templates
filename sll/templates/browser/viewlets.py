@@ -8,6 +8,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.PloneFormGen.interfaces import IPloneFormGenForm
+from datetime import date
 from plone.app.contentlisting.interfaces import IContentListing
 from plone.app.layout.navigation.interfaces import INavigationRoot
 from plone.app.layout.viewlets.common import PathBarViewlet
@@ -112,6 +113,20 @@ class FeedViewlet(ViewletBase):
 
 class NewsEventsFeedViewlet(ViewletBase):
     index = ViewPageTemplateFile('viewlets/news_events_feed.pt')
+
+    def link_to_news(self):
+        context = aq_inner(self.context)
+        if IPloneSiteRoot.providedBy(context):
+            return '{}/ajankohtaista/tiedotteet/{}'.format(
+                context.absolute_url(), date.today().year)
+
+    def link_to_events(self):
+        context = aq_inner(self.context)
+        if IPloneSiteRoot.providedBy(context):
+            url = '{}/tapahtumat'
+        else:
+            url = '{}/events_listing'
+        return url.format(context.absolute_url())
 
 
 class SimpleFeedViewlet(ViewletBase):

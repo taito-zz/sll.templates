@@ -34,3 +34,8 @@ msgstr "Lue lisää"
 msgid "Unfeed from Top"
 msgstr ""
 
+msgid "More News"
+msgstr "Lisää uutisia"
+
+msgid "More Events"
+msgstr "Lisää tapahtumia"

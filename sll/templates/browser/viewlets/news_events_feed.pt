@@ -2,20 +2,42 @@
   <ul>
     <li>
       <section>
-        <h1 i18n:translate="">News</h1>
+        <h1 tal:condition="not: view/link_to_news" i18n:translate="">News</h1>
+        <h1 tal:condition="view/link_to_news">
+          <a
+            tal:attributes="href view/link_to_news"
+            i18n:translate="">
+            News
+          </a>
+        </h1>
         <div tal:replace="structure provider:sll.news.feed.manager" />
+        <a
+          class="more-link"
+          tal:attributes="href view/link_to_news"
+          tal:condition="view/link_to_news"
+          i18n:domain="sll.templates"
+          i18n:translate="">
+          More News
+        </a>
       </section>
     </li>
     <li>
       <section>
         <h1>
           <a
-            href="tapahtumat"
+            tal:attributes="href view/link_to_events"
             i18n:translate="">
             Events
           </a>
         </h1>
         <div tal:replace="structure provider:sll.events.feed.manager" />
+        <a
+          class="more-link"
+          tal:attributes="href view/link_to_events"
+          i18n:domain="sll.templates"
+          i18n:translate="">
+          More Events
+        </a>
       </section>
     </li>
   </ul>
