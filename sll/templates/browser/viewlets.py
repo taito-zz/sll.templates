@@ -17,8 +17,6 @@ from plone.memoize.instance import memoize
 from sll.templates.browser.interfaces import IMicroSiteFeed
 from sll.templates.browser.interfaces import ITopPageFeed
 from zope.component import getMultiAdapter
-from collective.contentleadimage.browser.viewlets import LeadImageViewlet as BaseLeadImageViewlet
-from collective.contentleadimage.config import IMAGE_FIELD_NAME
 from zope.i18nmessageid import MessageFactory
 
 
