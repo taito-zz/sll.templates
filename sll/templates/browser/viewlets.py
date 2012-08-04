@@ -17,6 +17,12 @@ from plone.memoize.instance import memoize
 from sll.templates.browser.interfaces import IMicroSiteFeed
 from sll.templates.browser.interfaces import ITopPageFeed
 from zope.component import getMultiAdapter
+from collective.contentleadimage.browser.viewlets import LeadImageViewlet as BaseLeadImageViewlet
+from collective.contentleadimage.config import IMAGE_FIELD_NAME
+from zope.i18nmessageid import MessageFactory
+
+
+_ = MessageFactory("plone")
 
 
 class FeedViewlet(ViewletBase):
@@ -245,10 +251,11 @@ class FooterSubfoldersViewlet(ViewletBase):
         context = aq_inner(self.context)
         portal_state = getMultiAdapter((context, self.request), name="plone_portal_state")
         catalog = getToolByName(context, 'portal_catalog')
+        navigation_root_path = portal_state.navigation_root_path()
         query = {
             'object_provides': IATFolder.__identifier__,
             'path': {
-                'query': portal_state.navigation_root_path(),
+                'query': navigation_root_path,
                 'depth': 1,
             },
             'sort_on': 'getObjPositionInParent',
@@ -266,6 +273,11 @@ class FooterSubfoldersViewlet(ViewletBase):
                 'subfolders': self.subfolders(item, catalog, ploneview),
             } for item in IContentListing(res)
         ]
+        items.append({
+            'title': _('Site Map'),
+            'url': '{}/sitemap'.format(navigation_root_path),
+            'subfolders': [],
+            })
         return items
 
     def subfolders(self, item, catalog, ploneview):

@@ -179,16 +179,6 @@
     permission="zope2.View"
     />
 
-  <!-- Events Feed Viewlet -->
-  <!-- <browser:viewlet
-    class=".viewlets.EventsFeedViewlet"
-    for="*"
-    layer=".interfaces.ISllTemplatesLayer"
-    manager=".interfaces.IEventsFeedViewletManager"
-    name="sll.events.feed"
-    permission="zope2.View"
-    /> -->
-
   <!-- Footer -->
   <browser:viewlet
     name="plone.footer"
@@ -217,6 +207,16 @@
     class=".viewlets.FooterSubfoldersViewlet"
     permission="zope2.View"
     layer=".interfaces.ISllTemplatesLayer"
+    />
+
+  <browser:viewlet
+    class="collective.contentleadimage.browser.viewlets.LeadImageViewlet"
+    for="Products.ATContentTypes.interfaces.event.IATEvent"
+    layer=".interfaces.ISllTemplatesLayer"
+    manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
+    name="sll.templates.leadimage"
+    permission="zope2.View"
+    template="viewlets/leadimage.pt"
     />
 
 </configure>
