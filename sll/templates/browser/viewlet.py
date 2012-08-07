@@ -14,24 +14,8 @@ class SLLSearchEventResultsViewlet(SearchEventResultsViewlet):
     grok.layer(ISllTemplatesLayer)
     grok.template('results')
 
-    def results(self, b_start=0, b_size=10):
-        items = []
-        for item in super(SLLSearchEventResultsViewlet, self).results(
-            b_start=b_start, b_size=b_size):
-            parent = aq_parent(aq_inner(item.getObject()))
-
-            items.append(
-                {
-                    'datetime': self.datetime(item),
-                    'description': item.Description(),
-                    'parent_description': parent.Description(),
-                    'parent_title': parent.Title(),
-                    'parent_url': parent.absolute_url(),
-                    'title': item.Title(),
-                    'url': item.getURL(),
-                }
-            )
-        return items
+    def parent(self, item):
+        return aq_parent(aq_inner(item.getObject()))
 
 
 class EventsFeedViewlet(SearchEventResultsViewlet):

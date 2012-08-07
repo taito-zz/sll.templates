@@ -11,27 +11,27 @@
         <h1>
           <a
             tal:attributes="
-              href item/url;
-              title item/title
+              href item/getURL;
+              title item/Title
             "
-             tal:content="item/title"
+             tal:content="item/Title"
              />
         </h1>
         <h2>
           <a
             class="parent"
             tal:attributes="
-              alt item/parent_description;
-              href item/parent_url;
-              title item/parent_title;
+              alt python: viewlet.parent(item).Description();
+              href python: viewlet.parent(item).absolute_url();
+              title python: viewlet.parent(item).Title();
             "
-            tal:content="item/parent_title"
+            tal:content="python: viewlet.parent(item).Title()"
             />
-          <span class="datetime" tal:content="item/datetime" />
+          <span class="datetime" tal:content="python: viewlet.datetime(item)" />
         </h2>
         <p
-          tal:condition="item/description"
-          tal:content="item/description"
+          tal:condition="item/Description"
+          tal:content="item/Description"
           />
       </article>
     </tal:results>
