@@ -2,9 +2,9 @@ from Acquisition import aq_inner
 from Acquisition import aq_parent
 from collective.searchevent.browser.viewlet import SearchEventResultsViewlet
 from five import grok
-from sll.templates.browser.interfaces import ISllTemplatesLayer
-from sll.templates.browser.interfaces import IEventsFeedViewletManager
 from plone.app.layout.navigation.interfaces import INavigationRoot
+from sll.templates.browser.interfaces import IEventsFeedViewletManager
+from sll.templates.browser.interfaces import ISllTemplatesLayer
 
 
 grok.templatedir('viewlets')

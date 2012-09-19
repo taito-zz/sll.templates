@@ -1,8 +1,7 @@
 <div
   class="feed"
   i18n:domain="sll.templates"
-  tal:condition="view/items"
-  >
+  tal:condition="view/items">
   <table id="folder-feed">
     <tbody>
       <tr tal:repeat="item view/items">

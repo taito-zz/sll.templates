@@ -1,8 +1,7 @@
 <configure
-    i18n_domain="sll.templates"
-    xmlns:browser="http://namespaces.zope.org/browser"
-    xmlns="http://namespaces.zope.org/zope"
-    >
+  i18n_domain="sll.templates"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns="http://namespaces.zope.org/zope">
 
   <permission
     id="sll.templates.ManageFeedForTop"
@@ -15,39 +14,39 @@
     />
 
   <browser:page
-    name="feedable-to-top"
-    for="*"
-    class=".miscellaneous.Miscellaneous"
-    permission="sll.templates.ManageFeedForTop"
     attribute="feedable_to_top"
+    class=".miscellaneous.Miscellaneous"
+    for="*"
     layer=".interfaces.ISllTemplatesLayer"
+    name="feedable-to-top"
+    permission="sll.templates.ManageFeedForTop"
     />
 
   <browser:page
-    name="unfeedable-from-top"
-    for="*"
-    class=".miscellaneous.Miscellaneous"
-    permission="sll.templates.ManageFeedForTop"
     attribute="unfeedable_from_top"
+    class=".miscellaneous.Miscellaneous"
+    for="*"
     layer=".interfaces.ISllTemplatesLayer"
+    name="unfeedable-from-top"
+    permission="sll.templates.ManageFeedForTop"
     />
 
   <browser:page
-    name="feed-to-top"
-    for="*"
-    class=".miscellaneous.Miscellaneous"
-    permission="sll.templates.ManageFeedForTop"
     attribute="feed_to_top"
+    class=".miscellaneous.Miscellaneous"
+    for="*"
     layer=".interfaces.ISllTemplatesLayer"
+    name="feed-to-top"
+    permission="sll.templates.ManageFeedForTop"
     />
 
   <browser:page
-    name="unfeed-from-top"
-    for="*"
-    class=".miscellaneous.Miscellaneous"
-    permission="sll.templates.ManageFeedForTop"
     attribute="unfeed_from_top"
+    class=".miscellaneous.Miscellaneous"
+    for="*"
     layer=".interfaces.ISllTemplatesLayer"
+    name="unfeed-from-top"
+    permission="sll.templates.ManageFeedForTop"
     />
 
   <browser:page

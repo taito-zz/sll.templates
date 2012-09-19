@@ -1,6 +1,6 @@
 from five import grok
-from sll.templates.browser.interfaces import ISllTemplatesLayer
 from plone.app.layout.navigation.interfaces import INavigationRoot
+from sll.templates.browser.interfaces import ISllTemplatesLayer
 
 
 class View(grok.View):

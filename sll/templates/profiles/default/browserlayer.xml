@@ -1,6 +1,6 @@
 <layers>
   <layer
-      name="sll.templates"
-      interface="sll.templates.browser.interfaces.ISllTemplatesLayer"
-      />
+    interface="sll.templates.browser.interfaces.ISllTemplatesLayer"
+    name="sll.templates"
+    />
 </layers>
