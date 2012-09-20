@@ -1,5 +1,3 @@
-<div i18n:domain="collective.contentleadimage">
-
-    <img tal:replace="structure python:view.descTag(css_class='tileImage')" />
-
+<div i18n:domain="collective.contentleadimage" id="sll-templates-leadimage">
+  <img tal:replace="structure python:view.descTag(css_class='tileImage')" />
 </div>

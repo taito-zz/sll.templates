@@ -158,6 +158,13 @@ class TestCase(IntegrationTestCase):
         self.assertEqual(
             setup.getVersionForProfile('profile-sll.templates:default'), u'3')
 
+    def test_propertiestool_cli_properties__allowed_types(self):
+        properties = getToolByName(self.portal, 'portal_properties')
+        cli_properties = getattr(properties, 'cli_properties')
+        self.assertEqual(
+            cli_properties.getProperty('allowed_types'),
+            ('Document', 'Event', 'FormFolder'))
+
     def test_rolemap__ManageFeedForTop__rolesOfPermission(self):
         permission = "sll.templates: Manage feed for top"
         roles = [
