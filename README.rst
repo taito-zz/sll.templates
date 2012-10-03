@@ -7,10 +7,10 @@ sll.templates provides templates used within SLL site.
 Change log
 ----------
 
-0.8 (2012-10-XX)
+0.8 (2012-10-03)
 ================
 
-- Changed event feed query criteria to show only upcoming events, but not on going ones. [taito]
+- Changed event feed query criteria to show only upcoming events, but not on-going ones. [taito]
 - Added link to cropped images in feeds. [taito]
 
 0.7.1 (2012-09-24)
