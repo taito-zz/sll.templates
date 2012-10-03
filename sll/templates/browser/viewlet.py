@@ -1,7 +1,12 @@
 from Acquisition import aq_inner
 from Acquisition import aq_parent
+from DateTime import DateTime
+from Products.ATContentTypes.interfaces.event import IATEvent
+from Products.CMFCore.utils import getToolByName
 from collective.searchevent.browser.viewlet import SearchEventResultsViewlet
+from collective.searchevent.interfaces import IItemDateTime
 from five import grok
+from plone.app.contentlisting.interfaces import IContentListing
 from plone.app.layout.navigation.interfaces import INavigationRoot
 from sll.templates.browser.interfaces import IEventsFeedViewletManager
 from sll.templates.browser.interfaces import ISllTemplatesLayer
@@ -18,7 +23,7 @@ class SLLSearchEventResultsViewlet(SearchEventResultsViewlet):
         return aq_parent(aq_inner(item.getObject()))
 
 
-class EventsFeedViewlet(SearchEventResultsViewlet):
+class EventsFeedViewlet(grok.Viewlet):
     grok.context(INavigationRoot)
     grok.layer(ISllTemplatesLayer)
     grok.name('sll.events.feed')
@@ -26,23 +31,31 @@ class EventsFeedViewlet(SearchEventResultsViewlet):
     grok.template('event-feed')
     grok.viewletmanager(IEventsFeedViewletManager)
 
-    def results(self, b_start=0, b_size=10):
+    def items(self):
+        catalog = getToolByName(self.context, 'portal_catalog')
+        now = DateTime()
+        query = {
+            'object_provides': IATEvent.__identifier__,
+            'sort_limit': 3,
+            'sort_on': 'start',
+            'start': {
+                'query': [now, ],
+                'range': 'min',
+            },
+        }
         items = []
-        context = aq_inner(self.context)
-        paths = '/'.join(context.getPhysicalPath())
-        for item in super(EventsFeedViewlet, self).results(
-            paths=paths, limit=3, b_start=b_start, b_size=b_size):
+        for item in IContentListing(catalog(query)):
             parent = aq_parent(aq_inner(item.getObject()))
-            items.append(
-                {
-                    'datetime': self.datetime(item),
-                    'description': item.Description(),
-                    'parent_description': parent.Description(),
-                    'parent_title': parent.Title(),
-                    'parent_url': parent.absolute_url(),
-                    'title': item.Title(),
-                    'url': item.getURL(),
-                    'item': item,
-                }
-            )
+            items.append({
+                'datetime': self._datetime(item),
+                'description': item.Description(),
+                'parent_description': parent.Description(),
+                'parent_title': parent.Title(),
+                'parent_url': parent.absolute_url(),
+                'title': item.Title(),
+                'url': item.getURL(),
+            })
         return items
+
+    def _datetime(self, item):
+        return IItemDateTime(item)()

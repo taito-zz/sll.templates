@@ -1,37 +1,33 @@
 <tal:block
   i18n:domain="collective.searchevent"
-  tal:define="batch viewlet/batch;">
-  <p tal:condition="not: batch"
+  tal:define="items viewlet/items;">
+  <p tal:condition="not: items"
      i18n:translate="">
     There are no upcoming events.
   </p>
-  <tal:block tal:condition="batch">
-    <tal:results repeat="item batch">
-      <div class="simple-feed" repeat="item batch">
-        <article>
-          <h1>
-            <a
-              tal:attributes="
-                href item/url;
-                title item/title
-              "
-               tal:content="item/title"
-               />
-          </h1>
-          <h2>
-            <a
-              class="parent"
-              tal:attributes="
-                alt item/parent_description;
-                href item/parent_url;
-                title item/parent_title;
-              "
-              tal:content="item/parent_title"
-              />
-            <span class="sll-date" tal:content="item/datetime" />
-          </h2>
-        </article>
-      </div>
-    </tal:results>
+  <tal:block tal:condition="items">
+    <div class="simple-feed" tal:repeat="item items">
+      <article>
+        <h1>
+          <a
+            tal:attributes="
+              href item/url;
+              title item/title;"
+             tal:content="item/title"
+             />
+        </h1>
+        <h2>
+          <a
+            class="parent"
+            tal:attributes="
+              alt item/parent_description;
+              href item/parent_url;
+              title item/parent_title;"
+            tal:content="item/parent_title"
+            />
+          <span class="sll-date" tal:content="item/datetime" />
+        </h2>
+      </article>
+    </div>
   </tal:block>
 </tal:block>
