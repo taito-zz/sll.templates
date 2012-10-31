@@ -34,7 +34,7 @@ class TestCase(IntegrationTestCase):
             )
         )
 
-    def test_upgrades_2_to_3(self):
+    def test_update_actions(self):
 
         permission = "sll.templates: Manage feed for top"
         self.portal.manage_permission(permission, roles=['Manager'])
@@ -80,8 +80,8 @@ class TestCase(IntegrationTestCase):
         self.assertFalse(hasattr(object_buttons, 'feed_to_microsite'))
         self.assertFalse(hasattr(object_buttons, 'unfeed_from_microsite'))
 
-        from sll.templates.upgrades import upgrade_2_to_3
-        upgrade_2_to_3(self.portal)
+        from sll.templates.upgrades import update_actions
+        update_actions(self.portal)
 
         permission = "sll.templates: Manage feed for top"
         roles = [

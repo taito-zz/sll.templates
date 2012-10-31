@@ -216,7 +216,7 @@ class TestCase(IntegrationTestCase):
     def test_metadata__version(self):
         setup = getToolByName(self.portal, 'portal_setup')
         self.assertEqual(
-            setup.getVersionForProfile('profile-sll.templates:default'), u'3')
+            setup.getVersionForProfile('profile-sll.templates:default'), u'4')
 
     def test_propertiestool_cli_properties__allowed_types(self):
         properties = getToolByName(self.portal, 'portal_properties')
@@ -263,22 +263,18 @@ class TestCase(IntegrationTestCase):
             'Manager',
             'Site Administrator'])
 
-    def test_rolemap__ManageFeedForMicroSite__acquiredRolesAreUsedBy(self):
-        permission = "sll.templates: Manage feed for micro site"
+    def test_rolemap__ManageMakingMicroSite__acquiredRolesAreUsedBy(self):
+        permission = "sll.templates: Manage making micro site"
         self.assertEqual(self.portal.acquiredRolesAreUsedBy(permission),
             'CHECKED')
 
     def test_typeinfo__Document__view_method(self):
         types = getToolByName(self.portal, 'portal_types')
         ctype = types.getTypeInfo('Document')
-        self.assertEqual(
-            ctype.getProperty('view_methods'),
-            (
+        self.assertEqual(ctype.getProperty('view_methods'), (
                 'document_view',
                 'sll-view',
-                'monthly-supporter',
-            )
-        )
+                'monthly-supporter'))
 
     def test_uninstall__package(self):
         installer = getToolByName(self.portal, 'portal_quickinstaller')

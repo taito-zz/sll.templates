@@ -33,3 +33,17 @@ def upgrade_2_to_3(context, logger=None):
     logger.info('Reimporting actions.xml.')
     setup.runImportStepFromProfile(PROFILE_ID, 'actions', run_dependencies=False, purge_old=False)
     logger.info('Reimported actions.xml')
+
+
+def update_actions(context, logger=None):
+    """Update actions"""
+    if logger is None:
+        logger = logging.getLogger(__name__)
+
+    setup = getToolByName(context, 'portal_setup')
+
+    logger.info('Reimporting rolemap.xml.')
+    setup.runImportStepFromProfile(PROFILE_ID, 'rolemap', run_dependencies=False, purge_old=False)
+
+    logger.info('Reimporting actions.xml.')
+    setup.runImportStepFromProfile(PROFILE_ID, 'actions', run_dependencies=False, purge_old=False)

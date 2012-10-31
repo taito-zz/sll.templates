@@ -7,6 +7,11 @@ sll.templates provides templates used within SLL site.
 Change log
 ----------
 
+0.9 (2012-10-31)
+================
+
+- Added action to make and unmake micro site. [taito]
+
 0.8 (2012-10-03)
 ================
 
