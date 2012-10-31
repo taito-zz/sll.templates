@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-05-23 18:00+0000\n"
+"POT-Creation-Date: 2012-10-31 13:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,26 +16,57 @@ msgstr ""
 
 #: ./profiles/default/actions.xml
 msgid "Feed to Top"
-msgstr ""
+msgstr "Syöte etusivuun"
+
+#: ./profiles/default/actions.xml
+msgid "Feed to micro site"
+msgstr "Syöte mikrosivuston etusivuun"
+
+#: ./profiles/default/actions.xml
+msgid "Make feedable to micro site."
+msgstr "Mahdollistaa mikrosivustoon syötettä."
 
 #: ./profiles/default/actions.xml
 msgid "Make feedable to top page."
-msgstr ""
+msgstr "Mahdollistaa etusivuun syötettä."
+
+#: ./profiles/default/actions.xml
+msgid "Make micro site"
+msgstr "Luo mkrosivusto"
+
+#: ./profiles/default/actions.xml
+msgid "Make unfeedable from micro site."
+msgstr "Ota syöte pois mikrosivuston etusivusta."
 
 #: ./profiles/default/actions.xml
 msgid "Make unfeedable from top page."
-msgstr ""
+msgstr "Ota syöte pois etusivusta."
 
-#: ./browser/viewlets/feed.pt:30
-msgid "Read more"
-msgstr "Lue lisää"
+#: ./browser/viewlets/news_events_feed.pt:34
+msgid "More Events"
+msgstr "Lisää tapahtumia"
 
-#: ./profiles/default/actions.xml
-msgid "Unfeed from Top"
-msgstr ""
-
+#: ./browser/viewlets/news_events_feed.pt:14
 msgid "More News"
 msgstr "Lisää uutisia"
 
-msgid "More Events"
-msgstr "Lisää tapahtumia"
+#: ./browser/viewlets/feed.pt:35
+msgid "Read more"
+msgstr "Lue lisää"
+
+#: ./browser/viewlets.py:275
+msgid "Site Map"
+msgstr "Sivukartta"
+
+#: ./profiles/default/actions.xml
+msgid "Unfeed from Top"
+msgstr "Poista syöte etusivusta"
+
+#: ./profiles/default/actions.xml
+msgid "Unfeed from micro site"
+msgstr "Poista syöte mikrosivuston etusivusta"
+
+#: ./profiles/default/actions.xml
+msgid "Unmake micro site"
+msgstr "Luo mkrosivusto pois"
+

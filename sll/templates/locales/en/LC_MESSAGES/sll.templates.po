@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-05-23 18:00+0000\n"
+"POT-Creation-Date: 2012-10-31 13:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,18 +19,54 @@ msgid "Feed to Top"
 msgstr ""
 
 #: ./profiles/default/actions.xml
+msgid "Feed to micro site"
+msgstr ""
+
+#: ./profiles/default/actions.xml
+msgid "Make feedable to micro site."
+msgstr ""
+
+#: ./profiles/default/actions.xml
 msgid "Make feedable to top page."
+msgstr ""
+
+#: ./profiles/default/actions.xml
+msgid "Make micro site"
+msgstr ""
+
+#: ./profiles/default/actions.xml
+msgid "Make unfeedable from micro site."
 msgstr ""
 
 #: ./profiles/default/actions.xml
 msgid "Make unfeedable from top page."
 msgstr ""
 
-#: ./browser/viewlets/feed.pt:30
+#: ./browser/viewlets/news_events_feed.pt:34
+msgid "More Events"
+msgstr ""
+
+#: ./browser/viewlets/news_events_feed.pt:14
+msgid "More News"
+msgstr ""
+
+#: ./browser/viewlets/feed.pt:35
 msgid "Read more"
+msgstr ""
+
+#: ./browser/viewlets.py:275
+msgid "Site Map"
 msgstr ""
 
 #: ./profiles/default/actions.xml
 msgid "Unfeed from Top"
+msgstr ""
+
+#: ./profiles/default/actions.xml
+msgid "Unfeed from micro site"
+msgstr ""
+
+#: ./profiles/default/actions.xml
+msgid "Unmake micro site"
 msgstr ""
 
