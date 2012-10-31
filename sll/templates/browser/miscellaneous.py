@@ -1,7 +1,9 @@
 from Products.ATContentTypes.interfaces.document import IATDocument
 from Products.ATContentTypes.interfaces.event import IATEvent
+from Products.ATContentTypes.interfaces.folder import IATFolder
 from Products.ATContentTypes.interfaces.news import IATNewsItem
 from Products.Five.browser import BrowserView
+from plone.app.layout.navigation.interfaces import INavigationRoot
 from sll.templates.browser.interfaces import IMicroSiteFeed
 from sll.templates.browser.interfaces import ITopPageFeed
 from zope.interface import alsoProvides
@@ -19,9 +21,7 @@ class Miscellaneous(BrowserView):
             ) or IATNewsItem.providedBy(
                 self.context
             )
-        ) and not ITopPageFeed.providedBy(
-            self.context
-        )
+        ) and not ITopPageFeed.providedBy(self.context)
 
     def unfeedable_from_top(self):
         return (
@@ -32,9 +32,7 @@ class Miscellaneous(BrowserView):
             ) or IATNewsItem.providedBy(
                 self.context
             )
-        ) and ITopPageFeed.providedBy(
-            self.context
-        )
+        ) and ITopPageFeed.providedBy(self.context)
 
     def feed_to_top(self):
         alsoProvides(self.context, ITopPageFeed)
@@ -57,9 +55,7 @@ class Miscellaneous(BrowserView):
             ) or IATNewsItem.providedBy(
                 self.context
             )
-        ) and not IMicroSiteFeed.providedBy(
-            self.context
-        )
+        ) and not IMicroSiteFeed.providedBy(self.context)
 
     def unfeedable_from_microsite(self):
         return (
@@ -70,9 +66,7 @@ class Miscellaneous(BrowserView):
             ) or IATNewsItem.providedBy(
                 self.context
             )
-        ) and IMicroSiteFeed.providedBy(
-            self.context
-        )
+        ) and IMicroSiteFeed.providedBy(self.context)
 
     def feed_to_microsite(self):
         alsoProvides(self.context, IMicroSiteFeed)
@@ -82,6 +76,24 @@ class Miscellaneous(BrowserView):
 
     def unfeed_from_microsite(self):
         noLongerProvides(self.context, IMicroSiteFeed)
+        self.context.reindexObject(idxs=['object_provides'])
+        url = self.context.absolute_url()
+        return self.request.response.redirect(url)
+
+    def available_to_make_microsite(self):
+        return IATFolder.providedBy(self.context) and not INavigationRoot.providedBy(self.context)
+
+    def unavailable_to_make_microsite(self):
+        return IATFolder.providedBy(self.context) and INavigationRoot.providedBy(self.context)
+
+    def make_microsite(self):
+        alsoProvides(self.context, INavigationRoot)
+        self.context.reindexObject(idxs=['object_provides'])
+        url = self.context.absolute_url()
+        return self.request.response.redirect(url)
+
+    def unmake_microsite(self):
+        noLongerProvides(self.context, INavigationRoot)
         self.context.reindexObject(idxs=['object_provides'])
         url = self.context.absolute_url()
         return self.request.response.redirect(url)

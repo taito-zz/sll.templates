@@ -108,4 +108,5 @@ def test_suite():
     return unittest.TestSuite([
         DocFileSuite('functional/breadcrumbs.txt'),
         DocFileSuite('functional/folder.txt'),
+        DocFileSuite('functional/microsite.txt'),
         DocFileSuite('functional/portal.txt')])

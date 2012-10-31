@@ -153,6 +153,66 @@ class TestCase(IntegrationTestCase):
         action = getattr(object_buttons, 'unfeed_from_microsite')
         self.assertTrue(action.visible)
 
+    def test_actions__object_buttons__make_microsite__title(self):
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        action = getattr(object_buttons, 'make_microsite')
+        self.assertEqual(action.title, 'Make micro site')
+
+    def test_actions__object_buttons__make_microsite__description(self):
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        action = getattr(object_buttons, 'make_microsite')
+        self.assertEqual(action.description, '')
+
+    def test_actions__object_buttons__make_microsite__url_expr(self):
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        action = getattr(object_buttons, 'make_microsite')
+        self.assertEqual(action.url_expr, 'string:${globals_view/getCurrentObjectUrl}/@@make-microsite')
+
+    def test_actions__object_buttons__make_microsite__permissions(self):
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        action = getattr(object_buttons, 'make_microsite')
+        self.assertEqual(action.permissions, ('sll.templates: Manage making micro site',))
+
+    def test_actions__object_buttons__make_microsite__visible(self):
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        action = getattr(object_buttons, 'make_microsite')
+        self.assertTrue(action.visible)
+
+    def test_actions__object_buttons__unmake_microsite__title(self):
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        action = getattr(object_buttons, 'unmake_microsite')
+        self.assertEqual(action.title, 'Unmake micro site')
+
+    def test_actions__object_buttons__unmake_microsite__description(self):
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        action = getattr(object_buttons, 'unmake_microsite')
+        self.assertEqual(action.description, '')
+
+    def test_actions__object_buttons__unmake_microsite__url_expr(self):
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        action = getattr(object_buttons, 'unmake_microsite')
+        self.assertEqual(action.url_expr, 'string:${globals_view/getCurrentObjectUrl}/@@unmake-microsite')
+
+    def test_actions__object_buttons__unmake_microsite__permissions(self):
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        action = getattr(object_buttons, 'unmake_microsite')
+        self.assertEqual(action.permissions, ('sll.templates: Manage making micro site',))
+
+    def test_actions__object_buttons__unmake_microsite__visible(self):
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        action = getattr(object_buttons, 'unmake_microsite')
+        self.assertTrue(action.visible)
+
     def test_metadata__version(self):
         setup = getToolByName(self.portal, 'portal_setup')
         self.assertEqual(
@@ -167,50 +227,46 @@ class TestCase(IntegrationTestCase):
 
     def test_rolemap__ManageFeedForTop__rolesOfPermission(self):
         permission = "sll.templates: Manage feed for top"
-        roles = [
-            item['name'] for item in self.portal.rolesOfPermission(
-                permission
-            ) if item['selected'] == 'SELECTED'
-        ]
+        roles = [item['name'] for item in self.portal.rolesOfPermission(
+            permission) if item['selected'] == 'SELECTED']
         roles.sort()
-        self.assertEqual(
-            roles,
-            [
-                'Manager',
-                'Site Administrator',
-            ]
-        )
+        self.assertEqual(roles, [
+            'Manager',
+            'Site Administrator'])
 
     def test_rolemap__ManageFeedForTop__acquiredRolesAreUsedBy(self):
         permission = "sll.templates: Manage feed for top"
-        self.assertEqual(
-            self.portal.acquiredRolesAreUsedBy(permission),
-            'CHECKED'
-        )
+        self.assertEqual(self.portal.acquiredRolesAreUsedBy(permission),
+            'CHECKED')
 
     def test_rolemap__ManageFeedForMicroSite__rolesOfPermission(self):
         permission = "sll.templates: Manage feed for micro site"
-        roles = [
-            item['name'] for item in self.portal.rolesOfPermission(
-                permission
-            ) if item['selected'] == 'SELECTED'
-        ]
+        roles = [item['name'] for item in self.portal.rolesOfPermission(
+            permission) if item['selected'] == 'SELECTED']
         roles.sort()
-        self.assertEqual(
-            roles,
-            [
-                'Contributor',
-                'Manager',
-                'Site Administrator',
-            ]
-        )
+        self.assertEqual(roles, [
+            'Contributor',
+            'Manager',
+            'Site Administrator'])
 
     def test_rolemap__ManageFeedForMicroSite__acquiredRolesAreUsedBy(self):
         permission = "sll.templates: Manage feed for micro site"
-        self.assertEqual(
-            self.portal.acquiredRolesAreUsedBy(permission),
-            'CHECKED'
-        )
+        self.assertEqual(self.portal.acquiredRolesAreUsedBy(permission),
+            'CHECKED')
+
+    def test_rolemap__ManageMakingMicroSite__rolesOfPermission(self):
+        permission = "sll.templates: Manage making micro site"
+        roles = [item['name'] for item in self.portal.rolesOfPermission(
+            permission) if item['selected'] == 'SELECTED']
+        roles.sort()
+        self.assertEqual(roles, [
+            'Manager',
+            'Site Administrator'])
+
+    def test_rolemap__ManageFeedForMicroSite__acquiredRolesAreUsedBy(self):
+        permission = "sll.templates: Manage feed for micro site"
+        self.assertEqual(self.portal.acquiredRolesAreUsedBy(permission),
+            'CHECKED')
 
     def test_typeinfo__Document__view_method(self):
         types = getToolByName(self.portal, 'portal_types')
@@ -263,3 +319,17 @@ class TestCase(IntegrationTestCase):
         portal_actions = getToolByName(self.portal, 'portal_actions')
         object_buttons = getattr(portal_actions, 'object_buttons')
         self.assertFalse(hasattr(object_buttons, 'unfeed_from_microsite'))
+
+    def test_uninstall__actions__object_buttons__make_microsite(self):
+        installer = getToolByName(self.portal, 'portal_quickinstaller')
+        installer.uninstallProducts(['sll.templates'])
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        self.assertFalse(hasattr(object_buttons, 'make_microsite'))
+
+    def test_uninstall__actions__object_buttons__unmake_microsite(self):
+        installer = getToolByName(self.portal, 'portal_quickinstaller')
+        installer.uninstallProducts(['sll.templates'])
+        portal_actions = getToolByName(self.portal, 'portal_actions')
+        object_buttons = getattr(portal_actions, 'object_buttons')
+        self.assertFalse(hasattr(object_buttons, 'unmake_microsite'))

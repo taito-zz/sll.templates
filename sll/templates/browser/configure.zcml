@@ -13,6 +13,11 @@
     title="sll.templates: Manage feed for micro site"
     />
 
+  <permission
+    id="sll.templates.ManageMakingMicroSite"
+    title="sll.templates: Manage making micro site"
+    />
+
   <browser:page
     attribute="feedable_to_top"
     class=".miscellaneous.Miscellaneous"
@@ -82,6 +87,42 @@
     class=".miscellaneous.Miscellaneous"
     permission="sll.templates.ManageFeedForMicroSite"
     attribute="unfeed_from_microsite"
+    layer=".interfaces.ISllTemplatesLayer"
+    />
+
+  <browser:page
+    name="available-to-make-microsite"
+    for="*"
+    class=".miscellaneous.Miscellaneous"
+    permission="sll.templates.ManageMakingMicroSite"
+    attribute="available_to_make_microsite"
+    layer=".interfaces.ISllTemplatesLayer"
+    />
+
+  <browser:page
+    name="unavailable-to-make-microsite"
+    for="*"
+    class=".miscellaneous.Miscellaneous"
+    permission="sll.templates.ManageMakingMicroSite"
+    attribute="unavailable_to_make_microsite"
+    layer=".interfaces.ISllTemplatesLayer"
+    />
+
+  <browser:page
+    name="make-microsite"
+    for="*"
+    class=".miscellaneous.Miscellaneous"
+    permission="sll.templates.ManageMakingMicroSite"
+    attribute="make_microsite"
+    layer=".interfaces.ISllTemplatesLayer"
+    />
+
+  <browser:page
+    name="unmake-microsite"
+    for="*"
+    class=".miscellaneous.Miscellaneous"
+    permission="sll.templates.ManageFeedForMicroSite"
+    attribute="unmake_microsite"
     layer=".interfaces.ISllTemplatesLayer"
     />
 

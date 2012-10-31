@@ -1,0 +1,39 @@
+Log in as Manager::
+
+    >>> browser.login(TEST_USER_NAME, TEST_USER_PASSWORD)
+
+Go to Folder::
+
+    >>> browser.open('/folder')
+    >>> 'Make micro site' in browser.contents
+    True
+    >>> 'Unmake micro site' in browser.contents
+    False
+
+    >>> print browser.bycss('#portaltab-index_html')
+    --- 1 ---
+    <li id="portaltab-index_html" class="plain"><a href="http://nohost/plone" title="">Home</a></li>
+
+Make micro site::
+
+    >>> browser.getLink('Make micro site').click()
+    >>> 'Make micro site' in browser.contents
+    False
+    >>> 'Unmake micro site' in browser.contents
+    True
+
+    >>> print browser.bycss('#portaltab-index_html')
+    --- 1 ---
+    <li id="portaltab-index_html" class="selected"><a href="http://nohost/plone/folder" title="">Home</a></li>
+
+Unmake micro site::
+
+    >>> browser.getLink('Unmake micro site').click()
+    >>> 'Make micro site' in browser.contents
+    True
+    >>> 'Unmake micro site' in browser.contents
+    False
+
+    >>> print browser.bycss('#portaltab-index_html')
+    --- 1 ---
+    <li id="portaltab-index_html" class="plain"><a href="http://nohost/plone" title="">Home</a></li>

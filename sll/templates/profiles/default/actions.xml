@@ -8,7 +8,7 @@
       <property
         name="url_expr">string:${globals_view/getCurrentObjectUrl}/@@feed-to-top</property>
       <property
-        name="available_expr">python: object.restrictedTraverse("feedable-to-top")()</property>
+        name="available_expr">python: object.restrictedTraverse("@@feedable-to-top")()</property>
       <property name="permissions">
         <element value="sll.templates: Manage feed for top"/>
       </property>
@@ -20,7 +20,7 @@
       <property
         name="url_expr">string:${globals_view/getCurrentObjectUrl}/@@unfeed-from-top</property>
       <property
-        name="available_expr">python: object.restrictedTraverse("unfeedable-from-top")()</property>
+        name="available_expr">python: object.restrictedTraverse("@@unfeedable-from-top")()</property>
       <property name="permissions">
         <element value="sll.templates: Manage feed for top"/>
       </property>
@@ -32,7 +32,7 @@
       <property
         name="url_expr">string:${globals_view/getCurrentObjectUrl}/@@feed-to-microsite</property>
       <property
-        name="available_expr">python: object.restrictedTraverse("feedable-to-microsite")()</property>
+        name="available_expr">python: object.restrictedTraverse("@@feedable-to-microsite")()</property>
       <property name="permissions">
         <element value="sll.templates: Manage feed for micro site"/>
       </property>
@@ -44,9 +44,33 @@
       <property
         name="url_expr">string:${globals_view/getCurrentObjectUrl}/@@unfeed-from-microsite</property>
       <property
-        name="available_expr">python: object.restrictedTraverse("unfeedable-from-microsite")()</property>
+        name="available_expr">python: object.restrictedTraverse("@@unfeedable-from-microsite")()</property>
       <property name="permissions">
         <element value="sll.templates: Manage feed for micro site"/>
+      </property>
+      <property name="visible">True</property>
+    </object>
+    <object name="make_microsite" meta_type="CMF Action" i18n:domain="sll.templates">
+      <property name="title" i18n:translate="">Make micro site</property>
+      <property name="description" i18n:translate=""></property>
+      <property
+        name="url_expr">string:${globals_view/getCurrentObjectUrl}/@@make-microsite</property>
+      <property
+        name="available_expr">python: object.restrictedTraverse("@@available-to-make-microsite")()</property>
+      <property name="permissions">
+        <element value="sll.templates: Manage making micro site"/>
+      </property>
+      <property name="visible">True</property>
+    </object>
+    <object name="unmake_microsite" meta_type="CMF Action" i18n:domain="sll.templates">
+      <property name="title" i18n:translate="">Unmake micro site</property>
+      <property name="description" i18n:translate=""></property>
+      <property
+        name="url_expr">string:${globals_view/getCurrentObjectUrl}/@@unmake-microsite</property>
+      <property
+        name="available_expr">python: object.restrictedTraverse("@@unavailable-to-make-microsite")()</property>
+      <property name="permissions">
+        <element value="sll.templates: Manage making micro site"/>
       </property>
       <property name="visible">True</property>
     </object>

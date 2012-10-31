@@ -10,5 +10,9 @@
       <role name="Manager"/>
       <role name="Site Administrator"/>
     </permission>
+    <permission name="sll.templates: Manage making micro site" acquire="True">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+    </permission>
   </permissions>
 </rolemap>
