@@ -7,6 +7,11 @@ sll.templates provides templates used within SLL site.
 Change log
 ----------
 
+0.9.1 (2012-10-31)
+==================
+
+- Updated Finnish translations. [taito]
+
 0.9 (2012-10-31)
 ================
 

@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='sll.templates',
-    version='0.9',
+    version='0.9.1',
     description="Templates for SLL site.",
     long_description=open("README.rst").read(),
     # Get more strings from
