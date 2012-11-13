@@ -272,9 +272,9 @@ class TestCase(IntegrationTestCase):
         types = getToolByName(self.portal, 'portal_types')
         ctype = types.getTypeInfo('Document')
         self.assertEqual(ctype.getProperty('view_methods'), (
-                'document_view',
-                'sll-view',
-                'monthly-supporter'))
+            'document_view',
+            'sll-view',
+            'monthly-supporter'))
 
     def test_uninstall__package(self):
         installer = getToolByName(self.portal, 'portal_quickinstaller')

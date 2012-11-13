@@ -16,7 +16,7 @@ import manuel.doctest
 import manuel.testing
 import re
 import transaction
-import unittest2 as unittest
+import unittest
 
 FLAGS = doctest.NORMALIZE_WHITESPACE | doctest.ELLIPSIS | doctest.REPORT_NDIFF | doctest.REPORT_ONLY_FIRST_FAILURE
 
@@ -101,5 +101,4 @@ def DocFileSuite(testfile, flags=FLAGS, setUp=setUp, layer=FUNCTIONAL_TESTING):
 
 def test_suite():
     return unittest.TestSuite([
-        DocFileSuite('functional/footer_info.txt'),
-        ])
+        DocFileSuite('functional/footer_info.txt')])

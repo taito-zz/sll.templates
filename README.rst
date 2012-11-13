@@ -2,10 +2,15 @@
 sll.templates
 =============
 
-sll.templates provides templates used within SLL site.
+sll.templates provides templates for SLL site.
 
 Change log
 ----------
+
+0.9.2 (2012-11-13)
+==================
+
+- Fixed event feed on micro site's top page to feed only from the micro site. [taito]
 
 0.9.1 (2012-10-31)
 ==================

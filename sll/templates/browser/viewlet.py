@@ -32,10 +32,12 @@ class EventsFeedViewlet(grok.Viewlet):
     grok.viewletmanager(IEventsFeedViewletManager)
 
     def items(self):
-        catalog = getToolByName(self.context, 'portal_catalog')
+        context = aq_inner(self.context)
+        catalog = getToolByName(context, 'portal_catalog')
         now = DateTime()
         query = {
             'object_provides': IATEvent.__identifier__,
+            'path': '/'.join(context.getPhysicalPath()),
             'sort_limit': 3,
             'sort_on': 'start',
             'start': {

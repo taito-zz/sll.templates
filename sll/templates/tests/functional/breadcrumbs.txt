@@ -21,7 +21,7 @@ Go to folder where should be breadcrumbs::
     &#8594;
     </span>
     </span>
-    <span id="breadcrumbs-1" dir="ltr">
+    <span dir="ltr" id="breadcrumbs-1">
     <span id="breadcrumbs-current">Title of Folder</span>
     </span>
     </div>

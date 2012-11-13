@@ -275,7 +275,7 @@ class FooterSubfoldersViewlet(ViewletBase):
             'title': _('Site Map'),
             'url': '{}/sitemap'.format(navigation_root_path),
             'subfolders': [],
-            })
+        })
         return items
 
     def subfolders(self, item, catalog, ploneview):
