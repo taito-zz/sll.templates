@@ -7,6 +7,11 @@ sll.templates provides templates for SLL site.
 Change log
 ----------
 
+1.0 (2012-11-14)
+================
+
+- Tested with Plone-4.2.2. [taito]
+
 0.9.2 (2012-11-13)
 ==================
 
