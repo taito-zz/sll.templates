@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-11-14 21:15+0000\n"
+"POT-Creation-Date: 2012-11-16 17:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,11 +16,11 @@ msgstr ""
 
 #: ./profiles/default/actions.xml
 msgid "Feed to Top"
-msgstr "Syöte etusivuun"
+msgstr "Syöte etusivulle"
 
 #: ./profiles/default/actions.xml
 msgid "Feed to micro site"
-msgstr "Syöte mikrosivuston etusivuun"
+msgstr "Syöte mikrosivuston etusivulle"
 
 #: ./profiles/default/actions.xml
 msgid "Make feedable to micro site."
@@ -32,15 +32,15 @@ msgstr "Mahdollistaa etusivuun syötettä."
 
 #: ./profiles/default/actions.xml
 msgid "Make micro site"
-msgstr "Luo mkrosivusto"
+msgstr "Muuta mikrosivustoksi"
 
 #: ./profiles/default/actions.xml
 msgid "Make unfeedable from micro site."
-msgstr "Ota syöte pois mikrosivuston etusivusta."
+msgstr "Ota syöte pois mikrosivuston etusivulta."
 
 #: ./profiles/default/actions.xml
 msgid "Make unfeedable from top page."
-msgstr "Ota syöte pois etusivusta."
+msgstr "Ota syöte pois etusivulta."
 
 #: ./browser/viewlets/news_events_feed.pt:34
 msgid "More Events"
@@ -60,13 +60,13 @@ msgstr "Sivukartta"
 
 #: ./profiles/default/actions.xml
 msgid "Unfeed from Top"
-msgstr "Poista syöte etusivusta"
+msgstr "Poista syöte etusivulta"
 
 #: ./profiles/default/actions.xml
 msgid "Unfeed from micro site"
-msgstr "Poista syöte mikrosivuston etusivusta"
+msgstr "Poista syöte mikrosivuston etusivulta"
 
 #: ./profiles/default/actions.xml
 msgid "Unmake micro site"
-msgstr "Luo mkrosivusto pois"
+msgstr "Muuta ei-mikrosivustoksi"
 
