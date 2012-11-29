@@ -7,7 +7,7 @@ sll.templates provides templates for SLL site.
 Change log
 ----------
 
-1.1 (2012-11-29)
+1.1 (2012-11-30)
 ================
 
 - Moved micro site functionality to package: collective.microsite. [taito]

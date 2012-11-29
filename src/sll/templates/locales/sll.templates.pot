@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-11-14 21:15+0000\n"
+"POT-Creation-Date: 2012-11-29 22:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,10 +31,6 @@ msgstr ""
 
 #: ./profiles/default/actions.xml
 msgid "Make feedable to top page."
-msgstr ""
-
-#: ./profiles/default/actions.xml
-msgid "Make micro site"
 msgstr ""
 
 #: ./profiles/default/actions.xml
@@ -67,9 +63,5 @@ msgstr ""
 
 #: ./profiles/default/actions.xml
 msgid "Unfeed from micro site"
-msgstr ""
-
-#: ./profiles/default/actions.xml
-msgid "Unmake micro site"
 msgstr ""
 
