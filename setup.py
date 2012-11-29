@@ -28,6 +28,7 @@ setup(
         'collective.cropimage',
         'collective.searchevent',
         'five.grok',
+        'five.pt',
         'hexagonit.testing',
         'setuptools'],
     entry_points="""
