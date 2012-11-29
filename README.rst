@@ -7,6 +7,12 @@ sll.templates provides templates for SLL site.
 Change log
 ----------
 
+1.1 (2012-11-29)
+================
+
+- Moved micro site functionality to package: collective.microsite. [taito]
+- Added testing integration to Travis CI. [taito]
+
 1.0 (2012-11-14)
 ================
 
