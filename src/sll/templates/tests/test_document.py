@@ -1,6 +1,4 @@
 from hexagonit.testing.browser import Browser
-from plone.app.testing import SITE_OWNER_NAME
-from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import TEST_USER_PASSWORD
@@ -27,23 +25,17 @@ CHECKER = renormalizing.RENormalizing([
 
 def setUp(self):
     layer = self.globs['layer']
-    # Update global variables within the tests.
+    browser = Browser(layer['app'])
+    portal = layer['portal']
+
     self.globs.update({
-        'portal': layer['portal'],
-        'portal_url': layer['portal'].absolute_url(),
-        'browser': Browser(layer['app']),
-        'TEST_USER_ID': TEST_USER_ID,
+        'portal': portal,
+        'browser': browser,
         'TEST_USER_NAME': TEST_USER_NAME,
         'TEST_USER_PASSWORD': TEST_USER_PASSWORD,
-        'SITE_OWNER_NAME': SITE_OWNER_NAME,
-        'SITE_OWNER_PASSWORD': SITE_OWNER_PASSWORD,
     })
 
-    portal = self.globs['portal']
-    browser = self.globs['browser']
-    portal_url = self.globs['portal_url']
-    browser.setBaseUrl(portal_url)
-
+    browser.setBaseUrl(portal.absolute_url())
     browser.handleErrors = True
     portal.error_log._ignored_exceptions = ()
 
@@ -89,5 +81,4 @@ def DocFileSuite(testfile, flags=FLAGS, setUp=setUp, layer=FUNCTIONAL_TESTING):
 
 
 def test_suite():
-    return unittest.TestSuite([
-        DocFileSuite('functional/document.txt')])
+    return unittest.TestSuite([DocFileSuite('functional/document.txt')])

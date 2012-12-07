@@ -29,25 +29,21 @@ CHECKER = renormalizing.RENormalizing([
 
 def setUp(self):
     layer = self.globs['layer']
+    browser = Browser(layer['app'])
+    portal = layer['portal']
     # Update global variables within the tests.
     self.globs.update({
-        'portal': layer['portal'],
-        'portal_url': layer['portal'].absolute_url(),
-        'browser': Browser(layer['app']),
-        'TEST_USER_ID': TEST_USER_ID,
         'TEST_USER_NAME': TEST_USER_NAME,
         'TEST_USER_PASSWORD': TEST_USER_PASSWORD,
+        'browser': browser,
+        'portal': portal,
     })
 
-    portal = self.globs['portal']
-    browser = self.globs['browser']
-    portal_url = self.globs['portal_url']
-    browser.setBaseUrl(portal_url)
-
+    browser.setBaseUrl(portal.absolute_url())
     browser.handleErrors = True
     portal.error_log._ignored_exceptions = ()
-
     setRoles(portal, TEST_USER_ID, ['Site Administrator'])
+    # setRoles(portal, TEST_USER_ID, ['Manager'])
 
     user2 = 'test_user_2_'
     regtool = getToolByName(portal, 'portal_registration')
@@ -66,6 +62,17 @@ def setUp(self):
     doc1 = folder1[folder1.invokeFactory(
         'Document', 'doc1', title="Döcument1", description="Description of Döcument1")]
     doc1.reindexObject()
+    desc = 'Ä' * 201
+    doc2 = folder2[folder2.invokeFactory(
+        'Document', 'doc2', title="Döcument2", description=desc)]
+    doc2.reindexObject()
+
+    ajankohtaista = portal[portal.invokeFactory('Folder', 'ajankohtaista', title="Ajankohtaista")]
+    ajankohtaista.reindexObject()
+
+    news1 = ajankohtaista[ajankohtaista.invokeFactory(
+        'News Item', 'news1', title="News1", description="Descriptiön of News1")]
+    news1.reindexObject()
 
     transaction.commit()
 
@@ -96,5 +103,4 @@ def DocFileSuite(testfile, flags=FLAGS, setUp=setUp, layer=FUNCTIONAL_TESTING):
 
 
 def test_suite():
-    return unittest.TestSuite([
-        DocFileSuite('functional/portal_sll_view.txt')])
+    return unittest.TestSuite([DocFileSuite('functional/portal-sll-view.txt')])

@@ -24,13 +24,14 @@ setup(
     zip_safe=False,
     install_requires=[
         'Products.PloneFormGen',
+        'abita.adapter',
         'collective.contentleadimage',
         'collective.cropimage',
-        'collective.searchevent',
         'five.grok',
         'five.pt',
         'hexagonit.testing',
-        'setuptools'],
+        'setuptools',
+        'sll.basetheme'],
     entry_points="""
     # -*- Entry points: -*-
 

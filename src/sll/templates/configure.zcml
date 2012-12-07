@@ -7,11 +7,12 @@
   xmlns="http://namespaces.zope.org/zope">
 
   <include package="Products.PloneFormGen"/>
+  <include package="abita.adapter"/>
   <include package="collective.contentleadimage"/>
   <include package="collective.cropimage"/>
-  <include package="collective.searchevent"/>
   <include package="five.grok"/>
   <include package="five.pt"/>
+  <include package="sll.basetheme"/>
   <include package=".browser" />
   <include file="upgrades.zcml"/>
   <grok:grok package="." />
