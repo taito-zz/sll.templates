@@ -1,0 +1,101 @@
+#main-feed,
+#news-feed {
+    clear: both;
+}
+.crop-frame {
+    border: 1px solid #E3E3E3;
+    float: left;
+    height: 150px;
+    margin: 0 1em 2em 0;
+    padding: 5px;
+    width: 170px;
+}
+#main-feed article {
+    clear: both;
+}
+#main-feed .feed-text {
+    padding: 0.5em 0;
+}
+#main-feed h1,
+#main-feed h2,
+#main-feed p {
+    margin: 0 0 0.2em;
+}
+#main-feed h1 {
+    font-size: 1.75em;
+    line-height: 1em;
+}
+#main-feed h2 {
+    font-size: 1em;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+#main-feed h2 a:link,
+#main-feed h2 a:visited,
+#main-feed .sll-date {
+    color: #A7A7A7;
+}
+.clear-main-feed {
+    clear: both;
+}
+#news-feed,
+#event-feed {
+    display: table-cell;
+    padding: 0 0.3em 0 1.5em;
+    width: 50%;
+}
+#news-feed h1, #news-feed h2,
+#event-feed h1, #event-feed h2 {
+    font-weight: normal;
+    line-height: 1.2em;
+    letter-spacing: 0.05em;
+}
+#news-feed > h1, #news-feed article,
+#event-feed > h1, #event-feed article {
+    padding: 0 0.3em;
+}
+#news-feed > h1,
+#event-feed > h1 {
+    border-bottom: 0.1em solid #0084A7;
+    margin-bottom: 0.3em;
+}
+#news-feed article h1,
+#event-feed article h1 {
+    font-size: 1.3em;
+    margin: 0;
+    padding: 0;
+}
+#news-feed article h2,
+#event-feed article h2 {
+    font-size: 1em;
+    margin: 0;
+}
+#news-feed article h2, #news-feed article h2 a:link, #news-feed article h2 a:visited,
+#event-feed article h2, #event-feed article h2 a:link, #event-feed article h2 a:visited {
+    color: #A7A7A7;
+}
+.sll-date {
+    margin: 0 1em;
+}
+
+@media screen and (max-width: 600px) {
+    #main-feed h1 {
+        font-size: 1.5em;
+    }
+    .read-more {
+        display: none;
+    }
+}
+@media screen and (max-width: 550px) {
+    .crop-frame {
+        display: none;
+    }
+}
+@media screen and (max-width: 550px) {
+    #news-feed,
+    #event-feed {
+        display: block;
+        padding: 0 0.3em;
+        width: 100%;
+    }
+}

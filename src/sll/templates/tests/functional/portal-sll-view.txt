@@ -1,0 +1,271 @@
+Log in as Manager::
+
+    >>> browser.login(TEST_USER_NAME, TEST_USER_PASSWORD)
+
+Go to doc1::
+
+    >>> browser.open('/folder1/doc1')
+
+    >>> '@@feed-to-top' in browser.contents
+    True
+    >>> '@@unfeed-from-top' in browser.contents
+    False
+    >>> '@@feed-to-microsite' in browser.contents
+    True
+    >>> '@@unfeed-from-microsite' in browser.contents
+    False
+
+Feed to Top::
+
+    >>> browser.getLink('Feed to Top').url
+    'http://nohost/plone/folder1/doc1/@@feed-to-top'
+
+    >>> browser.getLink('Feed to Top').click()
+
+    >>> '@@feed-to-top' in browser.contents
+    False
+    >>> '@@unfeed-from-top' in browser.contents
+    True
+    >>> '@@feed-to-microsite' in browser.contents
+    True
+    >>> '@@unfeed-from-microsite' in browser.contents
+    False
+
+Go to doc2 and make feed to top::
+
+    >>> browser.open('/folder2/doc2')
+    >>> browser.getLink('Feed to Top').click()
+
+Go to /@@sll-view::
+
+    >>> browser.open('/@@sll-view')
+
+    >>> print browser.bycss('#main-feed')
+    --- 1 ---
+    <section id="main-feed"><article><div class="crop-frame">
+    <a href="http://nohost/plone/folder2/doc2" title="D&#246;cument2">
+    <div class="crop" style="width:170px;height:150px;"><img src="http://nohost/plone/++resource++sll.templates/images/feed-fallback.png" alt="D&#246;cument2" title="D&#246;cument2"></div>
+    </a>
+    </div>
+    <section class="feed-text"><h1>
+    <a href="http://nohost/plone/folder2/doc2" title="D&#246;cument2">D&#246;cument2</a>
+    </h1>
+    <h2>
+    <a href="http://nohost/plone/folder2" title="F&#246;lder2">F&#246;lder2</a>
+    <span class="sll-date">...</span>
+    </h2>
+    <p>&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;...</p>
+    <p class="read-more">
+    <a href="http://nohost/plone/folder2/doc2">Read more</a>
+    </p>
+    </section></article><article><div class="crop-frame">
+    <a href="http://nohost/plone/folder1/doc1" title="D&#246;cument1">
+    <div class="crop" style="width:170px;height:150px;"><img src="http://nohost/plone/++resource++sll.templates/images/feed-fallback.png" alt="D&#246;cument1" title="D&#246;cument1"></div>
+    </a>
+    </div>
+    <section class="feed-text"><h1>
+    <a href="http://nohost/plone/folder1/doc1" title="D&#246;cument1">D&#246;cument1</a>
+    </h1>
+    <h2>
+    <a href="http://nohost/plone/folder1" title="F&#246;lder1">F&#246;lder1</a>
+    <span class="sll-date">...</span>
+    </h2>
+    <p>Description of D&#246;cument1</p>
+    <p class="read-more">
+    <a href="http://nohost/plone/folder1/doc1">Read more</a>
+    </p>
+    </section></article></section>
+
+    >>> print browser.bycss('#news-feed')
+    --- 1 ---
+    <section id="news-feed"><h1>
+    <a href="http://nohost/plone/ajankohtaista" title="Ajankohtaista">Ajankohtaista</a>
+    </h1>
+    <article><h1>
+    <a href="http://nohost/plone/ajankohtaista/news1" title="News1">News1</a>
+    </h1>
+    <h2>
+    <a href="http://nohost/plone/ajankohtaista" title="Ajankohtaista">Ajankohtaista</a>
+    <span class="sll-date">...</span>
+    </h2>
+    </article></section>
+
+Go to /folder1/@@sll-view::
+
+    >>> browser.open('/folder1/@@sll-view')
+    >>> print browser.bycss('#main-feed')
+
+Unfeed from Top::
+
+    >>> browser.open('/folder1/doc1')
+
+    >>> browser.getLink('Unfeed from Top').url
+    'http://nohost/plone/folder1/doc1/@@unfeed-from-top'
+
+    >>> browser.getLink('Unfeed from Top').click()
+
+    >>> '@@feed-to-top' in browser.contents
+    True
+    >>> '@@unfeed-from-top' in browser.contents
+    False
+    >>> '@@feed-to-microsite' in browser.contents
+    True
+    >>> '@@unfeed-from-microsite' in browser.contents
+    False
+
+Go to /@@sll-view::
+
+    >>> browser.open('/@@sll-view')
+    >>> print browser.bycss('#main-feed')
+    --- 1 ---
+    <section id="main-feed"><article><div class="crop-frame">
+    <a href="http://nohost/plone/folder2/doc2" title="D&#246;cument2">
+    <div class="crop" style="width:170px;height:150px;"><img src="http://nohost/plone/++resource++sll.templates/images/feed-fallback.png" alt="D&#246;cument2" title="D&#246;cument2"></div>
+    </a>
+    </div>
+    <section class="feed-text"><h1>
+    <a href="http://nohost/plone/folder2/doc2" title="D&#246;cument2">D&#246;cument2</a>
+    </h1>
+    <h2>
+    <a href="http://nohost/plone/folder2" title="F&#246;lder2">F&#246;lder2</a>
+    <span class="sll-date">Dec 07, 2012</span>
+    </h2>
+    <p>&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;...</p>
+    <p class="read-more">
+    <a href="http://nohost/plone/folder2/doc2">Read more</a>
+    </p>
+    </section></article></section>
+
+Go to doc1::
+
+    >>> browser.open('/folder1/doc1')
+
+Feed to Micro Site::
+
+    >>> browser.getLink('Feed to micro site').url
+    'http://nohost/plone/folder1/doc1/@@feed-to-microsite'
+
+    >>> browser.getLink('Feed to micro site').click()
+    >>> '@@feed-to-microsite' in browser.contents
+    False
+    >>> '@@unfeed-from-microsite' in browser.contents
+    True
+
+Go to /@@sll-view::
+
+    >>> browser.open('/@@sll-view')
+    >>> print browser.bycss('#main-feed')
+    --- 1 ---
+    <section id="main-feed"><article><div class="crop-frame">
+    <a href="http://nohost/plone/folder2/doc2" title="D&#246;cument2">
+    <div class="crop" style="width:170px;height:150px;"><img src="http://nohost/plone/++resource++sll.templates/images/feed-fallback.png" alt="D&#246;cument2" title="D&#246;cument2"></div>
+    </a>
+    </div>
+    <section class="feed-text"><h1>
+    <a href="http://nohost/plone/folder2/doc2" title="D&#246;cument2">D&#246;cument2</a>
+    </h1>
+    <h2>
+    <a href="http://nohost/plone/folder2" title="F&#246;lder2">F&#246;lder2</a>
+    <span class="sll-date">Dec 07, 2012</span>
+    </h2>
+    <p>&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;...</p>
+    <p class="read-more">
+    <a href="http://nohost/plone/folder2/doc2">Read more</a>
+    </p>
+    </section></article></section>
+
+Go to /folder1/@@sll-view::
+
+    >>> browser.open('/folder1/@@sll-view')
+    >>> print browser.bycss('#main-feed')
+    --- 1 ---
+    <section id="main-feed"><article><div class="crop-frame">
+    <a href="http://nohost/plone/folder1/doc1" title="D&#246;cument1">
+    <div class="crop" style="width:170px;height:150px;"><img src="http://nohost/plone/++resource++sll.templates/images/feed-fallback.png" alt="D&#246;cument1" title="D&#246;cument1"></div>
+    </a>
+    </div>
+    <section class="feed-text"><h1>
+    <a href="http://nohost/plone/folder1/doc1" title="D&#246;cument1">D&#246;cument1</a>
+    </h1>
+    <h2>
+    <a href="http://nohost/plone/folder1" title="F&#246;lder1">F&#246;lder1</a>
+    <span class="sll-date">Dec 07, 2012</span>
+    </h2>
+    <p>Description of D&#246;cument1</p>
+    <p class="read-more">
+    <a href="http://nohost/plone/folder1/doc1">Read more</a>
+    </p>
+    </section></article></section>
+
+Go to /folder2/@@sll-view::
+
+    >>> browser.open('/folder2/@@sll-view')
+    >>> print browser.bycss('#main-feed')
+    --- 1 ---
+    <section id="main-feed"><article><div class="crop-frame">
+    <a href="http://nohost/plone/folder2/doc2" title="D&#246;cument2">
+    <div class="crop" style="width:170px;height:150px;"><img src="http://nohost/plone/++resource++sll.templates/images/feed-fallback.png" alt="D&#246;cument2" title="D&#246;cument2"></div>
+    </a>
+    </div>
+    <section class="feed-text"><h1>
+    <a href="http://nohost/plone/folder2/doc2" title="D&#246;cument2">D&#246;cument2</a>
+    </h1>
+    <h2>
+    <a href="http://nohost/plone/folder2" title="F&#246;lder2">F&#246;lder2</a>
+    <span class="sll-date">Dec 07, 2012</span>
+    </h2>
+    <p>&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;&#196;...</p>
+    <p class="read-more">
+    <a href="http://nohost/plone/folder2/doc2">Read more</a>
+    </p>
+    </section></article></section>
+
+Go to doc1 and unfeed from micro site::
+
+    >>> browser.open('/folder1/doc1')
+
+    >>> browser.getLink('Unfeed from micro site').url
+    'http://nohost/plone/folder1/doc1/@@unfeed-from-microsite'
+
+    >>> browser.getLink('Unfeed from micro site').click()
+
+    >>> '@@feed-to-microsite' in browser.contents
+    True
+    >>> '@@unfeed-from-microsite' in browser.contents
+    False
+
+Log out and log in as contributor::
+
+    >>> browser.getLink('Log out').click()
+    >>> browser.login(user2, user2)
+
+Go to doc1::
+
+    >>> browser.open('/folder1/doc1')
+
+    >>> '@@feed-to-top' in browser.contents
+    False
+    >>> '@@unfeed-from-top' in browser.contents
+    False
+    >>> '@@feed-to-microsite' in browser.contents
+    True
+    >>> '@@unfeed-from-microsite' in browser.contents
+    False
+
+Feed to micro site::
+
+    >>> browser.getLink('Feed to micro site').click()
+
+    >>> '@@feed-to-microsite' in browser.contents
+    False
+    >>> '@@unfeed-from-microsite' in browser.contents
+    True
+
+Unfeed from micro site::
+
+    >>> browser.getLink('Unfeed from micro site').click()
+
+    >>> '@@feed-to-microsite' in browser.contents
+    True
+    >>> '@@unfeed-from-microsite' in browser.contents
+    False

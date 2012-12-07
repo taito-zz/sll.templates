@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<registry>
+  <records interface="sll.templates.interfaces.IEventFeed" />
+  <records interface="sll.templates.interfaces.IFolderFeed">
+    <value key="number">4</value>
+  </records>
+  <records interface="sll.templates.interfaces.INewsFeed" />
+  <records interface="sll.templates.interfaces.ITopPageMainFeed" />
+</registry>

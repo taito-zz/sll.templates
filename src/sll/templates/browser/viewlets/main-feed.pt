@@ -1,0 +1,37 @@
+<section
+  id="main-feed"
+  i18n:domain="sll.templates"
+  tal:condition="viewlet/items">
+  <article tal:repeat="item viewlet/items">
+    <div class="crop-frame">
+      <a
+        tal:attributes="
+          href item/url;
+          title item/title">
+        <div tal:replace="structure item/image" />
+      </a>
+    </div>
+    <section class="feed-text">
+      <h1>
+        <a tal:content="item/title"
+           tal:attributes="href item/url;
+                           title item/title" />
+      </h1>
+      <h2>
+        <a tal:attributes="href item/parent_url;
+                           title item/parent_title;"
+           tal:content="item/parent_title" />
+        <span
+          class="sll-date"
+          tal:content="item/date"
+          />
+      </h2>
+      <p tal:content="item/description" />
+      <p class="read-more">
+        <a tal:attributes="href item/url;"
+           i18n:translate="">Read more</a>
+      </p>
+    </section>
+  </article>
+</section>
+<div class="clear-main-feed" />
