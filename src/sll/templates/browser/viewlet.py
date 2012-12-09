@@ -89,7 +89,7 @@ class BaseViewlet(grok.Viewlet):
             obj = item.getObject()
             if not isinstance(self, BaseNewsEventFeedViewlet) or (
                 ISiteRoot.providedBy(self.context) and not ITopPageFeed.providedBy(obj)) or (
-                not ISiteRoot.providedBy(self.context) and INavigationRoot.providedBy(self.context) and not IMicroSiteFeed.providedBy(obj)):
+                    not ISiteRoot.providedBy(self.context) and INavigationRoot.providedBy(self.context) and not IMicroSiteFeed.providedBy(obj)):
                 parent = aq_parent(aq_inner(obj))
                 res.append({
                     'title': item.Title(),
