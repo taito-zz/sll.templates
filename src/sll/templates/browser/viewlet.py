@@ -199,6 +199,7 @@ class EventFeedViewlet(BaseNewsEventFeedViewlet):
         now = DateTime()
         query = {
             'object_provides': IATEvent.__identifier__,
+            'sort_on': 'start',
             'start': {
                 'query': [now, ],
                 'range': 'min',

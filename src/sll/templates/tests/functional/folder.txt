@@ -13,3 +13,17 @@ Go to folder sll-view::
     True
     >>> 'Description of Document02' in browser.contents
     True
+    >>> 'Title of Document03' in browser.contents
+    True
+    >>> 'Description of Document03' in browser.contents
+    True
+
+Set sll.templates.interfaces.IFolderFeed.number to zero::
+
+    >>> browser.open('/portal_registry/edit/sll.templates.interfaces.IFolderFeed.number')
+    >>> browser.getControl(name="form.widgets.value").value = '0'
+    >>> browser.getControl(name="form.buttons.save").click()
+
+Go to folder sll-view::
+
+    >>> browser.open('/folder/@@sll-view')

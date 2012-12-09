@@ -272,3 +272,173 @@ Unfeed from micro site::
     True
     >>> '@@unfeed-from-microsite' in browser.contents
     False
+
+Event feed
+----------
+
+Start and end on the same day::
+
+    >>> from DateTime import DateTime
+    >>> FutureYear = str(DateTime().year() + 1)
+
+    >>> browser.open('/createObject?type_name=Event')
+    >>> browser.getControl(name="title").value = 'Event01'
+    >>> browser.getControl(name="startDate_year").value = [FutureYear]
+    >>> browser.getControl(name="startDate_month").value = ['05']
+    >>> browser.getControl(name="startDate_day").value = ['01']
+    >>> browser.getControl(name="startDate_hour").value = ['10']
+    >>> browser.getControl(name="startDate_minute").value = ['00']
+    >>> browser.getControl(name="startDate_ampm").value = ['AM']
+    >>> browser.getControl(name="endDate_year").value = [FutureYear]
+    >>> browser.getControl(name="endDate_month").value = ['05']
+    >>> browser.getControl(name="endDate_day").value = ['01']
+    >>> browser.getControl(name="endDate_hour").value = ['11']
+    >>> browser.getControl(name="endDate_minute").value = ['00']
+    >>> browser.getControl(name="endDate_ampm").value = ['AM']
+    >>> browser.getControl(name="form.button.save").click()
+
+    >>> browser.open('/')
+    >>> print browser.bycss('#event-news-feed')
+    --- 1 ---
+    ...
+    --- 2 ---
+    <section id="event-news-feed"><article><h1>
+    <a href="http://nohost/plone/event01" title="Event01">Event01</a>
+    </h1>
+    <h2>
+    <a href="http://nohost/plone" title="Plone site">Plone site</a>
+    <span class="sll-date">May 01, ... 10:00 AM - 11:00 AM</span>
+    </h2>
+    </article></section>
+
+Start and end on the same day and time::
+
+    >>> browser.open('/createObject?type_name=Event')
+    >>> browser.getControl(name="title").value = 'Event02'
+    >>> browser.getControl(name="startDate_year").value = [FutureYear]
+    >>> browser.getControl(name="startDate_month").value = ['05']
+    >>> browser.getControl(name="startDate_day").value = ['01']
+    >>> browser.getControl(name="startDate_hour").value = ['10']
+    >>> browser.getControl(name="startDate_minute").value = ['00']
+    >>> browser.getControl(name="startDate_ampm").value = ['AM']
+    >>> browser.getControl(name="endDate_year").value = [FutureYear]
+    >>> browser.getControl(name="endDate_month").value = ['05']
+    >>> browser.getControl(name="endDate_day").value = ['01']
+    >>> browser.getControl(name="endDate_hour").value = ['10']
+    >>> browser.getControl(name="endDate_minute").value = ['00']
+    >>> browser.getControl(name="endDate_ampm").value = ['AM']
+    >>> browser.getControl(name="form.button.save").click()
+
+    >>> browser.open('/')
+    >>> print browser.bycss('#event-news-feed')
+    --- 1 ---
+    ...
+    --- 2 ---
+    <section id="event-news-feed"><article><h1>
+    <a href="http://nohost/plone/event01" title="Event01">Event01</a>
+    </h1>
+    <h2>
+    <a href="http://nohost/plone" title="Plone site">Plone site</a>
+    <span class="sll-date">May 01, ... 10:00 AM - 11:00 AM</span>
+    </h2>
+    </article><article><h1>
+    <a href="http://nohost/plone/event02" title="Event02">Event02</a>
+    </h1>
+    <h2>
+    <a href="http://nohost/plone" title="Plone site">Plone site</a>
+    <span class="sll-date">May 01, ... 10:00 AM</span>
+    </h2>
+    </article></section>
+
+Start and end on different days and time::
+
+    >>> browser.open('/folder1/createObject?type_name=Event')
+    >>> browser.getControl(name="title").value = 'Event03'
+    >>> browser.getControl(name="startDate_year").value = [FutureYear]
+    >>> browser.getControl(name="startDate_month").value = ['05']
+    >>> browser.getControl(name="startDate_day").value = ['02']
+    >>> browser.getControl(name="startDate_hour").value = ['10']
+    >>> browser.getControl(name="startDate_minute").value = ['00']
+    >>> browser.getControl(name="startDate_ampm").value = ['AM']
+    >>> browser.getControl(name="endDate_year").value = [FutureYear]
+    >>> browser.getControl(name="endDate_month").value = ['05']
+    >>> browser.getControl(name="endDate_day").value = ['03']
+    >>> browser.getControl(name="endDate_hour").value = ['12']
+    >>> browser.getControl(name="endDate_minute").value = ['00']
+    >>> browser.getControl(name="endDate_ampm").value = ['AM']
+    >>> browser.getControl(name="form.button.save").click()
+
+    >>> browser.open('/')
+    >>> print browser.bycss('#event-news-feed')
+    --- 1 ---
+    ...
+    --- 2 ---
+    <section id="event-news-feed"><article><h1>
+    <a href="http://nohost/plone/event01" title="Event01">Event01</a>
+    </h1>
+    <h2>
+    <a href="http://nohost/plone" title="Plone site">Plone site</a>
+    <span class="sll-date">May 01, ... 10:00 AM - 11:00 AM</span>
+    </h2>
+    </article><article><h1>
+    <a href="http://nohost/plone/event02" title="Event02">Event02</a>
+    </h1>
+    <h2>
+    <a href="http://nohost/plone" title="Plone site">Plone site</a>
+    <span class="sll-date">May 01, ... 10:00 AM</span>
+    </h2>
+    </article><article><h1>
+    <a href="http://nohost/plone/folder1/event03" title="Event03">Event03</a>
+    </h1>
+    <h2>
+    <a href="http://nohost/plone/folder1" title="F&#246;lder1">F&#246;lder1</a>
+    <span class="sll-date">May 02, ... 10:00 AM - May 03, ... 12:00 AM</span>
+    </h2>
+    </article></section>
+
+Start and end on different days but same time att 00:00::
+
+    >>> browser.open('/folder1/createObject?type_name=Event')
+
+    >>> browser.getControl(name="title").value = 'Event04'
+    >>> browser.getControl(name="startDate_year").value = [FutureYear]
+    >>> browser.getControl(name="startDate_month").value = ['04']
+    >>> browser.getControl(name="startDate_day").value = ['30']
+    >>> browser.getControl(name="startDate_hour").value = ['12']
+    >>> browser.getControl(name="startDate_minute").value = ['00']
+    >>> browser.getControl(name="startDate_ampm").value = ['AM']
+    >>> browser.getControl(name="endDate_year").value = [FutureYear]
+    >>> browser.getControl(name="endDate_month").value = ['05']
+    >>> browser.getControl(name="endDate_day").value = ['05']
+    >>> browser.getControl(name="endDate_hour").value = ['12']
+    >>> browser.getControl(name="endDate_minute").value = ['00']
+    >>> browser.getControl(name="endDate_ampm").value = ['AM']
+    >>> browser.getControl(name="form.button.save").click()
+
+    >>> browser.open('/')
+    >>> print browser.bycss('#event-news-feed')
+    --- 1 ---
+    ...
+    --- 2 ---
+    <section id="event-news-feed"><article><h1>
+    <a href="http://nohost/plone/folder1/event04" title="Event04">Event04</a>
+    </h1>
+    <h2>
+    <a href="http://nohost/plone/folder1" title="F&#246;lder1">F&#246;lder1</a>
+    <span class="sll-date">Apr 30, ... - May 05, ...</span>
+    </h2>
+    </article><article><h1>
+    <a href="http://nohost/plone/event01" title="Event01">Event01</a>
+    </h1>
+    <h2>
+    <a href="http://nohost/plone" title="Plone site">Plone site</a>
+    <span class="sll-date">May 01, ... 10:00 AM - 11:00 AM</span>
+    </h2>
+    </article><article><h1>
+    <a href="http://nohost/plone/event02" title="Event02">Event02</a>
+    </h1>
+    <h2>
+    <a href="http://nohost/plone" title="Plone site">Plone site</a>
+    <span class="sll-date">May 01, ... 10:00 AM</span>
+    </h2>
+    </article></section>
