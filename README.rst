@@ -7,6 +7,11 @@ sll.templates provides templates for SLL site.
 Change log
 ----------
 
+1.4 (2012-12-09)
+================
+
+- Fixed feed in micro site. [taito]
+
 1.3 (2012-12-09)
 ================
 
