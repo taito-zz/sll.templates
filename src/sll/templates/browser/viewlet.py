@@ -5,6 +5,7 @@ from Products.ATContentTypes.interfaces import IATDocument
 from Products.ATContentTypes.interfaces import IATEvent
 from Products.ATContentTypes.interfaces import IATFolder
 from Products.ATContentTypes.interfaces import IATNewsItem
+from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 from Products.PloneFormGen.interfaces import IPloneFormGenForm
 from abita.adapter.interfaces import IBaseAdapter
@@ -86,7 +87,9 @@ class BaseViewlet(grok.Viewlet):
         res = []
         for item in base.get_content_listing(**query):
             obj = item.getObject()
-            if not isinstance(self, BaseNewsEventFeedViewlet) or not ITopPageFeed.providedBy(obj):
+            if not isinstance(self, BaseNewsEventFeedViewlet) or (
+                ISiteRoot.providedBy(self.context) and not ITopPageFeed.providedBy(obj)) or (
+                not ISiteRoot.providedBy(self.context) and INavigationRoot.providedBy(self.context) and not IMicroSiteFeed.providedBy(obj)):
                 parent = aq_parent(aq_inner(obj))
                 res.append({
                     'title': item.Title(),
