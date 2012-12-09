@@ -1,5 +1,5 @@
 #main-feed,
-#news-feed {
+#event-news-feed {
     clear: both;
 }
 .crop-frame {
@@ -38,40 +38,33 @@
 .clear-main-feed {
     clear: both;
 }
-#news-feed,
-#event-feed {
+#event-news-feed {
     display: table-cell;
     padding: 0 0.3em 0 1.5em;
     width: 50%;
 }
-#news-feed h1, #news-feed h2,
-#event-feed h1, #event-feed h2 {
+#event-news-feed h1, #event-news-feed h2 {
     font-weight: normal;
     line-height: 1.2em;
     letter-spacing: 0.05em;
 }
-#news-feed > h1, #news-feed article,
-#event-feed > h1, #event-feed article {
+#event-news-feed > h1, #event-news-feed article {
     padding: 0 0.3em;
 }
-#news-feed > h1,
-#event-feed > h1 {
+#event-news-feed > h1 {
     border-bottom: 0.1em solid #0084A7;
     margin-bottom: 0.3em;
 }
-#news-feed article h1,
-#event-feed article h1 {
+#event-news-feed article h1 {
     font-size: 1.3em;
     margin: 0;
     padding: 0;
 }
-#news-feed article h2,
-#event-feed article h2 {
+#event-news-feed article h2 {
     font-size: 1em;
     margin: 0;
 }
-#news-feed article h2, #news-feed article h2 a:link, #news-feed article h2 a:visited,
-#event-feed article h2, #event-feed article h2 a:link, #event-feed article h2 a:visited {
+#event-news-feed article h2, #event-news-feed article h2 a:link, #event-news-feed article h2 a:visited {
     color: #A7A7A7;
 }
 .sll-date {
@@ -92,8 +85,7 @@
     }
 }
 @media screen and (max-width: 550px) {
-    #news-feed,
-    #event-feed {
+    #event-news-feed {
         display: block;
         padding: 0 0.3em;
         width: 100%;
