@@ -7,6 +7,11 @@ sll.templates provides templates for SLL site.
 Change log
 ----------
 
+1.3 (2012-12-09)
+================
+
+- United event and news feed templates. [taito]
+
 1.2 (2012-12-07)
 ================
 
