@@ -1,5 +1,5 @@
 <section
-  id="news-feed"
+  id="event-news-feed"
   i18n:domain="sll.templates">
   <h1
     tal:condition="viewlet/link"
