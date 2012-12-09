@@ -81,45 +81,49 @@ class BaseViewlet(grok.Viewlet):
         adapter = IAdapter(self.context)
         sort_limit = adapter.get_feed_number(self.interface)
         if sort_limit:
-            if self.interface != ITopPageMainFeed:
-                sort_limit += adapter.get_feed_number(ITopPageMainFeed)
             query['sort_limit'] = sort_limit
         base = IBaseAdapter(self.context)
         res = []
         for item in base.get_content_listing(**query):
             obj = item.getObject()
-            parent = aq_parent(aq_inner(obj))
-            res.append({
-                'title': item.Title(),
-                'url': item.getURL(),
-                'parent_title': parent.Title(),
-                'parent_url': parent.absolute_url(),
-                'date': self._date(item),
-                'image': self._image(item),
-                'description': self._description(item),
-            })
+            if not isinstance(self, BaseNewsEventFeedViewlet) or not ITopPageFeed.providedBy(obj):
+                parent = aq_parent(aq_inner(obj))
+                res.append({
+                    'title': item.Title(),
+                    'url': item.getURL(),
+                    'parent_title': parent.Title(),
+                    'parent_url': parent.absolute_url(),
+                    'date': self._date(item),
+                    'image': self._image(item),
+                    'description': self._description(item),
+                })
         if sort_limit:
             return res[:sort_limit]
         return res
 
     def _date(self, item):
+        base = IBaseAdapter(self.context)
+        localized_time = base.ulocalized_time()
         if self.interface == IEventFeed:
-            base = IBaseAdapter(self.context)
             start = item.start
             end = item.end
-            start_dt = base.ulocalized_time(start, long_format=True, context=self.context)
+            start_dt = localized_time(start, long_format=True, context=self.context)
             if start.Date() == end.Date():
                 if start == end:
                     dt = start_dt
                 else:
-                    end_time = base.ulocalized_time(end, time_only=True)
+                    end_time = localized_time(end, time_only=True)
                     dt = u'{} - {}'.format(start_dt, end_time)
             else:
-                end_dt = base.ulocalized_time(end, long_format=True, context=self.context)
+                if start.h_24() == start.minute() == end.h_24() == end.minute() == 0:
+                    start_dt = localized_time(start, long_format=False, context=self.context)
+                    end_dt = localized_time(end, long_format=False, context=self.context)
+                else:
+                    end_dt = localized_time(end, long_format=True, context=self.context)
                 dt = u'{} - {}'.format(start_dt, end_dt)
             return dt
         else:
-            return IBaseAdapter(self.context).localized_time(item)
+            return localized_time(item.modified, long_format=False, context=self.context)
 
 
 class BaseTopPageFeedViewlet(BaseViewlet):
@@ -149,6 +153,7 @@ class MainFeedViewlet(BaseTopPageFeedViewlet):
 class BaseNewsEventFeedViewlet(BaseTopPageFeedViewlet):
     """Base class for NewsViewlet and EventViewlet"""
     grok.baseclass()
+    grok.template('event-news-feed')
 
     @view.memoize
     def records(self):
@@ -172,7 +177,6 @@ class BaseNewsEventFeedViewlet(BaseTopPageFeedViewlet):
 class NewsFeedViewlet(BaseNewsEventFeedViewlet):
     """Viewlet class for news feed"""
     grok.name('sll.templates.news.feed')
-    grok.template('news-feed')
 
     interface = INewsFeed
 
@@ -188,7 +192,6 @@ class NewsFeedViewlet(BaseNewsEventFeedViewlet):
 class EventFeedViewlet(BaseNewsEventFeedViewlet):
     """Viewlet class for event feed"""
     grok.name('sll.templates.event.feed')
-    grok.template('event-feed')
 
     interface = IEventFeed
 

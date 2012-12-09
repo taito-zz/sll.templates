@@ -90,7 +90,7 @@
     layer=".interfaces.ISllTemplatesLayer"
     />
 
-  <browser:viewlet
+  <!-- <browser:viewlet
     class="collective.contentleadimage.browser.viewlets.LeadImageViewlet"
     for="Products.ATContentTypes.interfaces.event.IATEvent"
     layer=".interfaces.ISllTemplatesLayer"
@@ -98,6 +98,6 @@
     name="sll.templates.leadimage"
     permission="zope2.View"
     template="viewlets/leadimage.pt"
-    />
+    /> -->
 
 </configure>

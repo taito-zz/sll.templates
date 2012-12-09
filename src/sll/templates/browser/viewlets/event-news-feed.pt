@@ -10,7 +10,7 @@
   </h1>
   <p tal:condition="not: viewlet/items"
      i18n:translate="">
-    There are no news available.
+    There are no information available.
   </p>
   <article tal:repeat="item viewlet/items">
     <h1>
