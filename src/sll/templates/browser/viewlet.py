@@ -237,11 +237,3 @@ class FolderFeedViewlet(BaseViewlet):
                 IPloneFormGenForm.__identifier__]
         }
         return self._items(**query)
-
-
-# class SLLSearchEventResultsViewlet(SearchEventResultsViewlet):
-#     grok.layer(ISllTemplatesLayer)
-#     grok.template('results')
-
-#     def parent(self, item):
-#         return aq_parent(aq_inner(item.getObject()))

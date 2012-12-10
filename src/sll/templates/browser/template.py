@@ -41,8 +41,3 @@ class BaseDocumentView(BaseView):
 
 class DocumentView(BaseDocumentView):
     grok.template('document')
-
-
-class MonthlySupporterView(BaseDocumentView):
-    grok.name('monthly-supporter')
-    grok.template('monthly-supporter')
