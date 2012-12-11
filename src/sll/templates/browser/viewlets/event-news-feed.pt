@@ -1,12 +1,11 @@
 <section
   id="event-news-feed"
-  i18n:domain="sll.templates">
-  <h1
-    tal:condition="viewlet/link"
-    tal:define="item viewlet/link">
+  i18n:domain="sll.templates"
+  tal:define="link viewlet/link">
+  <h1 tal:condition="link">
     <a
-      tal:attributes="href item/url; title item/title"
-      tal:content="item/title" />
+      tal:attributes="href link/url; title link/title"
+      tal:content="link/title" />
   </h1>
   <p tal:condition="not: viewlet/items"
      i18n:translate="">
@@ -28,4 +27,9 @@
         />
     </h2>
   </article>
+  <p class="read-more" tal:condition="viewlet/items">
+    <a
+      tal:attributes="href link/url; title link/title"
+      i18n:translate="">Read more</a>
+  </p>
 </section>

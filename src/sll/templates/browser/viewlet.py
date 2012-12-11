@@ -83,6 +83,8 @@ class BaseViewlet(grok.Viewlet):
         sort_limit = adapter.get_feed_number(self.interface)
         if sort_limit:
             query['sort_limit'] = sort_limit
+            if isinstance(self, BaseNewsEventFeedViewlet):
+                query['sort_limit'] += adapter.get_feed_number(ITopPageMainFeed)
         base = IBaseAdapter(self.context)
         res = []
         for item in base.get_content_listing(**query):

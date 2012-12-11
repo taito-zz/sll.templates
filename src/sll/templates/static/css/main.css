@@ -48,16 +48,21 @@
     line-height: 1.2em;
     letter-spacing: 0.05em;
 }
-#event-news-feed > h1, #event-news-feed article {
-    padding: 0 0.3em;
-}
 #event-news-feed > h1 {
     border-bottom: 0.1em solid #0084A7;
-    margin-bottom: 0.3em;
+    margin: 0 0 0.3em;
+    padding: 0 0.3em;
+}
+#event-news-feed article,
+#event-news-feed p {
+    padding: 0 0.5em;
+}
+#event-news-feed article {
+    margin: 0 0 1em;
 }
 #event-news-feed article h1 {
     font-size: 1.3em;
-    margin: 0;
+    margin: 0 0 0.2em;
     padding: 0;
 }
 #event-news-feed article h2 {
