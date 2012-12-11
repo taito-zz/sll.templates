@@ -7,6 +7,11 @@ sll.templates provides templates for SLL site.
 Change log
 ----------
 
+1.5.1 (2012-12-11)
+==================
+
+- Fixed bug in number of news and event feed when some to them are fed to main feed. [taito]
+
 1.5 (2012-12-10)
 ================
 

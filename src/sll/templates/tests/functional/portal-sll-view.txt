@@ -88,7 +88,10 @@ Go to /@@sll-view::
     <a href="http://nohost/plone/ajankohtaista" title="Ajankohtaista">Ajankohtaista</a>
     <span class="sll-date">...</span>
     </h2>
-    </article></section>
+    </article><p class="read-more">
+    <a href="http://nohost/plone/ajankohtaista" title="Ajankohtaista">Read more</a>
+    </p>
+    </section>
     --- 2 ---
     <section id="event-news-feed"><p>There are no information available.</p>
     </section>
@@ -272,6 +275,12 @@ Unfeed from micro site::
     True
     >>> '@@unfeed-from-microsite' in browser.contents
     False
+
+
+Log in as Manager::
+
+    >>> browser.getLink('Log out').click()
+    >>> browser.login(TEST_USER_NAME, TEST_USER_PASSWORD)
 
 Event feed
 ----------

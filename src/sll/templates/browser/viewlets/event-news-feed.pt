@@ -27,7 +27,7 @@
         />
     </h2>
   </article>
-  <p class="read-more" tal:condition="viewlet/items">
+  <p class="read-more" tal:condition="link">
     <a
       tal:attributes="href link/url; title link/title"
       i18n:translate="">Read more</a>

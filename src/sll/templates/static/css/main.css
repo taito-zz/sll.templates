@@ -40,7 +40,7 @@
 }
 #event-news-feed {
     display: table-cell;
-    padding: 0 0.3em 0 1.5em;
+    padding: 0 2em 0 0;
     width: 50%;
 }
 #event-news-feed h1, #event-news-feed h2 {
@@ -75,6 +75,12 @@
 .sll-date {
     margin: 0 1em;
 }
+
+/*@media screen and (max-width: 1050px) {
+    #main-feed {
+        margin: 0 2em;
+    }
+}*/
 
 @media screen and (max-width: 600px) {
     #main-feed h1 {
