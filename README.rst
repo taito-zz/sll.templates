@@ -7,6 +7,11 @@ sll.templates provides templates for SLL site.
 Change log
 ----------
 
+1.5.2 (2013-01-07)
+==================
+
+- Updated template and styles. [taito]
+
 1.5.1 (2012-12-11)
 ==================
 

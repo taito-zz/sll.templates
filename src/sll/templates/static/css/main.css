@@ -1,3 +1,6 @@
+#main-feed {
+    display: inline-block;
+}
 #main-feed,
 #event-news-feed {
     clear: both;
@@ -34,9 +37,6 @@
 #main-feed h2 a:visited,
 #main-feed .sll-date {
     color: #A7A7A7;
-}
-.clear-main-feed {
-    clear: both;
 }
 #event-news-feed {
     display: table-cell;
