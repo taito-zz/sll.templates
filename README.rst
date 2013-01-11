@@ -4,8 +4,15 @@ sll.templates
 
 sll.templates provides templates for SLL site.
 
+- Put feed back image to plone site root with id: feed-back.png
+
 Change log
 ----------
+
+1.6 (2013-01-11)
+================
+
+- Made feed back image dynamic. [taito]
 
 1.5.2 (2013-01-07)
 ==================

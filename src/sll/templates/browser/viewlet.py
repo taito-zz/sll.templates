@@ -69,7 +69,7 @@ class BaseViewlet(grok.Viewlet):
                 (self.context, self.request),
                 name=u'plone_portal_state'
             )
-            image_url = '{}/++resource++sll.templates/images/feed-fallback.png'.format(portal_state.portal_url())
+            image_url = '{}/feed-fallback.png'.format(portal_state.portal_url())
             html = '<div class="crop" style="width:170px;height:150px;">'
             html += '<img src="{0}" alt="{1}" title="{1}" />'.format(
                 image_url,
