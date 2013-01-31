@@ -128,7 +128,7 @@ class BaseViewlet(grok.Viewlet):
                 dt = u'{} - {}'.format(start_dt, end_dt)
             return dt
         else:
-            return localized_time(item.modified, long_format=False, context=self.context)
+            return localized_time(item.effective, long_format=False, context=self.context)
 
 
 class BaseTopPageFeedViewlet(BaseViewlet):
@@ -145,7 +145,7 @@ class MainFeedViewlet(BaseTopPageFeedViewlet):
 
     def items(self):
         query = {
-            'sort_on': 'modified',
+            'sort_on': 'effective',
             'sort_order': 'descending',
         }
         if IPloneSiteRoot.providedBy(self.context):
@@ -188,7 +188,7 @@ class NewsFeedViewlet(BaseNewsEventFeedViewlet):
     def items(self):
         query = {
             'object_provides': IATNewsItem.__identifier__,
-            'sort_on': 'modified',
+            'sort_on': 'effective',
             'sort_order': 'descending',
         }
         return self._items(**query)
@@ -230,7 +230,7 @@ class FolderFeedViewlet(BaseViewlet):
 
     def items(self):
         query = {
-            'sort_on': 'modified',
+            'sort_on': 'effective',
             'sort_order': 'descending',
             'object_provides': [
                 IATDocument.__identifier__,

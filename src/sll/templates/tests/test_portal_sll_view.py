@@ -61,17 +61,21 @@ def setUp(self):
     folder2.reindexObject()
     doc1 = folder1[folder1.invokeFactory(
         'Document', 'doc1', title="Döcument1", description="Description of Döcument1")]
+    doc1.setEffectiveDate(doc1.modified())
     doc1.reindexObject()
     desc = 'Ä' * 201
     doc2 = folder2[folder2.invokeFactory(
         'Document', 'doc2', title="Döcument2", description=desc)]
+    doc2.setEffectiveDate(doc2.modified())
     doc2.reindexObject()
 
     ajankohtaista = portal[portal.invokeFactory('Folder', 'ajankohtaista', title="Ajankohtaista")]
+    ajankohtaista.setEffectiveDate(ajankohtaista.modified())
     ajankohtaista.reindexObject()
 
     news1 = ajankohtaista[ajankohtaista.invokeFactory(
         'News Item', 'news1', title="News1", description="Descriptiön of News1")]
+    news1.setEffectiveDate(news1.modified())
     news1.reindexObject()
 
     transaction.commit()

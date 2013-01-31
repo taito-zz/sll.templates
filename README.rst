@@ -9,6 +9,11 @@ sll.templates provides templates for SLL site.
 Change log
 ----------
 
+1.7 (2013-01-31)
+================
+
+- Use effective date instead of modified date for feed views. [taito]
+
 1.6 (2013-01-11)
 ================
 

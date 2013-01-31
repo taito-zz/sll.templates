@@ -74,10 +74,12 @@ def setUp(self):
             )
         ]
         alsoProvides(obj, ITopPageFeed)
+        obj.setEffectiveDate(obj.modified())
         obj.reindexObject()
     doc03 = folder[folder.invokeFactory(
         'Document', 'doc03', title='Title of Document03', description='Description of Document03',
         text='<p>This is the body text of Document03.</p>')]
+    doc03.setEffectiveDate(doc03.modified())
     doc03.reindexObject()
 
     transaction.commit()
