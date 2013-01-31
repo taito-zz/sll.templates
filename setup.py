@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='sll.templates',
-    version='1.6',
+    version='1.7',
     description="Templates for SLL site.",
     long_description=open("README.rst").read(),
     classifiers=[
