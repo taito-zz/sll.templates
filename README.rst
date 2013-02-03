@@ -9,6 +9,11 @@ sll.templates provides templates for SLL site.
 Change log
 ----------
 
+1.7.1 (2013-02-03)
+==================
+
+- Fixed feed view for unpublished feeds. [taito]
+
 1.7 (2013-01-31)
 ================
 
