@@ -128,7 +128,10 @@ class BaseViewlet(grok.Viewlet):
                 dt = u'{} - {}'.format(start_dt, end_dt)
             return dt
         else:
-            return localized_time(item.effective, long_format=False, context=self.context)
+            try:
+                return localized_time(item.effective, long_format=False, context=self.context)
+            except ValueError:
+                return localized_time(item.created, long_format=False, context=self.context)
 
 
 class BaseTopPageFeedViewlet(BaseViewlet):

@@ -75,7 +75,7 @@ def setUp(self):
 
     news1 = ajankohtaista[ajankohtaista.invokeFactory(
         'News Item', 'news1', title="News1", description="Descriptiön of News1")]
-    news1.setEffectiveDate(news1.modified())
+    # news1.setEffectiveDate(news1.modified())
     news1.reindexObject()
 
     transaction.commit()
