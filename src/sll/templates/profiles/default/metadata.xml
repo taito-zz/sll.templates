@@ -3,7 +3,6 @@
   <version>7</version>
   <dependencies>
     <dependency>profile-Products.PloneFormGen:default</dependency>
-    <dependency>profile-abita.adapter:default</dependency>
     <dependency>profile-collective.contentleadimage:default</dependency>
     <dependency>profile-collective.cropimage:default</dependency>
     <dependency>profile-sll.basetheme:default</dependency>

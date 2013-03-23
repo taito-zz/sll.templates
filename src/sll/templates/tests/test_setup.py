@@ -186,10 +186,6 @@ class TestCase(IntegrationTestCase):
         installer = getToolByName(self.portal, 'portal_quickinstaller')
         self.failUnless(installer.isProductInstalled('PloneFormGen'))
 
-    def test_metadata__dependency__abita_adapter(self):
-        installer = getToolByName(self.portal, 'portal_quickinstaller')
-        self.failUnless(installer.isProductInstalled('abita.adapter'))
-
     def test_metadata__dependency__collective_contentleadimage(self):
         installer = getToolByName(self.portal, 'portal_quickinstaller')
         self.failUnless(installer.isProductInstalled('collective.contentleadimage'))

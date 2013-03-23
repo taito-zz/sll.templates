@@ -8,7 +8,7 @@ from Products.ATContentTypes.interfaces import IATNewsItem
 from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 from Products.PloneFormGen.interfaces import IPloneFormGenForm
-from abita.adapter.interfaces import IBaseAdapter
+from collective.base.interfaces import IAdapter as IBaseAdapter
 from five import grok
 from plone.app.layout.navigation.interfaces import INavigationRoot
 from plone.app.viewletmanager.manager import OrderedViewletManager
@@ -108,7 +108,7 @@ class BaseViewlet(grok.Viewlet):
 
     def _date(self, item):
         base = IBaseAdapter(self.context)
-        localized_time = base.ulocalized_time()
+        localized_time = base.ulocalized_time
         if self.interface == IEventFeed:
             start = item.start
             end = item.end

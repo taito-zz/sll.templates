@@ -6,8 +6,20 @@ sll.templates provides templates for SLL site.
 
 - Put feed back image to plone site root with id: feed-back.png
 
+Currently tested with
+---------------------
+
+- Plone-4.2.5
+- Python-2.7.3
+
 Change log
 ----------
+
+1.8 (2013-03-23)
+================
+
+- Updated from abita.adapter to collective.base:
+  Fist uninstall abita.adapter and then install collective.base. [taito]
 
 1.7.1 (2013-02-03)
 ==================

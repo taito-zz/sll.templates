@@ -24,7 +24,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'Products.PloneFormGen',
-        'abita.adapter',
+        'collective.base',
         'collective.contentleadimage',
         'collective.cropimage',
         'five.grok',

@@ -7,7 +7,7 @@
   xmlns="http://namespaces.zope.org/zope">
 
   <include package="Products.PloneFormGen"/>
-  <include package="abita.adapter"/>
+  <include package="collective.base"/>
   <include package="collective.contentleadimage"/>
   <include package="collective.cropimage"/>
   <include package="five.grok"/>
