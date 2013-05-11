@@ -9,7 +9,7 @@ setup(
     long_description=open("README.rst").read(),
     classifiers=[
         "Framework :: Plone",
-        "Framework :: Plone :: 4.2",
+        "Framework :: Plone :: 4.3",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7"],
     keywords='',
@@ -27,11 +27,9 @@ setup(
         'collective.base',
         'collective.contentleadimage',
         'collective.cropimage',
-        'five.grok',
-        'five.pt',
-        'hexagonit.testing',
         'setuptools',
         'sll.basetheme'],
+    extras_require={'test': ['hexagonit.testing']},
     entry_points="""
     # -*- Entry points: -*-
 

@@ -1,8 +1,8 @@
 <section
   id="main-feed"
   i18n:domain="sll.templates"
-  tal:condition="viewlet/items">
-  <article tal:repeat="item viewlet/items">
+  tal:condition="view/items">
+  <article tal:repeat="item view/items">
     <div class="crop-frame">
       <a
         tal:attributes="

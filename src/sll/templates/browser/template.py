@@ -1,36 +1,21 @@
-from Products.ATContentTypes.interfaces import IATDocument
-from Products.ATContentTypes.interfaces import IATFolder
-from five import grok
-from plone.app.layout.navigation.interfaces import INavigationRoot
-from sll.templates.browser.interfaces import ISllTemplatesLayer
+from sll.basetheme.browser.interfaces import INavigationRootView
+from Products.Five import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from zope.interface import implements
 
 
-grok.templatedir('templates')
-
-
-class BaseView(grok.View):
-    """Base class for View"""
-    grok.baseclass()
-    grok.layer(ISllTemplatesLayer)
-    grok.name('sll-view')
-    grok.require('zope2.View')
-
-
-class TopPageView(BaseView):
+class TopPageView(BrowserView):
     """View class for site and micro site top page."""
-    grok.context(INavigationRoot)
-    grok.template('top-page')
+    implements(INavigationRootView)
+    __call__ = ViewPageTemplateFile('templates/top-page.pt')
 
 
-class FolderView(BaseView):
+class FolderView(BrowserView):
     """View class for folder"""
-    grok.context(IATFolder)
-    grok.template('folder')
+    __call__ = ViewPageTemplateFile('templates/folder.pt')
 
 
-class BaseDocumentView(BaseView):
-    grok.baseclass()
-    grok.context(IATDocument)
+class BaseDocumentView(BrowserView):
 
     def image(self):
         return self.context.getField('leadImage').tag(self.context)
@@ -40,4 +25,4 @@ class BaseDocumentView(BaseView):
 
 
 class DocumentView(BaseDocumentView):
-    grok.template('document')
+    __call__ = ViewPageTemplateFile('templates/document.pt')

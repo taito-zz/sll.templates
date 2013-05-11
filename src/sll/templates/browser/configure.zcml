@@ -3,6 +3,12 @@
   xmlns:browser="http://namespaces.zope.org/browser"
   xmlns="http://namespaces.zope.org/zope">
 
+  <browser:resourceDirectory
+    name="sll.templates"
+    directory="static"
+    layer=".interfaces.ISllTemplatesLayer"
+    />
+
   <permission
     id="sll.templates.ManageFeedForTop"
     title="sll.templates: Manage feed for top"
@@ -90,14 +96,84 @@
     layer=".interfaces.ISllTemplatesLayer"
     />
 
-  <!-- <browser:viewlet
-    class="collective.contentleadimage.browser.viewlets.LeadImageViewlet"
-    for="Products.ATContentTypes.interfaces.event.IATEvent"
+  <!-- View -->
+  <browser:page
+    class=".template.TopPageView"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
     layer=".interfaces.ISllTemplatesLayer"
-    manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
-    name="sll.templates.leadimage"
+    name="sll-view"
     permission="zope2.View"
-    template="viewlets/leadimage.pt"
-    /> -->
+    />
+
+  <browser:page
+    class=".template.FolderView"
+    for="Products.ATContentTypes.interfaces.IATFolder"
+    layer=".interfaces.ISllTemplatesLayer"
+    name="sll-view"
+    permission="zope2.View"
+    />
+
+  <browser:page
+    class=".template.DocumentView"
+    for="Products.ATContentTypes.interfaces.IATDocument"
+    layer=".interfaces.ISllTemplatesLayer"
+    name="sll-view"
+    permission="zope2.View"
+    />
+
+  <!-- Viewlet Manager -->
+  <browser:viewletManager
+    class="plone.app.viewletmanager.manager.OrderedViewletManager"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    name="sll.templates.top.page.manager"
+    permission="zope2.View"
+    provides=".interfaces.ITopPageViewletManager"
+    />
+
+  <browser:viewletManager
+    class="plone.app.viewletmanager.manager.OrderedViewletManager"
+    for="Products.ATContentTypes.interfaces.IATFolder"
+    name="sll.templates.folder.manager"
+    permission="zope2.View"
+    provides=".interfaces.IFolderViewletManager"
+    />
+
+
+  <!-- Viewlet -->
+  <browser:viewlet
+    class=".viewlet.MainFeedViewlet"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    layer=".interfaces.ISllTemplatesLayer"
+    manager=".interfaces.ITopPageViewletManager"
+    name="sll.templates.main.feed"
+    permission="zope2.View"
+    />
+
+  <browser:viewlet
+    class=".viewlet.NewsFeedViewlet"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    layer=".interfaces.ISllTemplatesLayer"
+    manager=".interfaces.ITopPageViewletManager"
+    name="sll.templates.news.feed"
+    permission="zope2.View"
+    />
+
+  <browser:viewlet
+    class=".viewlet.EventFeedViewlet"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    layer=".interfaces.ISllTemplatesLayer"
+    manager=".interfaces.ITopPageViewletManager"
+    name="sll.templates.event.feed"
+    permission="zope2.View"
+    />
+
+  <browser:viewlet
+    class=".viewlet.FolderFeedViewlet"
+    for="Products.ATContentTypes.interfaces.IATFolder"
+    layer=".interfaces.ISllTemplatesLayer"
+    manager=".interfaces.IFolderViewletManager"
+    name="sll.templates.folder.feed"
+    permission="zope2.View"
+    />
 
 </configure>

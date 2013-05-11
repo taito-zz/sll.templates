@@ -9,11 +9,17 @@ sll.templates provides templates for SLL site.
 Currently tested with
 ---------------------
 
-- Plone-4.2.5
-- Python-2.7.3
+- Plone-4.3
+- Python-2.7.x
 
 Change log
 ----------
+
+1.9 (2013-05-11)
+================
+
+- Removed dependency from five.grok. [taito]
+- Tested with Plone-4.3. [taito]
 
 1.8 (2013-03-23)
 ================

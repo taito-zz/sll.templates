@@ -1,0 +1,12 @@
+<configure
+  i18n_domain="sll.templates"
+  xmlns:i18n="http://namespaces.zope.org/i18n"
+  xmlns="http://namespaces.zope.org/zope">
+
+  <adapter
+    factory=".interface.Adapter"
+    for="*"
+    provides="sll.templates.interfaces.IAdapter"
+    />
+
+</configure>

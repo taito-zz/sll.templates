@@ -1,19 +1,22 @@
-from five import grok
 from plone.registry.interfaces import IRegistry
 from sll.templates.interfaces import IEventFeed
 from sll.templates.interfaces import IFolderFeed
 from sll.templates.interfaces import INewsFeed
 from sll.templates.interfaces import IAdapter
 from sll.templates.interfaces import ITopPageMainFeed
+from zope.component import adapts
 from zope.component import getUtility
 from zope.interface import Interface
+from zope.interface import implements
 
 
-class Adapter(grok.Adapter):
+class Adapter(object):
     """Adapter for root object."""
+    adapts(Interface)
+    implements(IAdapter)
 
-    grok.context(Interface)
-    grok.provides(IAdapter)
+    def __init__(self, context):
+        self.context = context
 
     def get_feed_number(self, interface):
         records = getUtility(IRegistry).forInterface(interface)

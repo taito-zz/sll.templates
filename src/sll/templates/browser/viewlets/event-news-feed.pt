@@ -1,17 +1,17 @@
 <section
   id="event-news-feed"
   i18n:domain="sll.templates"
-  tal:define="link viewlet/link">
+  tal:define="link view/link">
   <h1 tal:condition="link">
     <a
       tal:attributes="href link/url; title link/title"
       tal:content="link/title" />
   </h1>
-  <p tal:condition="not: viewlet/items"
+  <p tal:condition="not: view/items"
      i18n:translate="">
     There are no information available.
   </p>
-  <article tal:repeat="item viewlet/items">
+  <article tal:repeat="item view/items">
     <h1>
       <a tal:content="item/title"
          tal:attributes="href item/url;

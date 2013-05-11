@@ -3,19 +3,17 @@ from Acquisition import aq_parent
 from DateTime import DateTime
 from Products.ATContentTypes.interfaces import IATDocument
 from Products.ATContentTypes.interfaces import IATEvent
-from Products.ATContentTypes.interfaces import IATFolder
 from Products.ATContentTypes.interfaces import IATNewsItem
 from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.PloneFormGen.interfaces import IPloneFormGenForm
 from collective.base.interfaces import IAdapter as IBaseAdapter
-from five import grok
 from plone.app.layout.navigation.interfaces import INavigationRoot
-from plone.app.viewletmanager.manager import OrderedViewletManager
+from plone.app.layout.viewlets.common import ViewletBase
 from plone.memoize import view
 from plone.registry.interfaces import IRegistry
 from sll.templates.browser.interfaces import IMicroSiteFeed
-from sll.templates.browser.interfaces import ISllTemplatesLayer
 from sll.templates.browser.interfaces import ITopPageFeed
 from sll.templates.interfaces import IAdapter
 from sll.templates.interfaces import IEventFeed
@@ -26,26 +24,8 @@ from zope.component import getMultiAdapter
 from zope.component import getUtility
 
 
-grok.templatedir('viewlets')
-
-
-class BaseViewletManager(OrderedViewletManager, grok.ViewletManager):
-    """Base class for viewlet manager"""
-    grok.baseclass()
-    grok.layer(ISllTemplatesLayer)
-
-
-class TopPageViewletManager(BaseViewletManager):
-    """Viewlet manager for top page"""
-    grok.context(INavigationRoot)
-    grok.name('sll.templates.top.page.manager')
-
-
-class BaseViewlet(grok.Viewlet):
+class BaseViewlet(ViewletBase):
     """Base class for viewlet"""
-    grok.baseclass()
-    grok.layer(ISllTemplatesLayer)
-    grok.require('zope2.View')
 
     interface = ITopPageMainFeed
 
@@ -107,44 +87,35 @@ class BaseViewlet(grok.Viewlet):
         return res
 
     def _date(self, item):
-        base = IBaseAdapter(self.context)
-        localized_time = base.ulocalized_time
+        toLocalizedTime = self.context.restrictedTraverse('@@plone').toLocalizedTime
         if self.interface == IEventFeed:
             start = item.start
             end = item.end
-            start_dt = localized_time(start, long_format=True, context=self.context)
+            start_dt = toLocalizedTime(start, long_format=True)
             if start.Date() == end.Date():
                 if start == end:
                     dt = start_dt
                 else:
-                    end_time = localized_time(end, time_only=True)
+                    end_time = toLocalizedTime(end, time_only=True)
                     dt = u'{} - {}'.format(start_dt, end_time)
             else:
                 if start.h_24() == start.minute() == end.h_24() == end.minute() == 0:
-                    start_dt = localized_time(start, long_format=False, context=self.context)
-                    end_dt = localized_time(end, long_format=False, context=self.context)
+                    start_dt = toLocalizedTime(start, long_format=False)
+                    end_dt = toLocalizedTime(end, long_format=False)
                 else:
-                    end_dt = localized_time(end, long_format=True, context=self.context)
+                    end_dt = toLocalizedTime(end, long_format=True)
                 dt = u'{} - {}'.format(start_dt, end_dt)
             return dt
         else:
             try:
-                return localized_time(item.effective, long_format=False, context=self.context)
+                return toLocalizedTime(item.effective, long_format=False)
             except ValueError:
-                return localized_time(item.created, long_format=False, context=self.context)
+                return toLocalizedTime(item.created, long_format=False)
 
 
-class BaseTopPageFeedViewlet(BaseViewlet):
-    """Base class for feed viewlet for TopPageViewletManager"""
-    grok.baseclass()
-    grok.context(INavigationRoot)
-    grok.viewletmanager(TopPageViewletManager)
-
-
-class MainFeedViewlet(BaseTopPageFeedViewlet):
+class MainFeedViewlet(BaseViewlet):
     """Viewlet class for main feed which has cropped images"""
-    grok.name('sll.templates.main.feed')
-    grok.template('main-feed')
+    index = ViewPageTemplateFile('viewlets/main-feed.pt')
 
     def items(self):
         query = {
@@ -158,10 +129,9 @@ class MainFeedViewlet(BaseTopPageFeedViewlet):
         return self._items(**query)
 
 
-class BaseNewsEventFeedViewlet(BaseTopPageFeedViewlet):
+class BaseNewsEventFeedViewlet(BaseViewlet):
     """Base class for NewsViewlet and EventViewlet"""
-    grok.baseclass()
-    grok.template('event-news-feed')
+    index = ViewPageTemplateFile('viewlets/event-news-feed.pt')
 
     @view.memoize
     def records(self):
@@ -184,7 +154,6 @@ class BaseNewsEventFeedViewlet(BaseTopPageFeedViewlet):
 
 class NewsFeedViewlet(BaseNewsEventFeedViewlet):
     """Viewlet class for news feed"""
-    grok.name('sll.templates.news.feed')
 
     interface = INewsFeed
 
@@ -199,7 +168,6 @@ class NewsFeedViewlet(BaseNewsEventFeedViewlet):
 
 class EventFeedViewlet(BaseNewsEventFeedViewlet):
     """Viewlet class for event feed"""
-    grok.name('sll.templates.event.feed')
 
     interface = IEventFeed
 
@@ -216,18 +184,9 @@ class EventFeedViewlet(BaseNewsEventFeedViewlet):
         return self._items(**query)
 
 
-class FolderViewletManager(BaseViewletManager):
-    """Viewlet manager for folder"""
-    grok.context(IATFolder)
-    grok.name('sll.templates.folder.manager')
-
-
 class FolderFeedViewlet(BaseViewlet):
     """Viewlet for folder feed"""
-    grok.context(IATFolder)
-    grok.name('sll.templates.folder.feed')
-    grok.template('main-feed')
-    grok.viewletmanager(FolderViewletManager)
+    index = ViewPageTemplateFile('viewlets/main-feed.pt')
 
     interface = IFolderFeed
 

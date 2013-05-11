@@ -4,36 +4,6 @@
   xmlns="http://namespaces.zope.org/zope">
 
   <genericsetup:upgradeStep
-    description=""
-    destination="2"
-    handler="sll.templates.upgrades.upgrade_1_to_2"
-    profile="sll.templates:default"
-    sortkey="1"
-    source="1"
-    title=""
-    />
-
-  <genericsetup:upgradeStep
-    description=""
-    destination="3"
-    handler="sll.templates.upgrades.upgrade_2_to_3"
-    profile="sll.templates:default"
-    sortkey="1"
-    source="2"
-    title="Reimport actions.xml and rolemap.xml"
-    />
-
-  <genericsetup:upgradeStep
-    description=""
-    destination="4"
-    handler="sll.templates.upgrades.update_actions"
-    profile="sll.templates:default"
-    sortkey="1"
-    source="3"
-    title="Update actions"
-    />
-
-  <genericsetup:upgradeStep
     description="Set default numbers for feeds."
     destination="5"
     handler="sll.templates.upgrades.reimport_registry"
