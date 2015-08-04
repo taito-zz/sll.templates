@@ -4,16 +4,24 @@ sll.templates
 
 sll.templates provides templates for SLL site.
 
+.. image:: https://secure.travis-ci.org/taito/sll.templates.png
+    :target: http://travis-ci.org/taito/sll.templates
+
 - Put feed back image to plone site root with id: feed-back.png
 
 Currently tested with
 ---------------------
 
-- Plone-4.3
-- Python-2.7.x
+- Plone-4.3.6
+- Python-2.7.10
 
 Change log
 ----------
+
+1.10 (2015-08-xx)
+=================
+
+- Add dependency to Products.CMFPlacefulWorkflow for test. [taito]
 
 1.9 (2013-05-11)
 ================
