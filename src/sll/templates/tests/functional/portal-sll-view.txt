@@ -93,9 +93,7 @@ Go to /@@sll-view::
     </p>
     </section>
     --- 2 ---
-    <section id="event-news-feed"><p>
-    There are no information available.
-    </p>
+    <section id="event-news-feed"><p>There are no information available.</p>
     </section>
 
 Go to /folder1/@@sll-view::

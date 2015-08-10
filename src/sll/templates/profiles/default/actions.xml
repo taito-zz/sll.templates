@@ -50,6 +50,20 @@
       </property>
       <property name="visible">True</property>
     </object>
+
+    <object name="clear_interfaces" meta_type="CMF Action" i18n:domain="sll.templates">
+      <property name="title" i18n:translate="">Clear interfaces</property>
+      <property name="description" i18n:translate="">Remember to excute this before importing this folder.</property>
+      <property
+        name="url_expr">string:${globals_view/getCurrentObjectUrl}/@@clear-interfaces</property>
+      <property
+        name="available_expr"></property>
+      <property name="permissions">
+        <element value="Manage Portal"/>
+      </property>
+      <property name="visible">True</property>
+    </object>
+
   </object>
 
 </object>

@@ -18,10 +18,11 @@ Currently tested with
 Change log
 ----------
 
-1.10 (2015-08-xx)
+1.10 (2015-08-10)
 =================
 
 - Add dependency to Products.CMFPlacefulWorkflow for test. [taito]
+- Add link to remove interfaces from objects underneath the folder. [taito]
 
 1.9 (2013-05-11)
 ================

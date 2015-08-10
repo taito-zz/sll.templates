@@ -4,33 +4,13 @@
   xmlns="http://namespaces.zope.org/zope">
 
   <genericsetup:upgradeStep
-    description="Set default numbers for feeds."
-    destination="5"
-    handler="sll.templates.upgrades.reimport_registry"
+    description=""
+    destination="8"
+    handler="sll.templates.upgrades.reimport_actions"
     profile="sll.templates:default"
     sortkey="1"
-    source="4"
-    title="Reimport registry"
-    />
-
-  <genericsetup:upgradeStep
-    description="Order viewlets within sll.templates.top.page.manager."
-    destination="6"
-    handler="sll.templates.upgrades.reimport_viewlets"
-    profile="sll.templates:default"
-    sortkey="1"
-    source="5"
-    title="Reimport viewlets"
-    />
-
-  <genericsetup:upgradeStep
-    description="Add ++resource++sll.templates/css/main.css."
-    destination="7"
-    handler="sll.templates.upgrades.reimport_cssregistry"
-    profile="sll.templates:default"
-    sortkey="1"
-    source="6"
-    title="Reimport cssregistry"
+    source="7"
+    title="Reimport actions"
     />
 
 </configure>

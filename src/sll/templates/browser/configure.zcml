@@ -96,6 +96,15 @@
     layer=".interfaces.ISllTemplatesLayer"
     />
 
+  <browser:page
+    name="clear-interfaces"
+    for="*"
+    class=".miscellaneous.Miscellaneous"
+    permission="cmf.ManagePortal"
+    attribute="clear_interfaces"
+    layer=".interfaces.ISllTemplatesLayer"
+    />
+
   <!-- View -->
   <browser:page
     class=".template.TopPageView"
@@ -137,7 +146,6 @@
     permission="zope2.View"
     provides=".interfaces.IFolderViewletManager"
     />
-
 
   <!-- Viewlet -->
   <browser:viewlet

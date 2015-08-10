@@ -13,124 +13,59 @@ class TestCase(IntegrationTestCase):
         installer = getToolByName(self.portal, 'portal_quickinstaller')
         self.failUnless(installer.isProductInstalled('sll.templates'))
 
-    def test_actions__object_buttons__feed_to_top__title(self):
+    def test_actions__object_buttons__feed_to_top(self):
         portal_actions = getToolByName(self.portal, 'portal_actions')
         object_buttons = getattr(portal_actions, 'object_buttons')
         action = getattr(object_buttons, 'feed_to_top')
         self.assertEqual(action.title, 'Feed to Top')
-
-    def test_actions__object_buttons__feed_to_top__description(self):
-        portal_actions = getToolByName(self.portal, 'portal_actions')
-        object_buttons = getattr(portal_actions, 'object_buttons')
-        action = getattr(object_buttons, 'feed_to_top')
         self.assertEqual(action.description, 'Make feedable to top page.')
-
-    def test_actions__object_buttons__feed_to_top__url_expr(self):
-        portal_actions = getToolByName(self.portal, 'portal_actions')
-        object_buttons = getattr(portal_actions, 'object_buttons')
-        action = getattr(object_buttons, 'feed_to_top')
         self.assertEqual(action.url_expr, 'string:${globals_view/getCurrentObjectUrl}/@@feed-to-top')
-
-    def test_actions__object_buttons__feed_to_top__permissions(self):
-        portal_actions = getToolByName(self.portal, 'portal_actions')
-        object_buttons = getattr(portal_actions, 'object_buttons')
-        action = getattr(object_buttons, 'feed_to_top')
+        self.assertEqual(action.available_expr, 'python: object.restrictedTraverse("@@feedable-to-top")()')
         self.assertEqual(action.permissions, ('sll.templates: Manage feed for top',))
-
-    def test_actions__object_buttons__feed_to_top__visible(self):
-        portal_actions = getToolByName(self.portal, 'portal_actions')
-        object_buttons = getattr(portal_actions, 'object_buttons')
-        action = getattr(object_buttons, 'feed_to_top')
         self.assertTrue(action.visible)
 
-    def test_actions__object_buttons__unfeed_from_top__title(self):
+    def test_actions__object_buttons__unfeed_from_top(self):
         portal_actions = getToolByName(self.portal, 'portal_actions')
         object_buttons = getattr(portal_actions, 'object_buttons')
         action = getattr(object_buttons, 'unfeed_from_top')
         self.assertEqual(action.title, 'Unfeed from Top')
-
-    def test_actions__object_buttons__unfeed_from_top__description(self):
-        portal_actions = getToolByName(self.portal, 'portal_actions')
-        object_buttons = getattr(portal_actions, 'object_buttons')
-        action = getattr(object_buttons, 'unfeed_from_top')
         self.assertEqual(action.description, 'Make unfeedable from top page.')
-
-    def test_actions__object_buttons__unfeed_from_top__url_expr(self):
-        portal_actions = getToolByName(self.portal, 'portal_actions')
-        object_buttons = getattr(portal_actions, 'object_buttons')
-        action = getattr(object_buttons, 'unfeed_from_top')
         self.assertEqual(action.url_expr, 'string:${globals_view/getCurrentObjectUrl}/@@unfeed-from-top')
-
-    def test_actions__object_buttons__unfeed_from_top__permissions(self):
-        portal_actions = getToolByName(self.portal, 'portal_actions')
-        object_buttons = getattr(portal_actions, 'object_buttons')
-        action = getattr(object_buttons, 'unfeed_from_top')
+        self.assertEqual(action.available_expr, 'python: object.restrictedTraverse("@@unfeedable-from-top")()')
         self.assertEqual(action.permissions, ('sll.templates: Manage feed for top',))
-
-    def test_actions__object_buttons__unfeed_from_top__visible(self):
-        portal_actions = getToolByName(self.portal, 'portal_actions')
-        object_buttons = getattr(portal_actions, 'object_buttons')
-        action = getattr(object_buttons, 'unfeed_from_top')
         self.assertTrue(action.visible)
 
-    def test_actions__object_buttons__feed_to_microsite__title(self):
+    def test_actions__object_buttons__feed_to_microsite(self):
         portal_actions = getToolByName(self.portal, 'portal_actions')
         object_buttons = getattr(portal_actions, 'object_buttons')
         action = getattr(object_buttons, 'feed_to_microsite')
         self.assertEqual(action.title, 'Feed to micro site')
-
-    def test_actions__object_buttons__feed_to_microsite__description(self):
-        portal_actions = getToolByName(self.portal, 'portal_actions')
-        object_buttons = getattr(portal_actions, 'object_buttons')
-        action = getattr(object_buttons, 'feed_to_microsite')
         self.assertEqual(action.description, 'Make feedable to micro site.')
-
-    def test_actions__object_buttons__feed_to_microsite__url_expr(self):
-        portal_actions = getToolByName(self.portal, 'portal_actions')
-        object_buttons = getattr(portal_actions, 'object_buttons')
-        action = getattr(object_buttons, 'feed_to_microsite')
         self.assertEqual(action.url_expr, 'string:${globals_view/getCurrentObjectUrl}/@@feed-to-microsite')
-
-    def test_actions__object_buttons__feed_to_microsite__permissions(self):
-        portal_actions = getToolByName(self.portal, 'portal_actions')
-        object_buttons = getattr(portal_actions, 'object_buttons')
-        action = getattr(object_buttons, 'feed_to_microsite')
+        self.assertEqual(action.available_expr, 'python: object.restrictedTraverse("@@feedable-to-microsite")()')
         self.assertEqual(action.permissions, ('sll.templates: Manage feed for micro site',))
-
-    def test_actions__object_buttons__feed_to_microsite__visible(self):
-        portal_actions = getToolByName(self.portal, 'portal_actions')
-        object_buttons = getattr(portal_actions, 'object_buttons')
-        action = getattr(object_buttons, 'feed_to_microsite')
         self.assertTrue(action.visible)
 
-    def test_actions__object_buttons__unfeed_from_microsite__title(self):
+    def test_actions__object_buttons__unfeed_from_microsite(self):
         portal_actions = getToolByName(self.portal, 'portal_actions')
         object_buttons = getattr(portal_actions, 'object_buttons')
         action = getattr(object_buttons, 'unfeed_from_microsite')
         self.assertEqual(action.title, 'Unfeed from micro site')
-
-    def test_actions__object_buttons__unfeed_from_microsite__description(self):
-        portal_actions = getToolByName(self.portal, 'portal_actions')
-        object_buttons = getattr(portal_actions, 'object_buttons')
-        action = getattr(object_buttons, 'unfeed_from_microsite')
         self.assertEqual(action.description, 'Make unfeedable from micro site.')
-
-    def test_actions__object_buttons__unfeed_from_microsite__url_expr(self):
-        portal_actions = getToolByName(self.portal, 'portal_actions')
-        object_buttons = getattr(portal_actions, 'object_buttons')
-        action = getattr(object_buttons, 'unfeed_from_microsite')
         self.assertEqual(action.url_expr, 'string:${globals_view/getCurrentObjectUrl}/@@unfeed-from-microsite')
-
-    def test_actions__object_buttons__unfeed_from_microsite__permissions(self):
-        portal_actions = getToolByName(self.portal, 'portal_actions')
-        object_buttons = getattr(portal_actions, 'object_buttons')
-        action = getattr(object_buttons, 'unfeed_from_microsite')
+        self.assertEqual(action.available_expr, 'python: object.restrictedTraverse("@@unfeedable-from-microsite")()')
         self.assertEqual(action.permissions, ('sll.templates: Manage feed for micro site',))
+        self.assertTrue(action.visible)
 
-    def test_actions__object_buttons__unfeed_from_microsite__visible(self):
+    def test_actions__object_buttons__clear_interfaces(self):
         portal_actions = getToolByName(self.portal, 'portal_actions')
         object_buttons = getattr(portal_actions, 'object_buttons')
-        action = getattr(object_buttons, 'unfeed_from_microsite')
+        action = getattr(object_buttons, 'clear_interfaces')
+        self.assertEqual(action.title, 'Clear interfaces')
+        self.assertEqual(action.description, 'Remember to excute this before importing this folder.')
+        self.assertEqual(action.url_expr, 'string:${globals_view/getCurrentObjectUrl}/@@clear-interfaces')
+        self.assertEqual(action.available_expr, '')
+        self.assertEqual(action.permissions, ('Manage Portal',))
         self.assertTrue(action.visible)
 
     def test_browserlayer(self):
@@ -201,7 +136,7 @@ class TestCase(IntegrationTestCase):
     def test_metadata__version(self):
         setup = getToolByName(self.portal, 'portal_setup')
         self.assertEqual(
-            setup.getVersionForProfile('profile-sll.templates:default'), u'7')
+            setup.getVersionForProfile('profile-sll.templates:default'), u'8')
 
     def test_propertiestool_cli_properties__allowed_types(self):
         properties = getToolByName(self.portal, 'portal_properties')
