@@ -22,7 +22,7 @@ Change log
 =================
 
 - Add dependency to Products.CMFPlacefulWorkflow for test. [taito]
-- Add link to remove interfaces from objects underneath the folder. [taito]
+- Add link to remove interfaces from objects underneath folder. [taito]
 
 1.9 (2013-05-11)
 ================
