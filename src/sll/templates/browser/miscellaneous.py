@@ -11,7 +11,6 @@ from Products.CMFEditions.interfaces import IVersioned
 from Products.Five.browser import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
 from collective.base.interfaces import IAdapter
-from collective.pfg.payment.interfaces import IOrderNumberAware
 from plone.app.blob.interfaces import IATBlobFile
 from plone.app.blob.interfaces import IATBlobImage
 from sll.templates.browser.interfaces import IMicroSiteFeed
@@ -113,7 +112,8 @@ class Miscellaneous(BrowserView):
                 ifaces = [iface for iface in directlyProvidedBy(obj) if iface not in omits]
                 if ifaces:
                     for iface in ifaces:
-                        if iface == IOrderNumberAware:
+                        identifier = iface.__identifier__
+                        if identifier == "collective.pfg.payment.interfaces.IOrderNumberAware":
                             del IAnnotations(obj)['collective.pfg.payment']
                         noLongerProvides(obj, iface)
                         identifier = iface.__identifier__
