@@ -112,9 +112,12 @@ class Miscellaneous(BrowserView):
                 ifaces = [iface for iface in directlyProvidedBy(obj) if iface not in omits]
                 if ifaces:
                     for iface in ifaces:
-                        identifier = iface.__identifier__
-                        if identifier == "collective.pfg.payment.interfaces.IOrderNumberAware":
-                            del IAnnotations(obj)['collective.pfg.payment']
+                        annotations = IAnnotations(obj)
+                        if annotations.get('collective.pfg.payment'):
+                            del annotations['collective.pfg.payment']
+                            message = 'Remove annotations collective.pfg.payment from {}.'.format('/'.join(obj.getPhysicalPath()))
+                            logger.info(message)
+                            IStatusMessage(self.request).addStatusMessage(message, type='info')
                         noLongerProvides(obj, iface)
                         identifier = iface.__identifier__
                         if identifier not in items:
