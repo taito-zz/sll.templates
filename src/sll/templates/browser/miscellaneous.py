@@ -1,14 +1,22 @@
 from Acquisition import aq_inner
+from Acquisition import aq_parent
 from Products.ATContentTypes.interfaces.document import IATDocument
 from Products.ATContentTypes.interfaces.event import IATEvent
+from Products.ATContentTypes.interfaces.file import IATFile
+from Products.ATContentTypes.interfaces.file import IFileContent
+from Products.ATContentTypes.interfaces.image import IATImage
+from Products.ATContentTypes.interfaces.image import IImageContent
 from Products.ATContentTypes.interfaces.news import IATNewsItem
+from Products.CMFEditions.interfaces import IVersioned
 from Products.Five.browser import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
 from collective.base.interfaces import IAdapter
-from hexagonit.socialbutton.interfaces import ISocialButtonHidden
+from plone.app.blob.interfaces import IATBlobFile
+from plone.app.blob.interfaces import IATBlobImage
 from sll.templates.browser.interfaces import IMicroSiteFeed
 from sll.templates.browser.interfaces import ITopPageFeed
 from zope.interface import alsoProvides
+from zope.interface import directlyProvidedBy
 from zope.interface import noLongerProvides
 
 import logging
@@ -87,22 +95,37 @@ class Miscellaneous(BrowserView):
         url = self.context.absolute_url()
         return self.request.response.redirect(url)
 
-    def _no_longer_provide(self, iface):
+    def clear_interfaces(self):
         context = aq_inner(self.context)
         adapter = IAdapter(context)
-        objs = adapter.get_objects(iface)
+        items = {}
+        omits = [IVersioned, IATImage, IImageContent, IATFile, IFileContent, IATBlobImage, IATBlobFile]
+        for obj in adapter.get_objects():
+            if obj.id == 'carousel':
+                parent = aq_parent(aq_inner(obj))
+                parent.manage_delObjects(['carousel'])
+                message = 'Remove carousel folder from {}.'.format('/'.join(parent.getPhysicalPath()))
+                logger.info(message)
+                IStatusMessage(self.request).addStatusMessage(message, type='info')
+            else:
+                ifaces = [iface for iface in directlyProvidedBy(obj) if iface not in omits]
+                if ifaces:
+                    for iface in ifaces:
+                        noLongerProvides(obj, iface)
+                        identifier = iface.__identifier__
+                        if identifier not in items:
+                            items[identifier] = 1
+                        else:
+                            items[identifier] += 1
+                    obj.reindexObject(idxs=['object_provides'])
 
-        for obj in objs:
-            noLongerProvides(obj, iface)
-            obj.reindexObject(idxs=['object_provides'])
-
-        message = '{} objects providing {} are cleared.'.format(len(objs), iface.__identifier__)
-        logger.info(message)
-        IStatusMessage(self.request).addStatusMessage(message, type='info')
-
-    def clear_interfaces(self):
-        self._no_longer_provide(ITopPageFeed)
-        self._no_longer_provide(IMicroSiteFeed)
-        self._no_longer_provide(ISocialButtonHidden)
+        for key in items:
+            message = '{} objects providing {} are cleared.'.format(items[key], key)
+            logger.info(message)
+            IStatusMessage(self.request).addStatusMessage(message, type='info')
+        if not items:
+            message = 'No objects need to be cleared.'
+            logger.info(message)
+            IStatusMessage(self.request).addStatusMessage(message, type='info')
         url = self.context.absolute_url()
         return self.request.response.redirect(url)
