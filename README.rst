@@ -18,7 +18,7 @@ Currently tested with
 Change log
 ----------
 
-1.11.1 (2015-08-24)
+1.11.2 (2015-08-24)
 ===================
 
 - Fix clear_interfaces to work for most interfaces and remove carousel folder. [taito]
